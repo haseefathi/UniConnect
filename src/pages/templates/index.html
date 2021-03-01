@@ -1,10 +1,24 @@
 {% load static %}
 
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{%  static  'css/style.css'  %}">
-    <title>Home page</title>
+    <title>project bro</title>
 </head>
 
-<body>
-    <h1>Home Page ka title - within project</h1>
+
+<body style="background-color: #1F1F29;">
+    <header>
+        <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+        {% include 'navbar.html' %}
+    </header>
+    <main>
+        <h1>yoohoo!</h1>
+    </main>
+
 </body>
