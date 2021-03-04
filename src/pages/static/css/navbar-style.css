@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 header {
     font-family: sans-serif;
     color: #E0E0EC;
@@ -21,7 +25,7 @@ header {
     margin-top: 0;
     margin-bottom: 0;
     line-height: .75;
-    margin-right: 75px;
+    margin-right: 60px;
     letter-spacing: 0.1em;
 }
 
@@ -39,7 +43,7 @@ header {
     text-align: center;
     font-size: 1.3em;
     text-transform: uppercase;
-    padding: 0 30px;
+    padding: 0 20px;
     letter-spacing: 0.20em;
 }
 
