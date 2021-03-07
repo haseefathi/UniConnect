@@ -1,6 +1,17 @@
 .content {
     margin-left: 200px;
-    padding: 1px 16px;
+    padding: 20px;
+}
+
+.content h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: bold;
+    font-size: 5em;
+    text-align: center;
+    margin-top: 25px;
+    color: #1F1F29;
 }
 
 @media screen and (max-width: 700px) {
