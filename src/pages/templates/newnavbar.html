@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper active">
         <div class="top_navbar">
             <div class="hamburger">
                 <div class="hamburger__inner">
@@ -51,7 +51,7 @@
                     </div>
                     <ul>
                         <li>
-                            <a href="#" class="active">
+                            <a href="/" class="active">
                                 <span class="icon"><i class="fas fa-home"></i></span>
                                 <span class="title">Home</span>
                             </a>
@@ -63,7 +63,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/predictor">
                                 <span class="icon"><i class="fas fa-user-check"></i></span>
                                 <span class="title">Predict<br>Admissions</span>
                             </a>
@@ -83,8 +83,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="container">
-                <!-- Your content goes here -->
+            <div class="container content" id="mainContent">
+                {% block content %} {% endblock %}
             </div>
         </div>
     </div>

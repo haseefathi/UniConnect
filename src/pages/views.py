@@ -9,6 +9,6 @@ def predictor_view(request, *args, **kwargs):
     context = {}
     return render(request, 'predictor.html', context)
 
-def link1_view(request, *argsm, **kwargs):
+def link1_view(request, *args, **kwargs):
     context = {}
     return render(request, 'link1.html', context)
