@@ -5,7 +5,7 @@
     list-style: none;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .wrapper {
@@ -218,4 +218,8 @@
 .wrapper.active .main_container .container {
     width: calc(100% - 80px);
     margin-left: 80px;
+}
+
+#navList li:hover {
+    cursor: pointer;
 }

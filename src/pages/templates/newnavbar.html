@@ -6,10 +6,12 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- SideBar-Menu CSS -->
+    <!-- My javascript -->
+    <script src="{% static 'js/main-script.js' %}"></script>
     <link rel="stylesheet" href="{%  static 'css/newnav-style.css' %}">
 </head>
 
-<body>
+<body style="background-color: #E0E0EC;">
     <div class="wrapper active">
         <div class="top_navbar">
             <div class="hamburger">
@@ -49,33 +51,33 @@
                             <p class="profile_name">Haseeba Fathiya</p>
                         </div>
                     </div>
-                    <ul>
+                    <ul id="navList">
                         <li>
-                            <a href="/" class="active">
-                                <span class="icon"><i class="fas fa-home"></i></span>
-                                <span class="title">Home</span>
+                            <a class="active" id="nav-dashboard" onclick="showDashboard(this)">
+                                <span class="icon"><i class="fas fa-cubes"></i></span>
+                                <span class="title">Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="nav-universities">
                                 <span class="icon"><i class="fas fa-university"></i></span>
                                 <span class="title">Universities</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/predictor">
+                            <a id="nav-predict" onclick="showPredictor(this)">
                                 <span class="icon"><i class="fas fa-user-check"></i></span>
                                 <span class="title">Predict<br>Admissions</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="nav-research">
                                 <span class="icon"><i class="fas fa-book-reader"></i></span>
                                 <span class="title">Research<br>Interests</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a id="nav-tables">
                                 <span class="icon"><i class="fas fa-border-all"></i></span>
                                 <span class="title">Tables</span>
                             </a>
@@ -83,8 +85,8 @@
                     </ul>
                 </div>
             </div>
+
             <div class="container content" id="mainContent">
-                {% block content %} {% endblock %}
             </div>
         </div>
     </div>

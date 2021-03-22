@@ -1,9 +1,14 @@
 from django.shortcuts import render
 
 # Create your views here.
+
 def home_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'home.html', context)
+    return render(request, 'newnavbar.html', context)
+
+def dashboard_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'dashboard.html', context)
 
 def predictor_view(request, *args, **kwargs):
     context = {}
@@ -12,3 +17,19 @@ def predictor_view(request, *args, **kwargs):
 def link1_view(request, *args, **kwargs):
     context = {}
     return render(request, 'link1.html', context)
+
+
+
+# random trial views 
+def trial_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'trial.html', context)
+
+def fruits_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'fruits.html', context)
+
+def veg_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'veg.html', context)
+
