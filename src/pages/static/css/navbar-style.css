@@ -25,7 +25,7 @@ nav {
 }
 
 .sidebar a.active {
-    background-color: #1F1F29;
+    background-color: #700101;
     color: white;
 }
 
@@ -38,7 +38,7 @@ nav {
     color: black;
     line-height: 1.2;
     text-decoration: none;
-    background-image: linear-gradient(to right, #700101 0, #700101 100%);
+    background-image: linear-gradient(to right, #1F1F29 0, #1F1F29 100%);
     background-position: 0 1em;
     background-size: 0 100%;
     background-repeat: no-repeat;

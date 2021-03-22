@@ -6,7 +6,7 @@
 
     <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/resp-nav-script.js' %}"></script>
+    <script src="{% static 'js/navbar-script.js' %}"></script>
     <link rel="stylesheet" href="{%  static 'css/navbar-style.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,11 +21,15 @@
                 <h2><i class="fa fa-university"></i> YOLO</h2>
             </a>
         </div>
+        <div id="demo">
 
-        <a class="underlined underlined--hover" href="/">Predictor</a>
-        <a class="underlined underlined--hover" href="/">Link 1</a>
-        <a class="underlined underlined--hover" href="/">Link 2</a>
-        <a class="underlined underlined--hover" href="/">Link 3</a>
+        </div>
+
+        <a id="pred" class="nav-item underlined underlined--hover" href="/predictor">Predictor</a>
+        <a class="nav-item underlined underlined--hover" href="/link1">Link 1</a>
+        <a class="nav-item underlined underlined--hover" href="/">Link 2</a>
+        <a class="nav-item underlined underlined--hover" href="/">Link 3</a>
+
 
     </div>
 
