@@ -14,6 +14,14 @@ def predictor_view(request, *args, **kwargs):
     context = {}
     return render(request, 'predictor.html', context)
 
+def universities_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'universities.html', context)
+    
+def research_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'research.html', context)
+
 def link1_view(request, *args, **kwargs):
     context = {}
     return render(request, 'link1.html', context)
