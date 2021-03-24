@@ -223,3 +223,11 @@
 #navList li:hover {
     cursor: pointer;
 }
+
+
+/* loading modal */
+
+img#loading-modal {
+    height: 100px;
+    width: 100px;
+}
