@@ -27,6 +27,11 @@ def link1_view(request, *args, **kwargs):
     return render(request, 'link1.html', context)
 
 
+# welcome view
+def welcome_view(request, *args, **kwargs):
+    context = {}
+    return render(request, 'index.html', context)
+
 
 # random trial views 
 def trial_view(request, *args, **kwargs):

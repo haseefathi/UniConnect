@@ -13,6 +13,7 @@
 
 <body style="background-color: #E0E0EC;">
     <div class="wrapper active">
+        {% if user.is_authenticated %}
         <div class="top_navbar">
             <div class="hamburger">
                 <div class="hamburger__inner">
@@ -32,7 +33,7 @@
                             <div class="profile_dd">
                                 <div class="dd_item">Profile</div>
                                 <div class="dd_item">Change Password</div>
-                                <div class="dd_item">Logout</div>
+                                <div class="dd_item"><a href="{% url 'logout' %}">Logout</a></div>
                             </div>
                         </li>
                     </ul>
@@ -48,7 +49,7 @@
                         </div>
                         <div class="profile_info">
                             <p>Welcome,</p>
-                            <p class="profile_name">Haseeba Fathiya</p>
+                            <p class="profile_name">{{ user.username }}</p>
                         </div>
                     </div>
                     <ul id="navList">
@@ -92,6 +93,9 @@
                 width: 120px;position: absolute;top: 45%;left: 50%;">
             </div>
         </div>
+
+        {% else %} You are not logged in
+        <a href="{% url 'login' %}">Log In</a> {% endif %}
     </div>
 
 
