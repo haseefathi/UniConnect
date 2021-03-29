@@ -4,27 +4,27 @@ from django.shortcuts import render
 
 def home_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'newnavbar.html', context)
+    return render(request, 'portal/skeleton.html', context)
 
 def dashboard_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'dashboard.html', context)
+    return render(request, 'portal/dashboard.html', context)
 
 def predictor_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'predictor.html', context)
+    return render(request, 'portal/predictor.html', context)
 
 def universities_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'universities.html', context)
+    return render(request, 'portal/universities.html', context)
     
 def research_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'research.html', context)
+    return render(request, 'portal/research.html', context)
 
 def link1_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'link1.html', context)
+    return render(request, 'portal/link1.html', context)
 
 
 # welcome view
