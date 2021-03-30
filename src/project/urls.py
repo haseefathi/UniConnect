@@ -31,6 +31,7 @@ urlpatterns = [
 
 
     # login urls - gives all the authentication views 
+    path('user/', include('user.urls')),
     path('user/', include('django.contrib.auth.urls')),
 
 ]
