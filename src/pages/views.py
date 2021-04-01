@@ -26,23 +26,7 @@ def link1_view(request, *args, **kwargs):
     context = {}
     return render(request, 'portal/link1.html', context)
 
-
 # welcome view
 def welcome_view(request, *args, **kwargs):
     context = {}
     return render(request, 'index.html', context)
-
-
-# random trial views 
-def trial_view(request, *args, **kwargs):
-    context = {}
-    return render(request, 'trial.html', context)
-
-def fruits_view(request, *args, **kwargs):
-    context = {}
-    return render(request, 'fruits.html', context)
-
-def veg_view(request, *args, **kwargs):
-    context = {}
-    return render(request, 'veg.html', context)
-
