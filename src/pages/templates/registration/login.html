@@ -1,6 +1,28 @@
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="{%  static 'css/login-style.css' %}">
+</head>
+
 <!-- templates/registration/login.html -->
-<h2>Log In</h2>
-<form method="post">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">Log In</button>
-</form>
+<div class="container">
+    <div class="left">
+        <div class="header">
+            <h2 class="animation a1">Welcome!</h2>
+            <h4 class="animation a2">Log in to your account using your username and password</h4>
+        </div>
+        <div class="form">
+            <form method="post">
+                {% csrf_token %} {% render_field form.username placeholder='Username' class='form-field animation a3' %}
+                <br> {% render_field form.password placeholder='Password' class='form-field animation a4' %}
+                <p class="animation a5"><a href="#">Forgot Password?</a></p>
+                <button id="login-button" class="animation a6" type="submit">LOGIN</button>
+            </form>
+        </div>
+    </div>
+    <div class="right"></div>
+</div>

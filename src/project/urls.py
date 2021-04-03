@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from pages.views import home_view, predictor_view, link1_view, dashboard_view, home_view, universities_view, research_view, welcome_view
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('predictor/',predictor_view, name='user-predictor'),
@@ -31,7 +32,7 @@ urlpatterns = [
 
 
     # login urls - gives all the authentication views 
-    path('user/', include('user.urls')),
+    path('user/', include('user.urls'), name='signup'),
     path('user/', include('django.contrib.auth.urls')),
 
 ]

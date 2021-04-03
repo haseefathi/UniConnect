@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    # pip libraries
+    'widget_tweaks',
+
     #my apps
     'pages',
     'user',
@@ -140,4 +144,4 @@ DJANGO_ICONS = {
 LOGIN_REDIRECT_URL = '/home'
 
 # goes to this page after user logs out
-LOGOUT_REDIRECT_URL = '/' # new
+LOGOUT_REDIRECT_URL = 'login' # new
