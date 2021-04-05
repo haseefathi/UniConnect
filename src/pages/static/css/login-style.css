@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -23,7 +24,7 @@
     flex: 1;
     background-color: black;
     transition: 1s;
-    background-image: url(https://shepherdexpress.com/downloads/48474/download/News_onlinecourses.jpg?cb=62787940c9e8f5158605c11a8138506d);
+    background-image: url("/static/images/login-img.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -31,7 +32,7 @@
 
 .header>h2 {
     margin: 0;
-    color: #4f46a5;
+    color: #111113;
 }
 
 .header>h4 {
