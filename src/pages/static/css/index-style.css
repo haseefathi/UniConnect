@@ -1,9 +1,9 @@
 body {
-    background-color: #E0E0EC;
+    background: #E0E0EC;
 }
 
 .main-content {
-    background-color: #fff;
+    background-color: white;
     text-align: center;
     margin: 150px 300px;
     padding: 30px;

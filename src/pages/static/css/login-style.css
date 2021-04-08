@@ -115,6 +115,7 @@ ul.errorlist {
     color: #700101;
     background: #ecb8b8;
     border: solid #700101 1px;
+    border-radius: 3px;
     width: 100%;
 }
 
