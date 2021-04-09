@@ -1,24 +1,57 @@
-body {
-    background: #E0E0EC;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.main-content {
-    background-color: white;
-    text-align: center;
-    margin: 150px 300px;
-    padding: 30px;
-    border-radius: 20px;
+body,
+html {
+    height: 100%;
+    line-height: 1.8;
 }
 
-button {
-    margin-top: 30px;
-    background-color: #1F1F29;
-    padding: 20px;
-    border-radius: 5px;
+
+/* Full height image header */
+
+.bgimg-1 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("/static/images/landing6.gif");
+    min-height: 100%;
+}
+
+.w3-bar .w3-button {
+    padding: 16px;
+}
+
+span {
     color: white;
-    border: none;
 }
 
-button:hover {
-    background-color: #700101;
+.title {
+    text-shadow: #700101 5px 5px;
+}
+
+#login-button {
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #E0E0EC;
+    text-align: center;
+    font-size: 1.1em;
+    letter-spacing: 0.2em;
+    color: #1F1F29;
+}
+
+#login-button:hover {
+    background-color: #8A8A8B;
+    transition: 0.2s;
+}
+
+a {
+    text-decoration: none;
 }
