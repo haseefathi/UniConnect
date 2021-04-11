@@ -145,3 +145,4 @@ LOGIN_REDIRECT_URL = '/home'
 
 # goes to this page after user logs out
 LOGOUT_REDIRECT_URL = 'login' # new
+

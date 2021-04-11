@@ -20,7 +20,7 @@ html {
 .bgimg-1 {
     background-position: center;
     background-size: cover;
-    background-image: url("/static/images/landing6.gif");
+    background-image: url("/static/images/landing-page-bg.gif");
     min-height: 100%;
 }
 
