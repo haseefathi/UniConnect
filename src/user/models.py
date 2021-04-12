@@ -18,8 +18,7 @@ INTENDED_SEMESTER_CHOICES = (
 
 GENDER_CHOICES = (
     ('M', 'Male'),
-    ('F', 'Female'),
-    ('O', 'Other')
+    ('F', 'Female')
 )
 
 def awa_score_validator(value):

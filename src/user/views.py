@@ -12,7 +12,7 @@ def user_signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print(request.POST)
+
             username = request.POST.get('username')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -22,7 +22,7 @@ def user_signup_view(request):
 
             u = User.objects.create_user(username=username, first_name = first_name, last_name = last_name,email = email, password = password )
 
-            print(u)
+            # print(u)
 
             u.refresh_from_db()
             siteuser = SiteUser()
@@ -36,8 +36,10 @@ def user_signup_view(request):
 
         else:
             print(form.errors)
+
     context = {
         'form': form
     }
+    
     return render(request, 'registration/signup.html', context)
 

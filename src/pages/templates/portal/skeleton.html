@@ -45,7 +45,9 @@
                 <div class="sidebar__inner">
                     <div class="profile">
                         <div class="img">
-                            <img src="https://cdn.iconscout.com/icon/free/png-256/graduating-student-2465650-2042096.png" alt="profile_pic">
+                            {% if user.siteuser.gender == 'M' %}
+                            <img src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic"> {% elif user.siteuser.gender == 'F' %}
+                            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic"> {% endif %}
                         </div>
                         <div class="profile_info">
                             <p>Welcome,</p>

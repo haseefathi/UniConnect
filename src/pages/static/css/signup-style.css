@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.outer {
+    display: flex;
+}
+
+.left {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-delay: 1s;
+    margin-right: 20px;
+    width: 35%;
+}
+
+.right {
+    flex: 1;
+    transition: 1s;
+    background-image: url("/static/images/signup-image.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.header>h2 {
+    margin: 0;
+    color: #111113;
+    font-size: 2.5em;
+}
+
+.header>h4 {
+    margin-top: 10px;
+    font-weight: normal;
+    font-size: 1.20em;
+    line-height: 1.5em;
+    color: #8A8A8B;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+#forgot-pwd {
+    font-size: 14px;
+    text-align: right;
+    margin: 15px 0px;
+}
+
+#forgot-pwd a {
+    color: #700101;
+}
+
+#sign-up {
+    font-size: 14px;
+    text-align: center;
+}
+
+#sign-up a {
+    color: #8A8A8B;
+}
+
+.form-field {
+    height: 46px;
+    padding: 0 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    outline: 0;
+    transition: .2s;
+    width: 100%;
+    font-size: 1em;
+    margin: 7px 0px;
+}
+
+.form-field:focus {
+    border-color: #6E6E92;
+}
+
+#signup-button {
+    padding: 12px 10px;
+    border: 0;
+    background: linear-gradient(to right, #1F1F29 0%, #111113 100%);
+    border-radius: 3px;
+    margin-bottom: 10px;
+    color: #fff;
+    width: 100%;
+    letter-spacing: .2em;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+#login-button:hover {
+    cursor: pointer;
+    background: linear-gradient(to right, #6E6E92 0%, #6E6E92 100%);
+}
+
+ul.errorlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist li {
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #700101;
+    background: #ecb8b8;
+    border: solid #700101 1px;
+    border-radius: 3px;
+    width: 100%;
+}
+
+#back-button {
+    margin: 20px 0px;
+    width: 76px;
+    background-color: #E0E0EC;
+    border: none;
+    border-radius: 5px;
+    color: #1F1F29;
+    text-align: center;
+    padding: 7px;
+}
+
+#back-button:hover {
+    background: #cacad4;
+    transition: 0.5s;
+    text-decoration: none;
+}

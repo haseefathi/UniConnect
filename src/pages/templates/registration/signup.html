@@ -1,5 +1,37 @@
-<h2>Sign up</h2>
-<form method="post">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-</form>
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="{%  static 'css/signup-style.css' %}">
+</head>
+
+<body>
+    <div class="container outer">
+        <div class="left">
+            <a href="/" id="back-button">&#8249; Home</a>
+            <div class="header">
+                <h2>Welcome!</h2>
+                <h4>Create an account and let's get started!</h4>
+            </div>
+            <div class="form">
+                <form method="post">
+                    {% csrf_token %} {{ form.non_field_errors }} {{ form.first_name.errors }}
+                    <br> {% render_field form.first_name placeholder='First Name' class='form-field animation a3'%}
+                    <br> {{ form.last_name.errors }} {% render_field form.last_name placeholder='Last Name' class='form-field animation a3 '%}
+                    <br> {{ form.gender.errors }} {% render_field form.gender placeholder='Gender' class='form-field animation a4 ' %}
+                    <br> {{ form.email.errors }} {% render_field form.email placeholder='Email' class='form-field animation a4' %}
+                    <br> {{ form.username.errors }} {% render_field form.username placeholder='Username' class='form-field animation a4' %}
+                    <br> {{ form.password.errors }} {% render_field form.password placeholder='Password' class='form-field animation a4 ' %}
+                    <br> {{ form.confirm_password.errors }} {% render_field form.confirm_password placeholder='Confirm Password' class='form-field animation a4' %}
+                    <button id="signup-button" class="animation a6  " type="submit">Create Account</button>
+                    <p class="animation a7" id="sign-up"><a href="/user/login">Already have an account? Log In!</a></p>
+                </form>
+            </div>
+        </div>
+        <div class="right"></div>
+    </div>
+</body>

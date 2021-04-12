@@ -5,8 +5,7 @@ from .models import SiteUser
 
 GENDER_CHOICES = (
     ('M', 'Male'),
-    ('F', 'Female'),
-    ('O', 'Other')
+    ('F', 'Female')
 )
 
 

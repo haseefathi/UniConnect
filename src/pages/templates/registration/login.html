@@ -14,7 +14,7 @@
         <div class="left">
             <a href="/" id="back-button">&#8249; Home</a>
             <div class="header">
-                <h2>Welcome!</h2>
+                <h2>Welcome back!</h2>
                 <h4>Login to your account using your username and password.</h4>
             </div>
             <div class="form">
@@ -22,7 +22,7 @@
                     {% csrf_token %} {{ form.non_field_errors }} {{ form.username.errors }} <br> {% render_field form.username placeholder='Username' class='form-field animation a3'%}
                     <br> {{ form.password.errors }} {% render_field form.password placeholder='Password' class='form-field animation a4' %}
                     <p class="animation a5" id="forgot-pwd"><a href="#">Forgot Password?</a></p>
-                    <button id="login-button" class="animation a6" type="submit">LOGIN</button>
+                    <button id="login-button" class="animation a6" type="submit">Login</button>
                     <p class="animation a7" id="sign-up"><a href="/user/signup">Don't have an account? Sign Up!</a></p>
                 </form>
             </div>
