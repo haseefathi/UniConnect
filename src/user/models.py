@@ -16,6 +16,12 @@ INTENDED_SEMESTER_CHOICES = (
     ('S', 'Spring')
 )
 
+GENDER_CHOICES = (
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ('O', 'Other')
+)
+
 def awa_score_validator(value):
     valid_scores = [0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0]
     if value not in valid_scores:
@@ -35,4 +41,6 @@ class SiteUser(models.Model):
     intended_semester = models.CharField(choices = INTENDED_SEMESTER_CHOICES, max_length = 5, blank = True, null=True, default = 'F')
     toefl_score = models.IntegerField(validators = [MinValueValidator(0), MaxValueValidator(120)], blank = True, null=True)
     undergrad_gpa = models.DecimalField( max_digits = 2, decimal_places = 1,  validators = [MinValueValidator(0.0), MaxValueValidator(6.0)], blank = True, null=True)
+    gender = models.CharField(choices = GENDER_CHOICES, max_length = 6, default = 'F')
     is_profile_updated = models.BooleanField(default = False)
+
