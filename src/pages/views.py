@@ -8,7 +8,7 @@ def home_view(request, *args, **kwargs):
 
 def dashboard_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'portal/dashboard.html', context)
+    return render(request, 'portal/home.html', context)
 
 def predictor_view(request, *args, **kwargs):
     context = {}
