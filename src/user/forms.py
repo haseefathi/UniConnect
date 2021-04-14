@@ -8,6 +8,16 @@ GENDER_CHOICES = (
     ('F', 'Female')
 )
 
+DEGREE_CHOICES = (
+    ('ms', 'MS'),
+    ('phd', 'PhD')
+)
+
+INTENDED_SEMESTER_CHOICES = (
+    ('F', 'Fall'),
+    ('S', 'Spring')
+)
+
 
 class SignUpForm(forms.Form):
     first_name = forms.CharField()
@@ -44,3 +54,62 @@ class SignUpForm(forms.Form):
         if duplicate_users.exists():
             raise forms.ValidationError("Username is already in use!")
         return username
+
+
+class UpdateProfileForm(forms.Form):
+    degree = forms.ChoiceField(choices = DEGREE_CHOICES)
+    gre_verbal_score = forms.IntegerField()
+    gre_quant_score = forms.IntegerField()
+    gre_awa_score = forms.DecimalField()
+    toefl_score = forms.IntegerField()
+    intended_semester = forms.ChoiceField(choices = INTENDED_SEMESTER_CHOICES)
+    undergraduate_gpa = forms.DecimalField()
+
+    def clean_gre_verbal_score(self):
+        cleaned_data = super(UpdateProfileForm, self).clean()
+        verbal_score = cleaned_data.get("gre_verbal_score")
+        if not (verbal_score >= 130 and verbal_score <=170):
+            raise forms.ValidationError(
+                "Please enter a valid score! The score should be between 130 and 170."
+            )
+        return verbal_score
+
+    def clean_gre_quant_score(self):
+        cleaned_data = super(UpdateProfileForm, self).clean()
+        quant_score = cleaned_data.get("gre_quant_score")
+        if not (quant_score >= 130 and quant_score <=170):
+            raise forms.ValidationError(
+                "Please enter a valid score! The score should be between 130 and 170."
+            )
+        return quant_score
+
+    def clean_gre_awa_score(self):
+        valid_scores = [0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0]
+        cleaned_data = super(UpdateProfileForm, self).clean()
+        awa_score = cleaned_data.get("gre_awa_score")
+        if awa_score not in valid_scores:
+            raise forms.ValidationError(
+                "Please enter a valid score!"
+            )
+        return awa_score
+
+    def clean_toefl_score(self):
+        cleaned_data = super(UpdateProfileForm, self).clean()
+        toefl = cleaned_data.get("toefl_score")
+        if not (toefl >= 0 and toefl <=120):
+            raise forms.ValidationError(
+                "Please enter a valid score! The score should be between 0 and 120."
+            )
+        return toefl
+
+    def undergrad_gpa(self):
+        cleaned_data = super(UpdateProfileForm, self).clean()
+        gpa = cleaned_data.get('undergrad_gpa')
+        if not (gpa >= 0 and gpa <=4):
+            raise forms.ValidationError(
+                "Please enter a valid GPA between 0.0 and 4.0."
+            )
+        return gpa
+
+        
+

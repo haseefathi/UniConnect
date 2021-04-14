@@ -46,6 +46,11 @@ h2 {
     padding-bottom: 50px;
 }
 
+.success {
+    border: green 2px solid;
+    padding-bottom: 50px;
+}
+
 #close {
     float: right;
     padding: 2px 5px;

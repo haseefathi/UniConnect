@@ -32,7 +32,7 @@ def awa_score_validator(value):
 
 # Create your models here.
 class SiteUser(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key=True)
     degree = models.CharField(choices = DEGREE_CHOICES, default = 'ms', max_length = 3)
     gre_verbal_score = models.IntegerField(validators = [MinValueValidator(130), MaxValueValidator(170)], blank = True, null=True)
     gre_quant_score = models.IntegerField(validators = [MinValueValidator(130), MaxValueValidator(170)], blank = True, null=True)
@@ -42,4 +42,6 @@ class SiteUser(models.Model):
     undergrad_gpa = models.DecimalField( max_digits = 2, decimal_places = 1,  validators = [MinValueValidator(0.0), MaxValueValidator(6.0)], blank = True, null=True)
     gender = models.CharField(choices = GENDER_CHOICES, max_length = 6, default = 'F')
     is_profile_updated = models.BooleanField(default = False)
+
+
 
