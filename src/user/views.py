@@ -72,6 +72,7 @@ def update_profile_view(request):
             siteuser.toefl_score = toefl_score
             siteuser.intended_semester = intended_semester
             siteuser.undergrad_gpa = undergrad_gpa
+            siteuser.gender = user.siteuser.gender
             siteuser.user = user
             siteuser.is_profile_updated = True
             siteuser.save()

@@ -102,9 +102,9 @@ class UpdateProfileForm(forms.Form):
             )
         return toefl
 
-    def undergrad_gpa(self):
+    def clean_undergraduate_gpa(self):
         cleaned_data = super(UpdateProfileForm, self).clean()
-        gpa = cleaned_data.get('undergrad_gpa')
+        gpa = cleaned_data.get('undergraduate_gpa')
         if not (gpa >= 0 and gpa <=4):
             raise forms.ValidationError(
                 "Please enter a valid GPA between 0.0 and 4.0."
