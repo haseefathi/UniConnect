@@ -16,6 +16,11 @@ h2 {
     background-color: #fff;
     margin: 20px 0px;
     font-size: 1.1em;
+    word-wrap: break-word;
+}
+
+.description {
+    background-color: #F7F3C6;
 }
 
 .section-heading {
@@ -35,13 +40,16 @@ h2 {
     float: right;
 }
 
+#predictor-button {
+    float: right;
+}
+
 .button:hover {
     background-color: #E0E0EC;
     text-decoration: none;
 }
 
 .notification {
-    border: 1px #1F1F29 solid;
     padding-bottom: 50px;
 }
 
@@ -59,4 +67,45 @@ h2 {
 #close:hover {
     color: #1F1F29;
     cursor: pointer;
+}
+
+.side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+#recommender-section img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 40px;
+}
+
+#university-recommendations-button {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+#predictor-section img {
+    padding-top: 20px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+#predictor-button {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.description ul li {
+    list-style-type: disc;
+    margin-left: 20px;
 }

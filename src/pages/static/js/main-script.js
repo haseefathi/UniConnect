@@ -69,10 +69,10 @@ function showResearch(event) {
     xhttp.send();
 }
 
-function showLink1(event) {
+function showProfile(event) {
     showLoadingSign();
     clearNavbarHighlight();
-    document.getElementById("nav-link1").classList.add("active");
+    document.getElementById("nav-profile").classList.add("active");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -81,7 +81,7 @@ function showLink1(event) {
             document.getElementById("mainContent").innerHTML = response;
         }
     };
-    xhttp.open("GET", "/link1", true);
+    xhttp.open("GET", "/profile", true);
     xhttp.send();
 }
 

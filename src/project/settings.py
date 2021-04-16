@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # pip libraries
     'widget_tweaks',
 
-    #my apps
+    # my apps
     'pages',
     'user',
 ]

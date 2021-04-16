@@ -22,9 +22,9 @@ def research_view(request, *args, **kwargs):
     context = {}
     return render(request, 'portal/research.html', context)
 
-def link1_view(request, *args, **kwargs):
+def profile_view(request, *args, **kwargs):
     context = {}
-    return render(request, 'portal/link1.html', context)
+    return render(request, 'portal/profile.html', context)
 
 # welcome view
 def welcome_view(request, *args, **kwargs):

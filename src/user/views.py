@@ -7,6 +7,9 @@ from user.models import SiteUser
 
 from django.contrib.auth import authenticate, login
 
+def user_profile_view(request):
+    pass
+
 def user_signup_view(request):
     form = SignUpForm(request.POST or None)
     if request.method == 'POST':

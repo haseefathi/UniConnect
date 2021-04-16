@@ -110,6 +110,3 @@ class UpdateProfileForm(forms.Form):
                 "Please enter a valid GPA between 0.0 and 4.0."
             )
         return gpa
-
-        
-
