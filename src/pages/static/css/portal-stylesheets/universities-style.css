@@ -109,3 +109,48 @@ h2 {
     list-style-type: disc;
     margin-left: 20px;
 }
+
+
+/* ----------------------breadcrumb style---------------------------- */
+
+
+/* Style the list */
+
+ul.breadcrumb {
+    padding: 5px 10px;
+    list-style: none;
+    background-color: #e9e9e9;
+}
+
+
+/* Display list items side by side */
+
+ul.breadcrumb li {
+    display: inline;
+    font-size: 13px;
+}
+
+
+/* Add a slash symbol (/) before/behind each list item */
+
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: ">\00a0";
+}
+
+
+/* Add a color to all links inside the list */
+
+ul.breadcrumb li a {
+    color: #8A8A8B;
+    text-decoration: none;
+}
+
+
+/* Add a color on mouse-over */
+
+ul.breadcrumb li a:hover {
+    color: #1F1F29;
+    text-decoration: underline;
+}

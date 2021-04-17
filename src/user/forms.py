@@ -1,6 +1,6 @@
 from django import forms 
 from django.contrib.auth.models import User
-from .models import SiteUser
+from .models import GraduateAdmissionsProfile
 
 
 GENDER_CHOICES = (
@@ -64,6 +64,7 @@ class UpdateProfileForm(forms.Form):
     toefl_score = forms.IntegerField()
     intended_semester = forms.ChoiceField(choices = INTENDED_SEMESTER_CHOICES)
     undergraduate_gpa = forms.DecimalField()
+    intended_field = forms.CharField()
 
     def clean_gre_verbal_score(self):
         cleaned_data = super(UpdateProfileForm, self).clean()

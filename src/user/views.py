@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import SignUpForm, UpdateProfileForm
 
 from django.contrib.auth.models import User
-from user.models import SiteUser
+from user.models import GraduateAdmissionsProfile
 
 from django.contrib.auth import authenticate, login
 
@@ -28,10 +28,10 @@ def user_signup_view(request):
             # print(u)
 
             u.refresh_from_db()
-            siteuser = SiteUser()
-            siteuser.gender = gender
-            siteuser.user = u
-            siteuser.save()
+            grad_profile = GraduateAdmissionsProfile()
+            grad_profile.gender = gender
+            grad_profile.user = u
+            grad_profile.save()
 
             user = authenticate(username=u.username, password=password)
             login(request, user)
@@ -61,25 +61,26 @@ def update_profile_view(request):
             toefl_score = request.POST.get('toefl_score')
             intended_semester = request.POST.get('intended_semester')
             undergrad_gpa = request.POST.get('undergraduate_gpa')
+            intended_field = request.POST.get('intended_field')
 
             logged_in_username = request.user.username
             
             user = User.objects.get(username = logged_in_username)
             
             user.refresh_from_db()
-            siteuser = SiteUser()
-            siteuser.degree = degree
-            siteuser.gre_verbal_score = gre_verbal_score
-            siteuser.gre_quant_score = gre_quant_score
-            siteuser.gre_awa_score = gre_awa_score
-            siteuser.toefl_score = toefl_score
-            siteuser.intended_semester = intended_semester
-            siteuser.undergrad_gpa = undergrad_gpa
-            siteuser.gender = user.siteuser.gender
-            siteuser.user = user
-            siteuser.is_profile_updated = True
-            siteuser.save()
-
+            grad_profile = GraduateAdmissionsProfile()
+            grad_profile.degree = degree
+            grad_profile.gre_verbal_score = gre_verbal_score
+            grad_profile.gre_quant_score = gre_quant_score
+            grad_profile.gre_awa_score = gre_awa_score
+            grad_profile.toefl_score = toefl_score
+            grad_profile.intended_semester = intended_semester
+            grad_profile.undergrad_gpa = undergrad_gpa
+            grad_profile.gender = user.graduateadmissionsprofile.gender
+            grad_profile.user = user
+            grad_profile.is_profile_updated = True
+            grad_profile.intended_field = intended_field
+            grad_profile.save()
 
             return redirect('user-home')
             # print(user)

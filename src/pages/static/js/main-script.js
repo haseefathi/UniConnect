@@ -1,6 +1,11 @@
 window.onload = function() {
-    showDashboard();
+    showUniversities();
 };
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 
 function showDashboard() {
     showLoadingSign();
@@ -14,6 +19,7 @@ function showDashboard() {
             document.getElementById("mainContent").innerHTML = response;
         }
     };
+    scrollToTop();
     xhttp.open("GET", "/dashboard", true);
     xhttp.send();
 }
@@ -30,6 +36,7 @@ function showPredictor(event) {
             document.getElementById("mainContent").innerHTML = response;
         }
     };
+    scrollToTop();
     xhttp.open("GET", "/predictor", true);
     xhttp.send();
 }
@@ -49,6 +56,7 @@ function showUniversities(event) {
 
         }
     };
+    scrollToTop();
     xhttp.open("GET", "/universities", true);
     xhttp.send();
 }
@@ -65,6 +73,7 @@ function showResearch(event) {
             document.getElementById("mainContent").innerHTML = response;
         }
     };
+    scrollToTop();
     xhttp.open("GET", "/research", true);
     xhttp.send();
 }
@@ -81,6 +90,7 @@ function showProfile(event) {
             document.getElementById("mainContent").innerHTML = response;
         }
     };
+    scrollToTop();
     xhttp.open("GET", "/profile", true);
     xhttp.send();
 }

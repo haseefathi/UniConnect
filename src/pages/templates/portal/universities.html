@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/universities-style.css' %}">
 </head>
 
+
+<ul class="breadcrumb">
+    <li> > Universities</li>
+</ul>
+
 <p class="main-heading">Universities</p>
 
 <div class="section description ">
@@ -19,7 +24,7 @@
     </ul>
 </div>
 
-{% if not user.siteuser.is_profile_updated %}
+{% if not user.graduateadmissionsprofile.is_profile_updated %}
 <div class="section notification">
     <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>&#10006;</span>
     <p class="section-heading">Looks like you haven't updated your Graduate Admissions Profile...</p>
@@ -27,14 +32,14 @@
         <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 14%; background-color:#666687     !important; line-height: 25px;" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">Profile updated: 14%</div>
     </div>
     <p>Update your profile to get better results!</p>
-    <a href="/user/update-profile" class="button" id="update-profile-button"> Update Profile </a>
+    <a href="/user/update-profile" class="button" id="update-profile-button"> Update Graduate Admissions Profile Profile </a>
 </div>
 {% else %}
 <div class="section notification success">
     <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>&#10006;</span>
     <p class="section-heading">Your Graduate Admissions Profile has been updated successfully!</p>
     <p>Update your profile for any changes!</p>
-    <a href="/user/update-profile" class="button" id="update-profile-button"> Update Profile </a>
+    <a href="/user/update-profile" class="button" id="update-profile-button"> Update Graduate Admissions Profile </a>
 </div>
 
 {% endif %}
