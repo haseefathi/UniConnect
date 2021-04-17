@@ -1,0 +1,50 @@
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+    <!-- stylesheet for this page -->
+    <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/form-stylesheets/update-grad-adm-style.css' %}">
+</head>
+
+
+<ul class="breadcrumb">
+    <li><a onclick="showUniversities()">> Universities</a></li>
+    <li>Update Graduate Admissions Profile</li>
+</ul>
+
+<div class="section">
+    <p class="section-heading">Update your Graduate Admissions Profile</p>
+    <form method="POST">{% csrf_token %} {{ form.non_field_errors }}
+        <div class="side-by-side">
+            <div>
+                <p class="subheading">Application Information</p>
+                <hr>
+                <br>{{form.degree.errors}} {% render_field form.degree placeholder='Degree' class='form-field'%}
+                <br> {{ form.intended_semester.errors }} {% render_field form.intended_semester placeholder='Last Name' class='form-field'%}
+                <br> {{ form.intended_field.errors }} {% render_field form.intended_field placeholder='Intended Field' class='form-field'%}
+                <br> {{ form.undergraduate_gpa.errors }} {% render_field form.undergraduate_gpa placeholder='Undergraduate GPA (0-4)' class='form-field'%}
+            </div>
+            <div>
+                <p class="subheading">Test Scores</p>
+                <hr>
+                <br>{{form.gre_verbal_score.errors}} {% render_field form.gre_verbal_score placeholder='GRE Verbal Score' class='form-field'%}
+                <br>{{form.gre_quant_score.errors}} {% render_field form.gre_quant_score placeholder='GRE Quantitative Score' class='form-field'%}
+                <br>{{form.gre_awa_score.errors}} {% render_field form.gre_awa_score placeholder='GRE AWA Score' class='form-field'%}
+                <br>{{form.toefl_score.errors}} {% render_field form.toefl_score placeholder='TOEFL Score' class='form-field'%}
+            </div>
+
+        </div>
+
+        <button type="submit" id="update-profile-button">Update Profile</button>
+        <div style="clear: both;"></div>
+    </form>
+
+</div>

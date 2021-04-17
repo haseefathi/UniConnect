@@ -1,11 +1,16 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 
-from .forms import SignUpForm, UpdateProfileForm
+from .forms import SignUpForm, UpdateGradAdmProfileForm
 
 from django.contrib.auth.models import User
 from user.models import GraduateAdmissionsProfile
 
 from django.contrib.auth import authenticate, login
+
+from django.template import RequestContext
+
+
+
 
 def user_profile_view(request):
     pass
@@ -47,13 +52,16 @@ def user_signup_view(request):
     return render(request, 'registration/signup.html', context)
 
 
-def update_profile_view(request):
-    form = UpdateProfileForm(request.POST or None)
 
+def update_grad_adm_profile_view(request):
+
+    form = UpdateGradAdmProfileForm(request.POST or None)
+    print('inside form view')
     if request.method == 'POST':
-        form = UpdateProfileForm(request.POST)
-
+        form = UpdateGradAdmProfileForm(request.POST)
+        print('inside method == post')
         if form.is_valid():
+            print('form is valid')
             degree = request.POST.get('degree')
             gre_verbal_score = request.POST.get('gre_verbal_score')
             gre_quant_score = request.POST.get('gre_quant_score')
@@ -87,8 +95,14 @@ def update_profile_view(request):
         
         else:
             print(form.errors)
+            print('form not valid')
+
+    else:
+        print('form not in post')
+
     context = {
         'form': form
     }
 
-    return render(request, 'registration/update-profile.html', context)
+
+    return render(request, 'registration/update-grad-adm-profile.html', context)

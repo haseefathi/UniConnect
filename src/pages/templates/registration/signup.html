@@ -19,8 +19,7 @@
             </div>
             <div class="form">
                 <form method="post">
-                    {% csrf_token %} {{ form.non_field_errors }} {{ form.first_name.errors }}
-                    <br> {% render_field form.first_name placeholder='First Name' class='form-field animation a3'%}
+                    {% csrf_token %} {{ form.non_field_errors }} <br>{{ form.first_name.errors }} {% render_field form.first_name placeholder='First Name' class='form-field animation a3'%}
                     <br> {{ form.last_name.errors }} {% render_field form.last_name placeholder='Last Name' class='form-field animation a3 '%}
                     <br> {{ form.gender.errors }} {% render_field form.gender placeholder='Gender' class='form-field animation a4 ' %}
                     <br> {{ form.email.errors }} {% render_field form.email placeholder='Email' class='form-field animation a4' %}

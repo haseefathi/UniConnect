@@ -56,18 +56,18 @@ class SignUpForm(forms.Form):
         return username
 
 
-class UpdateProfileForm(forms.Form):
+class UpdateGradAdmProfileForm(forms.Form):
     degree = forms.ChoiceField(choices = DEGREE_CHOICES)
-    gre_verbal_score = forms.IntegerField()
-    gre_quant_score = forms.IntegerField()
-    gre_awa_score = forms.DecimalField()
-    toefl_score = forms.IntegerField()
-    intended_semester = forms.ChoiceField(choices = INTENDED_SEMESTER_CHOICES)
-    undergraduate_gpa = forms.DecimalField()
-    intended_field = forms.CharField()
+    gre_verbal_score = forms.IntegerField(label = "GRE Verbal Score")
+    gre_quant_score = forms.IntegerField(label = "GRE Quantitative Score")
+    gre_awa_score = forms.DecimalField(label = "GRE AWA Score")
+    toefl_score = forms.IntegerField(label = "TOEFL Score")
+    intended_semester = forms.ChoiceField(choices = INTENDED_SEMESTER_CHOICES, label = "Intended Semester")
+    undergraduate_gpa = forms.DecimalField(label= "Undergraduate GPA")
+    intended_field = forms.CharField(label = "Intended Field")
 
     def clean_gre_verbal_score(self):
-        cleaned_data = super(UpdateProfileForm, self).clean()
+        cleaned_data = super(UpdateGradAdmProfileForm, self).clean()
         verbal_score = cleaned_data.get("gre_verbal_score")
         if not (verbal_score >= 130 and verbal_score <=170):
             raise forms.ValidationError(
@@ -76,7 +76,7 @@ class UpdateProfileForm(forms.Form):
         return verbal_score
 
     def clean_gre_quant_score(self):
-        cleaned_data = super(UpdateProfileForm, self).clean()
+        cleaned_data = super(UpdateGradAdmProfileForm, self).clean()
         quant_score = cleaned_data.get("gre_quant_score")
         if not (quant_score >= 130 and quant_score <=170):
             raise forms.ValidationError(
@@ -86,7 +86,7 @@ class UpdateProfileForm(forms.Form):
 
     def clean_gre_awa_score(self):
         valid_scores = [0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0]
-        cleaned_data = super(UpdateProfileForm, self).clean()
+        cleaned_data = super(UpdateGradAdmProfileForm, self).clean()
         awa_score = cleaned_data.get("gre_awa_score")
         if awa_score not in valid_scores:
             raise forms.ValidationError(
@@ -95,7 +95,7 @@ class UpdateProfileForm(forms.Form):
         return awa_score
 
     def clean_toefl_score(self):
-        cleaned_data = super(UpdateProfileForm, self).clean()
+        cleaned_data = super(UpdateGradAdmProfileForm, self).clean()
         toefl = cleaned_data.get("toefl_score")
         if not (toefl >= 0 and toefl <=120):
             raise forms.ValidationError(
@@ -104,7 +104,7 @@ class UpdateProfileForm(forms.Form):
         return toefl
 
     def clean_undergraduate_gpa(self):
-        cleaned_data = super(UpdateProfileForm, self).clean()
+        cleaned_data = super(UpdateGradAdmProfileForm, self).clean()
         gpa = cleaned_data.get('undergraduate_gpa')
         if not (gpa >= 0 and gpa <=4):
             raise forms.ValidationError(

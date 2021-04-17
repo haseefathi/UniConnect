@@ -52,12 +52,10 @@ function showUniversities(event) {
             var response = this.responseText;
             closeLoadingSign();
             document.getElementById("mainContent").innerHTML = response;
-
-
         }
     };
     scrollToTop();
-    xhttp.open("GET", "/universities", true);
+    xhttp.open("GET", "/universities/", true);
     xhttp.send();
 }
 
@@ -92,6 +90,21 @@ function showProfile(event) {
     };
     scrollToTop();
     xhttp.open("GET", "/profile", true);
+    xhttp.send();
+}
+
+function showGraduateAdmissionsProfileUpdateForm() {
+    showLoadingSign();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+            closeLoadingSign();
+            document.getElementById("mainContent").innerHTML = response;
+        }
+    };
+    scrollToTop();
+    xhttp.open("GET", "/user/update-grad-adm-profile/", true);
     xhttp.send();
 }
 
