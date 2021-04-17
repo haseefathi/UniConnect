@@ -1,3 +1,79 @@
-<h2>
-    {{user.first_name}} {{user.last_name}}'s Profile
-</h2>
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+    <!-- stylesheet for this page -->
+    <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/profile-style.css' %}">
+</head>
+
+
+<ul class="breadcrumb">
+    <li>> Profile</li>
+</ul>
+
+<p class="main-heading">{{user.first_name}} {{user.last_name}}</p>
+
+{% if user.graduateadmissionsprofile.gender == 'M' %}
+<img class="profile-pic" src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic"> {% else %}
+<img class="profile-pic" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic"> {% endif %}
+
+<div class="side-by-side">
+    <div class="section">
+        <p class="section-heading">Your Graduate Admissions Profile</p>
+        <hr>
+        <table>
+            <tr>
+                <th>Degree</th>
+                <td>{{ user.graduateadmissionsprofile.degree|upper }}</td>
+            </tr>
+            <tr>
+                <th>Intended Semester</th>
+                <td> {% if user.graduateadmissionsprofile.intended_semester == 'F' %} Fall {% else %} Spring {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Intended Field</th>
+                <td>{{ user.graduateadmissionsprofile.intended_field|title }}</td>
+            </tr>
+            <tr>
+                <th>Undergraduate GPA</th>
+                <td>{{ user.graduateadmissionsprofile.undergrad_gpa }}</td>
+            </tr>
+            <tr>
+                <th>GRE Verbal Score</th>
+                <td>{{ user.graduateadmissionsprofile.gre_verbal_score }}</td>
+            </tr>
+            <tr>
+                <th>GRE Quantitative Score</th>
+                <td>{{ user.graduateadmissionsprofile.gre_quant_score }}</td>
+            </tr>
+            <tr>
+                <th>GRE AWA Score</th>
+                <td>{{ user.graduateadmissionsprofile.gre_awa_score }}</td>
+            </tr>
+            <tr>
+                <th>TOEFL Score</th>
+                <td>{{ user.graduateadmissionsprofile.toefl_score }}</td>
+            </tr>
+        </table>
+
+        <p class="button-outside">
+            <a class="button" id="update-grad-adm-button" onclick="showGraduateAdmissionsProfileUpdateForm()"> Update Graduate Admissions Profile </a>
+        </p>
+
+        <div style="clear: both;"></div>
+
+    </div>
+    <div class="section">
+        <p class="section-heading">Some Other Profile</p>
+        <hr> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam, alias rerum ullam quo fugiat sapiente illo sit debitis! Amet et quasi atque nostrum repellendus, cumque enim eveniet molestias beatae voluptatibus.
+    </div>
+</div>

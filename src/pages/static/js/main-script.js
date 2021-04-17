@@ -1,5 +1,5 @@
 window.onload = function() {
-    showUniversities();
+    showProfile();
 };
 
 function scrollToTop() {
@@ -93,8 +93,10 @@ function showProfile(event) {
     xhttp.send();
 }
 
-function showGraduateAdmissionsProfileUpdateForm() {
+function showGraduateAdmissionsProfileUpdateForm(event) {
     showLoadingSign();
+    clearNavbarHighlight();
+    document.getElementById("nav-universities").classList.add("active");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
