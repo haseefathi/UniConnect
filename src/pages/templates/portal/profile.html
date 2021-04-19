@@ -19,7 +19,7 @@
     <li>> Profile</li>
 </ul>
 
-<p class="main-heading">{{user.first_name}} {{user.last_name}}</p>
+<p class="main-heading">{{user.first_name|title}} {{user.last_name|title}}</p>
 
 {% if user.graduateadmissionsprofile.gender == 'M' %}
 <img class="profile-pic" src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic"> {% else %}

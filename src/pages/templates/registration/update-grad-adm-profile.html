@@ -22,7 +22,7 @@
 
 <div class="section">
     <p class="section-heading">Update your Graduate Admissions Profile</p>
-    <form method="POST">{% csrf_token %} {{ form.non_field_errors }}
+    <form method="POST" action="{% url 'update-grad-adm-profile' %}">{% csrf_token %} {{ form.non_field_errors }}
         <div class="side-by-side">
             <div>
                 <p class="subheading">Application Information</p>

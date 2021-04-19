@@ -55,11 +55,11 @@ def user_signup_view(request):
 
 def update_grad_adm_profile_view(request):
 
-    form = UpdateGradAdmProfileForm(request.POST or None)
-    print('inside form view')
     if request.method == 'POST':
+        print('form has been submitted')
+
         form = UpdateGradAdmProfileForm(request.POST)
-        print('inside method == post')
+        
         if form.is_valid():
             print('form is valid')
             degree = request.POST.get('degree')
@@ -98,7 +98,7 @@ def update_grad_adm_profile_view(request):
             print('form not valid')
 
     else:
-        print('form not in post')
+        form = UpdateGradAdmProfileForm()
 
     context = {
         'form': form
@@ -106,3 +106,7 @@ def update_grad_adm_profile_view(request):
 
 
     return render(request, 'registration/update-grad-adm-profile.html', context)
+
+
+
+

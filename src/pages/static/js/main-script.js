@@ -1,5 +1,5 @@
 window.onload = function() {
-    showProfile();
+    showUniversities();
 };
 
 function scrollToTop() {

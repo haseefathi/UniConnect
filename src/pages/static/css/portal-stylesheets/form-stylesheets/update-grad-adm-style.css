@@ -110,3 +110,22 @@ ul.breadcrumb li a:hover {
     color: #1F1F29;
     text-decoration: underline;
 }
+
+
+/* form errors styling  */
+
+ul.errorlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist li {
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #700101;
+    background: #ecb8b8;
+    border: solid #700101 1px;
+    border-radius: 3px;
+    width: 100%;
+}
