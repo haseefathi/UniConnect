@@ -156,3 +156,40 @@ ul.breadcrumb li a:hover {
     color: #1F1F29;
     text-decoration: underline;
 }
+
+
+/* ---------------university search bar -----------------*/
+
+.search-bar {
+    padding: 0 16px;
+    font-size: 1em;
+    height: 46px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    float: left;
+    width: 87%;
+    outline: 0;
+    transition: .2s;
+}
+
+.search-bar:focus {
+    border-color: #6E6E92;
+    border-right: none;
+}
+
+#search-button {
+    border: 0;
+    background: linear-gradient(to right, #1F1F29 0%, #111113 100%);
+    border-radius: 3px;
+    margin-bottom: 10px;
+    color: #fff;
+    width: 13%;
+    letter-spacing: .2em;
+    font-size: 1em;
+    height: 46px;
+    float: left;
+}
+
+#search-button:hover {
+    background: linear-gradient(to right, #6E6E92 0%, #6E6E92 100%);
+}
