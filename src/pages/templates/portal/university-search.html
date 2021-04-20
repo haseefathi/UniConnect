@@ -1,0 +1,35 @@
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- stylesheet for this page -->
+    <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/form-stylesheets/university-search-style.css' %}">
+</head>
+
+
+<!-- breadcrumb section  -->
+<ul class="breadcrumb">
+    <li>
+        <a href=""> Universities </a>
+    </li>
+    <li> University Search </li>
+</ul>
+
+
+<!-- university search bar -->
+<div class="section">
+    <p class="section-heading">Search Results</p>
+    <input type="text" name="university-search" id="university-search-input" class="search-bar" placeholder="University Name" value="{{university_name}}">
+    <button type="submit " id="search-button" onclick="universitySearch() "><i class="fas fa-search "></i></button>
+    <div style="clear: both; "></div>
+</div>
+
+<div class="section">
+    {% if error_message %} University not found bro {% else %} {{acceptance_rate}} {{average_gre_verbal}} {{average_gre_quant}} {% endif %}
+
+</div>

@@ -1,3 +1,4 @@
+// function to get csrf token cookie value 
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -36,4 +37,34 @@ function showForm() {
             alert('Something wrong with the server bro...');
         }
     });
+}
+
+
+function universitySearch() {
+    var college_name = document.getElementById("university-search-input").value;
+
+    // only do if a college name has been entered 
+    if (college_name.length != 0 || college_name !== "" || college_name.replace(/\s+/g, '').length != 0) {
+        showLoadingSign();
+        clearNavbarHighlight();
+        document.getElementById("nav-universities").classList.add("active");
+        $.ajax({
+            url: '/user/university-search/',
+            type: 'GET',
+            dataType: 'html',
+            data: {
+                // 'csrfmiddlewaretoken': getCookie('csrftoken'),
+                //'initialrender': true,
+                'college_name': college_name
+            },
+            success: function(content) {
+                closeLoadingSign();
+                $('#mainContent').html(content);
+                scrollToTop();
+            },
+            failure: function() {
+                alert('Something wrong with the server bro...');
+            }
+        });
+    }
 }

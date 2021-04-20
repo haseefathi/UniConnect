@@ -7,11 +7,6 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-
-
     <!-- stylesheet for this page -->
     <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/universities-style.css' %}">
 </head>
@@ -59,7 +54,7 @@
 <div class="section">
     <p class="section-heading">See how you stand in any school!</p>
     <input type="text" name="university-search" id="university-search-input" class="search-bar" placeholder="University Name">
-    <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    <button type="submit" id="search-button" onclick="universitySearch()"><i class="fas fa-search"></i></button>
     <div style="clear: both;"></div>
 </div>
 

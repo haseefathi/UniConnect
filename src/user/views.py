@@ -9,11 +9,7 @@ from django.contrib.auth import authenticate, login
 
 from django.template import RequestContext
 
-
-
-
-def user_profile_view(request):
-    pass
+from user.university_search import university_search
 
 def user_signup_view(request):
     form = SignUpForm(request.POST or None)
@@ -106,6 +102,16 @@ def update_grad_adm_profile_view(request):
 
 
     return render(request, 'registration/update-grad-adm-profile.html', context)
+
+
+def university_search_view(request):
+    
+    college_name = request.GET['college_name']
+
+    context = university_search(college_name)
+
+    return render(request, 'portal/university-search.html', context)
+
 
 
 
