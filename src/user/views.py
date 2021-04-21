@@ -107,9 +107,7 @@ def update_grad_adm_profile_view(request):
 def university_search_view(request):
     
     college_name = request.GET['college_name']
-
     context = university_search(college_name)
-
     return render(request, 'portal/university-search.html', context)
 
 

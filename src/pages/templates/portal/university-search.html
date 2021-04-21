@@ -24,12 +24,12 @@
 <!-- university search bar -->
 <div class="section">
     <p class="section-heading">Search Results</p>
-    <input type="text" name="university-search" id="university-search-input" class="search-bar" placeholder="University Name" value="{{university_name}}">
+    <input type="text" name="university-search" id="university-search-input" class="search-bar" placeholder="University Name" value="{{college_name}}">
     <button type="submit " id="search-button" onclick="universitySearch() "><i class="fas fa-search "></i></button>
     <div style="clear: both; "></div>
 </div>
 
 <div class="section">
-    {% if error_message %} University not found bro {% else %} {{acceptance_rate}} {{average_gre_verbal}} {{average_gre_quant}} {% endif %}
+    {% if error %} University not found bro {% else %} {{acceptance_rate}} {{average_verbal}} {{average_quant}} {{majors_count}} {% endif %}
 
 </div>
