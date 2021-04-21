@@ -134,22 +134,3 @@ def university_search(college_name):
         }
 
     return context
-
-
-
-        
-
-
-        
-
-
-
-
-
-
-
-
-
-        
-
-
