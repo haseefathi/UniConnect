@@ -1,11 +1,17 @@
 {% load widget_tweaks %} {% load static %}
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+    <!-- bootstrap -->
+    <!-- <link rel="stylesheet" href="{%  static 'css/bootstrap.min.css' %}"> -->
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 
     <!-- stylesheet for this page -->
     <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/form-stylesheets/university-search-style.css' %}">
@@ -29,7 +35,101 @@
     <div style="clear: both; "></div>
 </div>
 
+{% if error %}
 <div class="section">
-    {% if error %} University not found bro {% else %} {{acceptance_rate}} {{average_verbal}} {{average_quant}} {{majors_count}} {% endif %}
+    <p class="section-heading">University not found!</p>
+</div>
+
+
+{% else %}
+
+<script>
+</script>
+
+<div class="side-by-side">
+
+    <!-- section for displaying statistics -->
+    <div class="section">
+        <p class="section-heading">Statistics of Admitted Students</p>
+        <hr>
+        <table>
+            <tr>
+                <th>Name of University</th>
+                <td>{{ college_name|title }}</td>
+            </tr>
+            <tr>
+                <th>Acceptance Rate</th>
+                <td>{{ acceptance_rate|floatformat:'2' }}%</td>
+            </tr>
+            <tr>
+                <th>Majors Offered</th>
+                <td>{{ majors_count }}</td>
+            </tr>
+            <tr>
+                <th>Average GRE Score</th>
+                <td>
+                    {{average_gre|floatformat:'2' }}
+                </td>
+            </tr>
+            <tr>
+                <th>Average GRE Verbal Score</th>
+                <td>{{ average_verbal|floatformat:'2' }}</td>
+            </tr>
+            <tr>
+                <th>Average GRE Quant Score</th>
+                <td>{{ average_quant|floatformat:'2' }}</td>
+            </tr>
+            <tr>
+                <th>Average GPA</th>
+                <td>{{ average_gpa|floatformat:'2' }}</td>
+            </tr>
+            <tr>
+                <th>Average TOEFL Score</th>
+                <td>{{ average_toefl|floatformat:'2' }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <p class="section-heading">Campus Images</p>
+        <hr>
+        <div id="campus-slider" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#campus-slider" data-slide-to="0" class="active"></li>
+                <li data-target="#campus-slider" data-slide-to="1"></li>
+                <li data-target="#campus-slider" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{{image1}}" alt="Campus Images">
+                </div>
+
+                <div class="item">
+                    <img src="{{image2}}" alt="Campus Images">
+                </div>
+
+                <div class="item">
+                    <img src="{{image3}}" alt="Campus Images">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#campus-slider" data-slide="prev" style="background: none;">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#campus-slider" data-slide="next" style="background: none;">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+    </div>
+
 
 </div>
+
+{% endif %}

@@ -117,3 +117,30 @@ ul.breadcrumb li a:hover {
 #search-button:hover {
     background: linear-gradient(to right, #6E6E92 0%, #6E6E92 100%);
 }
+
+
+/* -------------------------- for tables --------------------------- */
+
+table {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+table tr td {
+    width: 50%;
+    padding: 10px;
+}
+
+table tr th {
+    width: 50%;
+    padding: 10px;
+}
+
+
+/* images styling */
+
+.campus-images {
+    width: 100%;
+    vertical-align: middle;
+}

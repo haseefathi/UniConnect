@@ -5,6 +5,25 @@ from matplotlib.pyplot import figure
 from matplotlib.legend import Legend
 from bokeh.embed import components
 
+from apiclient.discovery import build
+
+# returns urls of campus images using google custom search api
+def get_university_images(college_name):
+    query = college_name + 'campus'
+    api_key = 'AIzaSyBh2aoaZvbcsLK9EO8tFCs6LSijNo_lyzQ'
+    resource = build('customsearch','v1', developerKey = api_key).cse()
+    result = resource.list(q = query, cx = 'ecf1c639b0185cb84', searchType = 'image').execute()
+
+    image_links = list()
+
+    image_count = 0
+    for item in result['items']:
+        if image_count < 3:
+            image_links.append(item['link'])
+            image_count += 1
+
+    return image_links
+
 
 def university_search(college_name):
 
@@ -90,6 +109,9 @@ def university_search(college_name):
         majors_count = len(all_majors)
 
 
+        # getting campus images
+        images = get_university_images(college_name)
+
         context = {
             'college_name': college_name,
             
@@ -124,6 +146,15 @@ def university_search(college_name):
             # majors offered info
             'majors_count': majors_count,
 
+            # campus images
+            'image1': images[0],
+            'image2': images[1],
+            'image3': images[2],
+
+            # 'image1': 'http://www.purdue.edu/purdue/images/audience/about-banner.jpg',
+            # 'image2': 'https://www.purdue.edu/uns/images/2020/MemorialMallLO.JPG',
+            # 'image3': 'https://engineering.purdue.edu/GEP/Images/campus-partners-content-page',
+
             # if any errors in finding uni
             'error': False
         }
@@ -134,3 +165,9 @@ def university_search(college_name):
         }
 
     return context
+
+
+
+
+
+
