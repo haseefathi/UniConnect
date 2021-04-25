@@ -1,0 +1,141 @@
+
+<!-- javascript for gre verbal histogram 
+<script>
+    let average_verbal_score = parseInt('{{average_verbal}}');
+
+    let verbal_options = {
+        chart: {
+            type: 'histogram',
+            height: '300px',
+            width: '90%'
+        },
+        series: [{
+            name: 'Number of Students',
+            data: [
+                0,
+                parseInt('{{verbal_histogram|getitem:"1"}}'),
+                parseInt('{{verbal_histogram|getitem:"2"}}'),
+                parseInt('{{verbal_histogram|getitem:"3"}}'),
+                parseInt('{{verbal_histogram|getitem:"4"}}'),
+                parseInt('{{verbal_histogram|getitem:"5"}}'),
+                parseInt('{{verbal_histogram|getitem:"6"}}'),
+                parseInt('{{verbal_histogram|getitem:"7"}}'),
+                parseInt('{{verbal_histogram|getitem:"8"}}'),
+                0
+            ]
+        }, ],
+        xaxis: {
+            categories: ['', '130-135', '135-140', '140-145', '145-150', '150-155', '155-160', '160-165', '165-170', '']
+        },
+        colors: ["#b19cd9"],
+        annotations: {
+            xaxis: [{
+                x: getCoordinate(average_verbal_score),
+                borderColor: '#800000',
+                label: {
+                    borderColor: '#00E396',
+                    orientation: 'vertical',
+                    text: 'Average Verbal Score'
+                }
+            }, ]
+        },
+    }
+
+    if (profile_updated == 'true') {
+        let my_verbal = parseInt('{{user.graduateadmissionsprofile.gre_verbal_score}}');
+        my_verbal_annotation = {
+            x: getCoordinate(my_verbal),
+            borderColor: '#800000',
+            label: {
+                borderColor: '#00E396',
+                orientation: 'vertical',
+                text: 'Your score'
+            }
+        }
+        verbal_options.annotations.xaxis.push(my_verbal_annotation);
+    }
+
+    var verbal_chart = new ApexCharts(document.querySelector("#verbal-histogram"), verbal_options);
+    verbal_chart.render();
+</script>
+-->
+
+
+
+
+
+
+
+<!-- 
+<script>
+    console.log('printing out average verbal: ' + parseInt('{{average_verbal}}'));
+    var options = {
+        chart: {
+            type: 'histogram',
+            height: '300px',
+            width: '90%'
+        },
+        series: [{
+            name: 'Number of Students',
+            data: [
+                0,
+                parseInt('{{histogram|getitem:"1"}}'),
+                parseInt('{{histogram|getitem:"2"}}'),
+                parseInt('{{histogram|getitem:"3"}}'),
+                parseInt('{{histogram|getitem:"4"}}'),
+                parseInt('{{histogram|getitem:"5"}}'),
+                parseInt('{{histogram|getitem:"6"}}'),
+                parseInt('{{histogram|getitem:"7"}}'),
+                parseInt('{{histogram|getitem:"8"}}'),
+                0
+            ]
+        }, ],
+        xaxis: {
+            categories: ['', '130-135', '135-140', '140-145', '145-150', '150-155', '155-160', '160-165', '165-170', '']
+
+        },
+        colors: ["#87ceff"],
+        annotations: {
+            xaxis: [{
+                x: 500,
+                borderColor: '#800000',
+                label: {
+                    borderColor: '#00E396',
+                    orientation: 'vertical',
+                    text: 'Average Score'
+                }
+            }, ]
+        },
+
+
+    }
+
+    function getCoordinate(score) {
+        let coord = 100 + ((score - 130) * 19);
+        console.log('modified coord ' + coord);
+        return coord;
+    }
+
+    console.log('my verbal score = {{user.graduateadmissionsprofile.gre_verbal_score}}')
+    var verbal_score = parseInt('{{user.graduateadmissionsprofile.gre_verbal_score}}');
+    var my_line = getCoordinate(verbal_score);
+
+    var new_annotation = {
+        x: my_line,
+        borderColor: '#800000',
+        label: {
+            borderColor: '#00E396',
+            orientation: 'vertical',
+            text: 'You are here'
+        }
+    }
+    options.annotations.xaxis.push(new_annotation);
+
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+
+    //console.log(parseInt('{{histogram|getitem:"5"}}'));
+    //console.log(typeof(parseInt('{{histogram|getitem:"5"}}')));
+</script>
+ -->

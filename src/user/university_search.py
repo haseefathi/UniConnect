@@ -9,6 +9,7 @@ from bokeh.embed import components
 # for getting images from google search
 from apiclient.discovery import build
 
+from project.trial import get_gre_histogram, get_toefl_histogram, get_gpa_histogram
 
 def df_to_list(df):
     df_list = list()
@@ -70,25 +71,6 @@ def university_search(college_name):
         if decision_data is not None:
             decision_data['greScores'] = (decision_data[['verbal_scores','quant_scores']].sum(axis = 1))
 
-
-            # # trial run for charts ---------------------------------------------------------
-            # all_gre_df = decision_data['greScores'].dropna()
-            # print('printing the type',type(all_gre_df))
-            # print('printing the individual values',all_gre_df)
-            # print('number of scores', len(all_gre_df))
-
-            # all_gre_scores = list()
-            # for score in all_gre_df:
-            #     all_gre_scores.append(score)
-
-
-            # print('after transformation')
-            # print('printing the type',type(all_gre_scores))
-            # print('printing the individual values',all_gre_scores)
-            # print('number of scores', len(all_gre_scores))
-            
-            # # end trial run for charts ---------------------------------------------------------
-
             # calculating the average, max, min gre score of those who were accepted 
             average_gre = float("%.2f" % (decision_data['greScores'].dropna()).mean())
             min_gre = (decision_data['greScores'].dropna()).min()
@@ -141,8 +123,16 @@ def university_search(college_name):
 
 
             # getting campus images
-            images = get_university_images(college_name)
+            # images = get_university_images(college_name)
 
+
+            # getting frequency distribution of scores
+            verbal_histogram = get_gre_histogram(df_to_list(decision_data['verbal_scores'].dropna()))
+            quant_histogram = get_gre_histogram(df_to_list(decision_data['quant_scores'].dropna()))
+            toefl_histogram = get_toefl_histogram(df_to_list(decision_data['toefl_scores'].dropna()))
+            gpa_histogram = get_gpa_histogram(df_to_list(decision_data['gpa'].dropna()))
+
+            # -----------------------------------------------------------------
             context = {
                 'college_name': college_name,
                 
@@ -176,23 +166,27 @@ def university_search(college_name):
 
                 # majors offered info
                 'majors_count': majors_count,
+                'all_majors': all_majors,
 
                 # campus images
-                'image1': images[0],
-                'image2': images[1],
-                'image3': images[2],
+                # 'image1': images[0],
+                # 'image2': images[1],
+                # 'image3': images[2],
 
-                # 'image1': 'http://www.purdue.edu/purdue/images/audience/about-banner.jpg',
-                # 'image2': 'https://www.purdue.edu/uns/images/2020/MemorialMallLO.JPG',
-                # 'image3': 'https://engineering.purdue.edu/GEP/Images/campus-partners-content-page',
+                'image1': 'http://www.purdue.edu/purdue/images/audience/about-banner.jpg',
+                'image2': 'https://www.purdue.edu/uns/images/2020/MemorialMallLO.JPG',
+                'image3': 'https://engineering.purdue.edu/GEP/Images/campus-partners-content-page',
 
                 # if any errors in finding uni
                 'error': False,
 
-                # trial run for charts
-                'all_gre_scores': df_to_list(decision_data['greScores'].dropna()),
-                'all_verbal_scores': df_to_list(decision_data['verbal_scores'].dropna()),
-                'all_quant_scores': df_to_list(decision_data['quant_scores'].dropna()),
+
+                # for charts
+                'verbal_histogram': verbal_histogram,
+                'quant_histogram': quant_histogram,
+                'toefl_histogram': toefl_histogram,
+                'gpa_histogram': gpa_histogram
+
             }
     
         else: 

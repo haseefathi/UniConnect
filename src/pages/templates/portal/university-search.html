@@ -1,4 +1,4 @@
-{% load widget_tweaks %} {% load static %}
+{% load widget_tweaks %} {% load static %} {% load custom_tags %}
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -134,36 +134,343 @@
 </div>
 
 
+<div class="section">
+
+    <p class="section-heading">Distribution of GRE Verbal Scores</p>
+    <div id="verbal-histogram"></div>
+
+
+</div>
+
+<div class="section">
+
+    <p class="section-heading">Distribution of GRE Quantitative Scores</p>
+    <div id="quant-histogram"></div>
+
+</div>
+
 <div class="side-by-side">
     <div class="section">
-        <p class="section-heading">Chart bro</p>
-        <div id="chart">
-        </div>
-
+        <p class="section-heading">Distribution of TOEFL scores</p>
+        <hr>
+        <div id="toefl-histogram"></div>
     </div>
     <div class="section">
-        right sside div bro
+        <p class="section-heading">Distribution of GPAs</p>
+        <hr>
+        <div id="gpa-histogram"></div>
+    </div>
+
+</div>
+
+<div class="section">
+    <p class="section-heading">
+        Majors Offered ({{majors_count}})
+    </p>
+
+    <input type="text" id="major-search" onkeyup="searchList()" placeholder="Search for majors..">
+
+    <div class="list" style="height: 200px; overflow: auto;">
+        <ul id="majors-list">
+
+            {% for major in all_majors %}
+            <li><a>{{ major }}</a></li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 
 
+
+
+<!-- script for searchable list -->
 <script>
-    var options = {
-        chart: {
-            type: 'bar'
-        },
-        series: [{
-            name: 'sales',
-            data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-        }],
-        xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+    function searchList() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("major-search");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("majors-list");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
         }
     }
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
 </script>
+
+
+<script>
+    function getFullWidthCoordinate(score) {
+        let coord = 100 + ((score - 130) * 19);
+        console.log('modified coord ' + coord);
+        return coord;
+    }
+
+    function getHalfWidthCoordinate(score, multiplier) {
+        let coord = score * multiplier + 39.3;
+        console.log('modified coord ' + coord);
+        return coord;
+    }
+
+    var updated = '{{user.graduateadmissionsprofile.is_profile_updated}}';
+    var profile_updated = false;
+    if (updated == 'True') {
+        profile_updated = true;
+    }
+</script>
+
+
+<!-- javascript for showing verbal histogram -->
+<script>
+    let average_verbal_score = parseInt('{{average_verbal}}');
+
+    let verbal_options = {
+        chart: {
+            type: 'histogram',
+            height: '300px',
+            width: '90%'
+        },
+        series: [{
+            name: 'Number of Students',
+            data: [
+                0,
+                parseInt('{{verbal_histogram|getitem:"1"}}'),
+                parseInt('{{verbal_histogram|getitem:"2"}}'),
+                parseInt('{{verbal_histogram|getitem:"3"}}'),
+                parseInt('{{verbal_histogram|getitem:"4"}}'),
+                parseInt('{{verbal_histogram|getitem:"5"}}'),
+                parseInt('{{verbal_histogram|getitem:"6"}}'),
+                parseInt('{{verbal_histogram|getitem:"7"}}'),
+                parseInt('{{verbal_histogram|getitem:"8"}}'),
+                0
+            ]
+        }, ],
+        xaxis: {
+            categories: ['', '130-135', '135-140', '140-145', '145-150', '150-155', '155-160', '160-165', '165-170', '']
+        },
+        colors: ["#b19cd9"],
+        annotations: {
+            xaxis: [{
+                x: getFullWidthCoordinate(average_verbal_score),
+                borderColor: '#779ecb',
+                label: {
+                    borderColor: '#779ecb',
+                    orientation: 'vertical',
+                    text: 'Average Verbal Score (' + average_verbal_score + ')'
+                }
+            }, ]
+        },
+    }
+
+    if (profile_updated) {
+        let my_verbal = parseInt('{{user.graduateadmissionsprofile.gre_verbal_score}}');
+        my_verbal_annotation = {
+            x: getFullWidthCoordinate(my_verbal),
+            borderColor: '#800000',
+            label: {
+                borderColor: '#800000',
+                orientation: 'vertical',
+                text: 'Your score (' + my_verbal + ')'
+            }
+        }
+        verbal_options.annotations.xaxis.push(my_verbal_annotation);
+    }
+
+    var verbal_chart = new ApexCharts(document.querySelector("#verbal-histogram"), verbal_options);
+    verbal_chart.render();
+</script>
+
+
+<!-- javascript for showing quant histogram -->
+<script>
+    let average_quant_score = parseInt('{{average_quant}}');
+
+    let quant_options = {
+        chart: {
+            type: 'histogram',
+            height: '300px',
+            width: '90%'
+        },
+        series: [{
+            name: 'Number of Students',
+            data: [
+                0,
+                parseInt('{{quant_histogram|getitem:"1"}}'),
+                parseInt('{{quant_histogram|getitem:"2"}}'),
+                parseInt('{{quant_histogram|getitem:"3"}}'),
+                parseInt('{{quant_histogram|getitem:"4"}}'),
+                parseInt('{{quant_histogram|getitem:"5"}}'),
+                parseInt('{{quant_histogram|getitem:"6"}}'),
+                parseInt('{{quant_histogram|getitem:"7"}}'),
+                parseInt('{{quant_histogram|getitem:"8"}}'),
+                0
+            ]
+        }, ],
+        xaxis: {
+            categories: ['', '130-135', '135-140', '140-145', '145-150', '150-155', '155-160', '160-165', '165-170', '']
+        },
+        colors: ["#ffb347"],
+        annotations: {
+            xaxis: [{
+                x: getFullWidthCoordinate(average_quant_score),
+                borderColor: '#779ecb',
+                label: {
+                    borderColor: '#779ecb',
+                    orientation: 'vertical',
+                    text: 'Average Verbal Score (' + average_quant_score + ')'
+                }
+            }, ]
+        },
+    }
+
+    if (profile_updated) {
+        let my_quant = parseInt('{{user.graduateadmissionsprofile.gre_quant_score}}');
+        my_quant_annotation = {
+            x: getFullWidthCoordinate(my_quant),
+            borderColor: '#800000',
+            label: {
+                borderColor: '#800000',
+                orientation: 'vertical',
+                text: 'Your score (' + my_quant + ')'
+            }
+        }
+        quant_options.annotations.xaxis.push(my_quant_annotation);
+    }
+
+    var quant_chart = new ApexCharts(document.querySelector("#quant-histogram"), quant_options);
+    quant_chart.render();
+</script>
+
+
+<!-- javascript for toefl histogram -->
+<script>
+    let average_toefl_score = parseInt('{{average_toefl}}');
+
+    toefl_options = {
+        chart: {
+            type: 'histogram',
+            height: '300px',
+            width: '450px'
+        },
+        series: [{
+            name: 'Number of Students',
+            data: [
+                0,
+                parseInt('{{toefl_histogram|getitem:"1"}}'),
+                parseInt('{{toefl_histogram|getitem:"2"}}'),
+                parseInt('{{toefl_histogram|getitem:"3"}}'),
+                parseInt('{{toefl_histogram|getitem:"4"}}'),
+                parseInt('{{toefl_histogram|getitem:"5"}}'),
+                parseInt('{{toefl_histogram|getitem:"6"}}'),
+                parseInt('{{toefl_histogram|getitem:"7"}}'),
+                parseInt('{{toefl_histogram|getitem:"8"}}'),
+                0
+            ]
+        }, ],
+        xaxis: {
+            categories: ['', '0-15', '15-30', '30-45', '45-60', '60-75', '75-90', '90-105', '105-120', '']
+        },
+        colors: ["#87ceeb"],
+        annotations: {
+            xaxis: [{
+                x: getHalfWidthCoordinate(average_toefl_score, 2.6),
+                borderColor: '#779ecb',
+                label: {
+                    borderColor: '#779ecb',
+                    orientation: 'vertical',
+                    text: 'Average TOEFL Score (' + average_toefl_score + ')'
+                }
+            }, ]
+        },
+    }
+
+
+    if (profile_updated) {
+        let my_toefl = parseInt('{{user.graduateadmissionsprofile.toefl_score}}');
+        my_toefl_annotation = {
+            x: getHalfWidthCoordinate(my_toefl, 2.6),
+            borderColor: '#800000',
+            label: {
+                borderColor: '#800000',
+                orientation: 'vertical',
+                text: 'Your score (' + my_toefl + ')'
+            }
+        }
+        toefl_options.annotations.xaxis.push(my_toefl_annotation);
+    }
+
+    var toefl_chart = new ApexCharts(document.querySelector("#toefl-histogram"), toefl_options);
+    toefl_chart.render();
+</script>
+
+
+
+<!-- javascript for gpa histogram -->
+<script>
+    let average_gpa = parseInt('{{average_gpa}}');
+
+    gpa_options = {
+        chart: {
+            type: 'histogram',
+            height: '300px',
+            width: '450px'
+        },
+        series: [{
+            name: 'Number of Students',
+            data: [
+                0,
+                parseInt('{{gpa_histogram|getitem:"1"}}'),
+                parseInt('{{gpa_histogram|getitem:"2"}}'),
+                parseInt('{{gpa_histogram|getitem:"3"}}'),
+                parseInt('{{gpa_histogram|getitem:"4"}}'),
+                parseInt('{{gpa_histogram|getitem:"5"}}'),
+                parseInt('{{gpa_histogram|getitem:"6"}}'),
+                parseInt('{{gpa_histogram|getitem:"7"}}'),
+                parseInt('{{gpa_histogram|getitem:"8"}}'),
+                0
+            ]
+        }, ],
+        xaxis: {
+            categories: ['', '0-0.5', '0.5-1.0', '1.0-1.5', '1.5-2.0', '2.0-2.5', '2.5-3.0', '3.0-3.5', '3.5-4.0', '']
+        },
+        colors: ["#ff6961"],
+        annotations: {
+            xaxis: [{
+                x: getHalfWidthCoordinate(average_gpa, 78.75),
+                borderColor: '#779ecb',
+                label: {
+                    borderColor: '#779ecb',
+                    orientation: 'vertical',
+                    text: 'Average TOEFL Score (' + average_gpa + ')'
+                }
+            }, ]
+        },
+    }
+
+
+    if (profile_updated) {
+        let my_gpa = parseInt('{{user.graduateadmissionsprofile.undergrad_gpa}}');
+        my_gpa_annotation = {
+            x: getHalfWidthCoordinate(my_gpa, 78.75),
+            borderColor: '#800000',
+            label: {
+                borderColor: '#800000',
+                orientation: 'vertical',
+                text: 'Your GPA (' + my_gpa + ')'
+            }
+        }
+        gpa_options.annotations.xaxis.push(my_gpa_annotation);
+    }
+
+    var gpa_chart = new ApexCharts(document.querySelector("#gpa-histogram"), gpa_options);
+    gpa_chart.render();
+</script>
+
 
 
 
