@@ -24,23 +24,6 @@ function showDashboard() {
     xhttp.send();
 }
 
-function showPredictor(event) {
-    showLoadingSign();
-    clearNavbarHighlight();
-    document.getElementById("nav-predict").classList.add("active");
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = this.responseText;
-            closeLoadingSign();
-            document.getElementById("mainContent").innerHTML = response;
-        }
-    };
-    scrollToTop();
-    xhttp.open("GET", "/predictor", true);
-    xhttp.send();
-}
-
 
 function showUniversities(event) {
     showLoadingSign();
@@ -109,6 +92,24 @@ function showGraduateAdmissionsProfileUpdateForm(event) {
     xhttp.open("GET", "/user/update-grad-adm-profile/", true);
     xhttp.send();
 }
+
+function showPredictor(event) {
+    showLoadingSign();
+    clearNavbarHighlight();
+    document.getElementById("nav-universities").classList.add("active");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+            closeLoadingSign();
+            document.getElementById("mainContent").innerHTML = response;
+        }
+    };
+    scrollToTop();
+    xhttp.open("GET", "/user/university-admissions-predictor/", true);
+    xhttp.send();
+}
+
 
 
 function clearNavbarHighlight() {
