@@ -9,7 +9,8 @@ from bokeh.embed import components
 # for getting images from google search
 from apiclient.discovery import build
 
-from project.trial import get_gre_histogram, get_toefl_histogram, get_gpa_histogram
+from .histograms import get_gre_histogram, get_toefl_histogram, get_gpa_histogram
+
 
 def df_to_list(df):
     df_list = list()
