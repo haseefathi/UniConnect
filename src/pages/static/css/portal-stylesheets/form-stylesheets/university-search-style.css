@@ -125,6 +125,9 @@ ul.breadcrumb li a:hover {
 }
 
 
+/* --------------------major search bar------------------------ */
+
+
 /* -------------------------- for tables --------------------------- */
 
 table {
@@ -158,10 +161,17 @@ table tr th {
     background-position: 10px 12px;
     background-repeat: no-repeat;
     width: 100%;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
+    font-size: 1em;
+    padding: 0 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
     margin-bottom: 12px;
+    height: 46px;
+    transition: .2s;
+}
+
+#major-search:focus {
+    border-color: #6E6E92;
 }
 
 #majors-list {
@@ -174,14 +184,15 @@ table tr th {
     border: 1px solid #ddd;
     margin-top: -1px;
     /* Prevent double borders */
-    background-color: #f6f6f6;
+    background-color: white;
     padding: 12px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1em;
     color: black;
     display: block
 }
 
 #majors-list li a:hover:not(.header) {
-    background-color: #eee;
+    background-color: #1F1F29;
+    color: white;
 }

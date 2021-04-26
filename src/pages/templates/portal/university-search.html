@@ -168,11 +168,10 @@
         Majors Offered ({{majors_count}})
     </p>
 
-    <input type="text" id="major-search" onkeyup="searchList()" placeholder="Search for majors..">
+    <input class="major-search-bar" type="text" id="major-search" onkeyup="searchList()" placeholder="Search for majors..">
 
     <div class="list" style="height: 200px; overflow: auto;">
         <ul id="majors-list">
-
             {% for major in all_majors %}
             <li><a>{{ major }}</a></li>
             {% endfor %}

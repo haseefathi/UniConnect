@@ -124,7 +124,7 @@ def university_search(college_name):
 
 
             # getting campus images
-            # images = get_university_images(college_name)
+            images = get_university_images(college_name)
 
 
             # getting frequency distribution of scores
@@ -170,13 +170,13 @@ def university_search(college_name):
                 'all_majors': all_majors,
 
                 # campus images
-                # 'image1': images[0],
-                # 'image2': images[1],
-                # 'image3': images[2],
+                'image1': images[0],
+                'image2': images[1],
+                'image3': images[2],
 
-                'image1': 'http://www.purdue.edu/purdue/images/audience/about-banner.jpg',
-                'image2': 'https://www.purdue.edu/uns/images/2020/MemorialMallLO.JPG',
-                'image3': 'https://engineering.purdue.edu/GEP/Images/campus-partners-content-page',
+                # 'image1': 'http://www.purdue.edu/purdue/images/audience/about-banner.jpg',
+                # 'image2': 'https://www.purdue.edu/uns/images/2020/MemorialMallLO.JPG',
+                # 'image3': 'https://engineering.purdue.edu/GEP/Images/campus-partners-content-page',
 
                 # if any errors in finding uni
                 'error': False,
