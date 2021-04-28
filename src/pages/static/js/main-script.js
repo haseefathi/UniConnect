@@ -110,6 +110,23 @@ function showPredictor(event) {
     xhttp.send();
 }
 
+function showRecommender(event) {
+    showLoadingSign();
+    clearNavbarHighlight();
+    document.getElementById("nav-universities").classList.add("active");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+            closeLoadingSign();
+            document.getElementById("mainContent").innerHTML = response;
+        }
+    };
+    scrollToTop();
+    xhttp.open("GET", "/user/university-recommender/", true);
+    xhttp.send();
+}
+
 
 
 function clearNavbarHighlight() {

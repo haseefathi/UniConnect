@@ -118,6 +118,15 @@ def admissions_predictor_view(request):
     return render(request,'portal/admissions-predictor.html', context)
 
 
+def university_recommender_view(request):
+    context = {
+
+    }
+    return render(request,'portal/university-recommender.html', context)
+
+
+
+
 
 
 
