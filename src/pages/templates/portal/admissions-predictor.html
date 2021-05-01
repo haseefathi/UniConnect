@@ -1,3 +1,87 @@
-<h2>
-    Admissions Predictor
-</h2>
+{% load widget_tweaks %} {% load static %} {% load custom_tags %}
+
+<head>
+    <!-- stylesheet for this page -->
+    <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/form-stylesheets/predictor-style.css' %}">
+</head>
+
+<!-- breadcrumb section  -->
+<ul class="breadcrumb">
+    <li>
+        <a href=""> Universities </a>
+    </li>
+    <li> Predict Admissions </li>
+</ul>
+
+
+<div class="section">
+    <p class="section-heading">
+        Predict your chances of getting admissions at any university!
+    </p>
+    {% if college_name and processed%}
+    <input type="text" name="university-predict" id="university-predict-input" class="search-bar" placeholder="University Name" value="{{college_name}}"> {% else %}
+    <input type="text" name="university-predict" id="university-predict-input" class="search-bar" placeholder="University Name"> {% endif %}
+    <button type="submit " id="predict-button" onclick="predictAdmissions() ">Predict my chances!</button>
+    <div style="clear: both; "></div>
+</div>
+
+{% if not error and processed %}
+<!-- everything is fine -->
+{% if profile_updated %}
+<div class="section">
+    {{prediction}}
+</div>
+{% else %}
+
+<!-- if the user has entered a correct uni name but hasnt updated their profile...shows acceptance rate -->
+<div class="section">
+    <p class="section-heading">Your Admission Chances at {{college_name}}</p>
+    <p class="section-content">
+        Your chances of getting accepted: {{acceptance_rate}}%
+        <div id="acceptance_rate_chart"></div>
+
+        <p class="extra-info">&#9432; These results are not personalized to your profile. Update your Graduate Admissions Profile for better results. </p>
+        <a class="button" id="update-profile-button" onclick="showForm()"> Update Graduate Admissions Profile </a>
+    </p>
+    <div style="clear:both;"></div>
+</div>
+
+
+{% endif %} {% elif error and processed %}
+<div class="section">
+    University not found!
+</div>
+{% endif %}
+
+
+<!-- script for acceptance rate chart -->
+<script>
+    let acceptance_rate = parseFloat('{{acceptance_rate}}');
+    let rejection_rate = 100 - acceptance_rate;
+
+    var options = {
+        series: [acceptance_rate, rejection_rate],
+        chart: {
+            type: 'donut',
+            height: '300px',
+            width: '97%'
+        },
+        colors: ['#77dd77', '#F7372D'],
+        labels: ['Acceptance', 'Rejection'],
+
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#acceptance_rate_chart"), options);
+    chart.render();
+</script>
