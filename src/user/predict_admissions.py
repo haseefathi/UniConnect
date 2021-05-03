@@ -182,6 +182,95 @@ def get_knn_predictions(college_name, student_info):
 
 
 
+def get_random_forest_prediction(college_name, student_info):
+    data_file_path = paths['university_admissions_data']
+
+    student_intended_major = student_info.get('intended_field')
+    normalized_student = normalize_student_data(student_info)
+
+    column_names = ['uniNames', 'majors','degrees', 'seasons', 'result', 'gpa', 'verbal_scores', 'quant_scores', 'awa_scores','toefl_scores']
+
+    data = pd.read_csv(data_file_path, names = column_names, header = None )
+    data.fillna(0, inplace = True)
+
+    majors_data = data[(data['majors'] == student_intended_major) & (data['uniNames'] == college_name)]
+
+    majors_data_1 = majors_data
+    majors_data_2 = majors_data
+    majors_data_3 = majors_data
+    majors_data_4 = majors_data
+    majors_data_5 = majors_data
+
+    frames = [majors_data, majors_data_1, majors_data_2, majors_data_3, majors_data_4, majors_data_5]
+
+    majors_multiplied = pd.concat(frames)
+
+    # making all scores of type float
+    majors_multiplied['gpa'] = majors_multiplied.gpa.astype(float)
+    majors_multiplied['verbal_scores'] = majors_multiplied.verbal_scores.astype(float)
+    majors_multiplied['quant_scores'] = majors_multiplied.quant_scores.astype(float)
+    majors_multiplied['awa_scores'] = majors_multiplied.awa_scores.astype(float)
+    majors_multiplied['toefl_scores'] = majors_multiplied.toefl_scores.astype(float)
+
+    dataframe = majors_multiplied.loc[:,'gpa':'toefl_scores']
+
+    # creating x and y
+    x = np.array(dataframe)
+    y = np.array(majors_multiplied.loc[:,['result']])
+
+    # splitting into train and test set
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 4)
+
+    # creating random forest classifier
+    rf_model = RandomForestClassifier(
+        bootstrap = True, 
+        class_weight = None, 
+        criterion = 'gini', 
+        max_depth = None, 
+        max_features = 'auto', 
+        max_leaf_nodes = None, 
+        min_samples_leaf = 1, 
+        min_samples_split = 2, 
+        min_weight_fraction_leaf = 0.0, 
+        n_estimators = 500, 
+        n_jobs = 2, 
+        oob_score = False, 
+        random_state = None, 
+        verbose = 0, 
+        warm_start = False
+    )
+
+    # training and fitting model
+    rf_model.fit(x_train, y_train)
+
+    # testing on test data
+    test_prediction = rf_model.predict(x_test)
+
+    test_decision_accuracy = rf_model.predict_proba(x_test)
+
+    # getting prediction for current student
+    admission_prediction = rf_model.predict(normalized_student)
+    # print('rf pred', admission_prediction)
+    
+    # getting chance of acceptance
+    accuracies = rf_model.predict_proba(normalized_student)
+
+    accuracies_list = accuracies.tolist()
+    # print('rf acc', accuracies_list)
+
+    acceptance_probability = (accuracies_list[0])[0]
+    acceptance_chance = float('%.2f' % (acceptance_probability * 100))
+    # print('rf acceptance chance', acceptance_chance)
+
+    rf_prediction = {
+        'prediction': admission_prediction,
+        'acceptance_chance': acceptance_chance
+    }
+
+    return rf_prediction
+
+    
+
 
 def get_predictions(college_name, student_info):
 
@@ -204,7 +293,10 @@ def get_predictions(college_name, student_info):
         # student has updated profile...so gotta get the correct predictions using classifiers
 
         knn_prediction = get_knn_predictions(college_name, student_info)
+        rf_prediction = get_random_forest_prediction(college_name, student_info)
+
         print('prediction using knn', knn_prediction['prediction'], knn_prediction['acceptance_chance'])
+        print('prediction using rf', rf_prediction['prediction'], rf_prediction['acceptance_chance'])
 
         context = {
             'college_name': college_name,
