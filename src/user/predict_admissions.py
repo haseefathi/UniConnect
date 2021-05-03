@@ -174,7 +174,8 @@ def get_knn_predictions(college_name, student_info):
         
         knn_prediction = {
             'prediction': admission_prediction,
-            'acceptance_chance': acceptance_chance
+            'acceptance_chance': acceptance_chance,
+            'accuracy': accuracy_percent
         }
 
         return knn_prediction
@@ -264,10 +265,84 @@ def get_random_forest_prediction(college_name, student_info):
 
     rf_prediction = {
         'prediction': admission_prediction,
-        'acceptance_chance': acceptance_chance
+        'acceptance_chance': acceptance_chance, 
     }
 
     return rf_prediction
+
+
+
+
+def get_svm_prediction(college_name, student_info):
+    data_file_path = paths['university_admissions_data']
+
+    student_intended_major = student_info.get('intended_field')
+    normalized_student = normalize_student_data(student_info)
+
+    column_names = ['uniNames', 'majors','degrees', 'seasons', 'result', 'gpa', 'verbal_scores', 'quant_scores', 'awa_scores','toefl_scores']
+
+    data = pd.read_csv(data_file_path, names = column_names, header = None )
+
+    majors_data = data[(data['majors'] == student_intended_major)] 
+    majors_data = majors_data[majors_data['uniNames'] == college_name]
+
+    f1 = majors_data
+    f2 = majors_data
+    f3 = majors_data
+    f4 = majors_data
+    f5 = majors_data
+
+    # creating dataframe
+    frames = [majors_data, f1, f2, f3, f4, f5]
+    dataframe = pd.concat(frames)
+
+    # making all scores in dataframe as float
+    dataframe['gpa'] = dataframe.gpa.astype(float)
+    dataframe['verbal_scores'] = dataframe.verbal_scores.astype(float)
+    dataframe['quant_scores'] = dataframe.quant_scores.astype(float)
+    dataframe['awa_scores'] = dataframe.awa_scores.astype(float)
+    dataframe['toefl_scores'] = dataframe.toefl_scores.astype(float)
+
+    # creating x and y
+    x = np.array(dataframe.loc[:, 'gpa':'toefl_scores'])
+    y = np.array(dataframe.loc[:, ['result']])
+
+    # print('-------x---------')
+    # print(x)
+    # print('-------y---------')
+    # print(y)
+
+    # splitting into train and test set
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 4)
+
+    # create svm model
+    svm_model = svm.SVC(kernel = 'linear', C = 0.001)
+
+    # fitting the model
+    svm_model.fit(x_train, y_train)
+
+    # model evaluation on test data
+    test_predictions = svm_model.predict(x_test)
+    test_accuracy = svm_model.score(x_test, y_test)
+    # print('svm accuracy on test set', test_accuracy)
+
+    # predicting for current student
+    admission_prediction = svm_model.predict(normalized_student)
+    # print('svm pred', admission_prediction)
+
+    if admission_prediction == 'Accepted':
+        acceptance_chance = float('%.2f' % (test_accuracy * 100))
+    else:
+        acceptance_chance = 100 - float('%.2f' % (test_accuracy * 100))
+    
+
+    svm_prediction = {
+        'prediction': admission_prediction, 
+        'acceptance_chance': acceptance_chance, 
+        'accuracy': test_accuracy
+    }
+
+    return svm_prediction
 
     
 
@@ -275,7 +350,7 @@ def get_random_forest_prediction(college_name, student_info):
 def get_predictions(college_name, student_info):
 
     college_name = get_corrected_uni_name(college_name)
-    print(college_name)
+    # print(college_name)
 
     if not student_info['profile_updated']:
         # student hasnt updated profile...so gotta get the acceptance rate of uni since cant personalize for student
@@ -294,9 +369,11 @@ def get_predictions(college_name, student_info):
 
         knn_prediction = get_knn_predictions(college_name, student_info)
         rf_prediction = get_random_forest_prediction(college_name, student_info)
+        svm_prediction = get_svm_prediction(college_name, student_info)
 
-        print('prediction using knn', knn_prediction['prediction'], knn_prediction['acceptance_chance'])
+        print('prediction using knn', knn_prediction['prediction'], knn_prediction['acceptance_chance'], knn_prediction['accuracy'])
         print('prediction using rf', rf_prediction['prediction'], rf_prediction['acceptance_chance'])
+        print('prediction using svm', svm_prediction['prediction'], svm_prediction['acceptance_chance'], svm_prediction['accuracy'] )
 
         context = {
             'college_name': college_name,
@@ -307,5 +384,3 @@ def get_predictions(college_name, student_info):
         }
         
     return context
-
-
