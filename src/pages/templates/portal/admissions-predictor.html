@@ -40,14 +40,102 @@
                 <p class="acceptance-details">This university can be considered as
                     <span style="color: {{color}};">{{school_type}}</span>.</p>
             </div>
-            <div class="right">
+            <div>
                 <div id="pers_final_acceptance_rate_chart"></div>
             </div>
         </div>
 
     </p>
+</div>
+
+
+
+<!-- section which shows each classifiers stuff separately -->
+<div class="section">
+    <p class="section-heading">Additional details</p>
+    <p class="section-content">Details on the classifiers used:</p>
+
+    <div class="classifier_details">
+
+        <!-- for knn results -->
+        <button class="accordion">KNN Classifier</button>
+        <div class="panel">
+            <div class="section">
+                <div class="side-by-side">
+                    <div>
+                        <p class="acceptance-details">KNN Prediction: {% if knn_prediction|getitem:'prediction' == 'Accepted'%} Accepted {% else %} Rejected {% endif %}
+                        </p>
+                        <p class="acceptance-details">Your chances of getting accepted (KNN): {{knn_prediction|getitem:"acceptance_chance"|floatformat:'2'}}%</p>
+                    </div>
+                    <div>
+                        <div id="pers_knn_acceptance_rate_chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- for svm results -->
+        <button class="accordion">SVM Classifier</button>
+        <div class="panel">
+            <div class="section">
+                <div class="side-by-side">
+                    <div>
+                        <p class="acceptance-details">SVM Prediction: {% if svm_prediction|getitem:'prediction' == 'Accepted'%} Accepted {% else %} Rejected {% endif %}
+                        </p>
+                        <p class="acceptance-details">Your chances of getting accepted (SVM): {{svm_prediction|getitem:"acceptance_chance"|floatformat:'2'}}%</p>
+                    </div>
+                    <div>
+                        <div id="pers_svm_acceptance_rate_chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- for rf results -->
+        <button class="accordion">Random Forest Classifier</button>
+        <div class="panel">
+            <div class="section">
+                <div class="side-by-side">
+                    <div>
+                        <p class="acceptance-details">Random Forest Prediction: {% if rf_prediction|getitem:'prediction' == 'Accepted'%} Accepted {% else %} Rejected {% endif %}
+                        </p>
+                        <p class="acceptance-details">Your chances of getting accepted (RF): {{rf_prediction|getitem:"acceptance_chance"|floatformat:'2'}}%</p>
+                    </div>
+                    <div>
+                        <div id="pers_rf_acceptance_rate_chart"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
 
 </div>
+
+
+
+
+<!-- script for the accordion -->
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("accordion-open");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>
 
 
 
@@ -138,4 +226,105 @@
 
     var chart_final_pers = new ApexCharts(document.querySelector("#pers_final_acceptance_rate_chart"), options_final_pers);
     chart_final_pers.render();
+</script>
+
+
+
+<!-- script for acceptance rate chart for personalized prediction (knn prediction) -->
+<script>
+    let acceptance_rate_knn_pers = parseFloat('{{knn_prediction_acceptance|floatformat:"2"}}');
+    let rejection_rate_knn_pers = 100 - acceptance_rate_knn_pers;
+
+    var options_knn_pers = {
+        series: [acceptance_rate_knn_pers, rejection_rate_knn_pers],
+        chart: {
+            type: 'donut',
+            height: '200px',
+            width: '95%'
+        },
+        colors: ['#77dd77', '#F7372D'],
+        labels: ['Acceptance', 'Rejection'],
+
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart_knn_pers = new ApexCharts(document.querySelector("#pers_knn_acceptance_rate_chart"), options_knn_pers);
+    chart_knn_pers.render();
+</script>
+
+
+<!-- script for acceptance rate chart for personalized prediction (svm prediction) -->
+<script>
+    let acceptance_rate_svm_pers = parseFloat('{{svm_prediction_acceptance|floatformat:"2"}}');
+    let rejection_rate_svm_pers = 100 - acceptance_rate_svm_pers;
+
+    var options_svm_pers = {
+        series: [acceptance_rate_svm_pers, rejection_rate_svm_pers],
+        chart: {
+            type: 'donut',
+            height: '200px',
+            width: '95%'
+        },
+        colors: ['#77dd77', '#F7372D'],
+        labels: ['Acceptance', 'Rejection'],
+
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart_svm_pers = new ApexCharts(document.querySelector("#pers_svm_acceptance_rate_chart"), options_svm_pers);
+    chart_svm_pers.render();
+</script>
+
+
+
+<!-- script for acceptance rate chart for personalized prediction (random forest prediction) -->
+<script>
+    let acceptance_rate_rf_pers = parseFloat('{{rf_prediction_acceptance|floatformat:"2"}}');
+    let rejection_rate_rf_pers = 100 - acceptance_rate_rf_pers;
+
+    var options_rf_pers = {
+        series: [acceptance_rate_rf_pers, rejection_rate_rf_pers],
+        chart: {
+            type: 'donut',
+            height: '200px',
+            width: '95%'
+        },
+        colors: ['#77dd77', '#F7372D'],
+        labels: ['Acceptance', 'Rejection'],
+
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart_rf_pers = new ApexCharts(document.querySelector("#pers_rf_acceptance_rate_chart"), options_rf_pers);
+    chart_rf_pers.render();
 </script>
