@@ -29,6 +29,17 @@ h2 {
     color: #700101;
 }
 
+.section-subheading {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1F1F29;
+    margin-top: 20px;
+}
+
+.section-subheading span {
+    text-decoration: underline;
+}
+
 .section-content {
     margin-top: 20px;
 }
@@ -132,7 +143,7 @@ ul.breadcrumb li a:hover {
 }
 
 #predict-button:hover {
-    background-color: #6E6E92;
+    background: #6E6E92;
     cursor: pointer;
 }
 
@@ -154,4 +165,18 @@ ul.breadcrumb li a:hover {
 
 #update-profile-button {
     float: right;
+}
+
+
+/* -------styling for admission chances details------------ */
+
+.acceptance-details {
+    background-color: rgb(236, 235, 235);
+    width: 100%;
+    padding: 20px;
+    margin: 20px;
+}
+
+.acceptance-details span {
+    text-decoration: underline;
 }

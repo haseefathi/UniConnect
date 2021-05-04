@@ -30,8 +30,27 @@
 {% if profile_updated %}
 <!-- if the user has entered correct uni name and has profile updated...personalized results -->
 <div class="section">
-    {{prediction}}
+    <p class="section-heading">Your Admission Chances at {{college_name}}</p>
+    <p class="section-subheading">Predicted Result: <span>{{final_prediction|getitem:"final_prediction"}}</span></p>
+    <p class="section-content">
+
+        <div class="side-by-side">
+            <div>
+                <p class="acceptance-details">Your chances of getting accepted: {{final_prediction|getitem:"acceptance_chance"|floatformat:'2'}}%</p>
+                <p class="acceptance-details">This university can be considered as
+                    <span style="color: {{color}};">{{school_type}}</span>.</p>
+            </div>
+            <div class="right">
+                <div id="pers_final_acceptance_rate_chart"></div>
+            </div>
+        </div>
+
+    </p>
+
 </div>
+
+
+
 {% else %}
 
 <!-- if the user has entered a correct uni name but hasnt updated their profile...shows acceptance rate -->
@@ -55,13 +74,13 @@
 {% endif %}
 
 
-<!-- script for acceptance rate chart -->
+<!-- script for acceptance rate chart for non personalized prediction -->
 <script>
-    let acceptance_rate = parseFloat('{{acceptance_rate}}');
-    let rejection_rate = 100 - acceptance_rate;
+    let acceptance_rate_npers = parseFloat('{{acceptance_rate}}');
+    let rejection_rate_npers = 100 - acceptance_rate_npers;
 
-    var options = {
-        series: [acceptance_rate, rejection_rate],
+    var options_npers = {
+        series: [acceptance_rate_npers, rejection_rate_npers],
         chart: {
             type: 'donut',
             height: '300px',
@@ -83,6 +102,40 @@
         }]
     };
 
-    var chart = new ApexCharts(document.querySelector("#acceptance_rate_chart"), options);
-    chart.render();
+    var chart_npers = new ApexCharts(document.querySelector("#acceptance_rate_chart"), options_npers);
+    chart_npers.render();
+</script>
+
+
+
+<!-- script for acceptance rate chart for personalized prediction (final prediction) -->
+<script>
+    let acceptance_rate_final_pers = parseFloat('{{final_prediction_acceptance|floatformat:"2"}}');
+    let rejection_rate_final_pers = 100 - acceptance_rate_final_pers;
+
+    var options_final_pers = {
+        series: [acceptance_rate_final_pers, rejection_rate_final_pers],
+        chart: {
+            type: 'donut',
+            height: '200px',
+            width: '95%'
+        },
+        colors: ['#77dd77', '#F7372D'],
+        labels: ['Acceptance', 'Rejection'],
+
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart_final_pers = new ApexCharts(document.querySelector("#pers_final_acceptance_rate_chart"), options_final_pers);
+    chart_final_pers.render();
 </script>

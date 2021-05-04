@@ -8,6 +8,7 @@ from fuzzywuzzy import process
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 from sklearn import svm
+import math as m
 
 
 
@@ -40,8 +41,10 @@ def get_corrected_uni_name(college_name):
 
 
 def get_acceptance_rate(college_name):
+
     data_file_path = paths['university_admissions_data']
     column_names = ['uniNames', 'majors','degrees', 'seasons', 'decisions', 'gpa', 'verbal_scores', 'quant_scores', 'awa_scores','toefl_scores']
+
     data = pd.read_csv(data_file_path, names = column_names, header = None)
 
     # extracting data for the university searched for by the user 
@@ -148,7 +151,7 @@ def get_knn_predictions(college_name, student_info):
         # print(z1)
 
         # splitting the data into training and test set
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 4)
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 4)
 
         # creating knn model with k = 15
         knn_model = KNeighborsClassifier(n_neighbors = 15)
@@ -175,6 +178,7 @@ def get_knn_predictions(college_name, student_info):
         knn_prediction = {
             'prediction': admission_prediction,
             'acceptance_chance': acceptance_chance,
+            'rejection_chance': 100 - acceptance_chance,
             'accuracy': accuracy_percent
         }
 
@@ -206,6 +210,16 @@ def get_random_forest_prediction(college_name, student_info):
 
     majors_multiplied = pd.concat(frames)
 
+
+    # ----------------------------------------------------------
+    majors_data['gpa'] = majors_data.gpa.astype(float)
+    majors_data['verbal_scores'] = majors_data.verbal_scores.astype(float)
+    majors_data['quant_scores'] = majors_data.quant_scores.astype(float)
+    majors_data['awa_scores'] = majors_data.awa_scores.astype(float)
+    majors_data['toefl_scores'] = majors_data.toefl_scores.astype(float)
+    # ----------------------------------------------------------
+
+
     # making all scores of type float
     majors_multiplied['gpa'] = majors_multiplied.gpa.astype(float)
     majors_multiplied['verbal_scores'] = majors_multiplied.verbal_scores.astype(float)
@@ -219,8 +233,13 @@ def get_random_forest_prediction(college_name, student_info):
     x = np.array(dataframe)
     y = np.array(majors_multiplied.loc[:,['result']])
 
+
+    # creating x and y
+    x1 = np.array(majors_data.loc[:,'gpa':'toefl_scores'])
+    y1 = np.array(majors_data.loc[:,['result']])
+
     # splitting into train and test set
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 4)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 4)
 
     # creating random forest classifier
     rf_model = RandomForestClassifier(
@@ -235,10 +254,7 @@ def get_random_forest_prediction(college_name, student_info):
         min_weight_fraction_leaf = 0.0, 
         n_estimators = 500, 
         n_jobs = 2, 
-        oob_score = False, 
-        random_state = None, 
-        verbose = 0, 
-        warm_start = False
+        oob_score = False
     )
 
     # training and fitting model
@@ -253,6 +269,14 @@ def get_random_forest_prediction(college_name, student_info):
     admission_prediction = rf_model.predict(normalized_student)
     # print('rf pred', admission_prediction)
     
+
+    # my calculation of accuracies
+    acc = rf_model.score(x_test, y_test)
+    print('my calculation of accuracy of rf on test set', acc)
+    acc = rf_model.score(x_train, y_train)
+    print('my calculation of accuracy of rf on train set', acc)
+
+
     # getting chance of acceptance
     accuracies = rf_model.predict_proba(normalized_student)
 
@@ -266,6 +290,7 @@ def get_random_forest_prediction(college_name, student_info):
     rf_prediction = {
         'prediction': admission_prediction,
         'acceptance_chance': acceptance_chance, 
+        'rejection_chance': 100 - acceptance_chance
     }
 
     return rf_prediction
@@ -313,7 +338,7 @@ def get_svm_prediction(college_name, student_info):
     # print(y)
 
     # splitting into train and test set
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 4)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 4)
 
     # create svm model
     svm_model = svm.SVC(kernel = 'linear', C = 0.001)
@@ -339,14 +364,59 @@ def get_svm_prediction(college_name, student_info):
     svm_prediction = {
         'prediction': admission_prediction, 
         'acceptance_chance': acceptance_chance, 
-        'accuracy': test_accuracy
+        'accuracy': test_accuracy * 100, 
+        'rejection_chance': 100 - acceptance_chance
     }
 
     return svm_prediction
 
+
+
+
+def get_final_prediction(knn_prediction, rf_prediction, svm_prediction):
+    all_predictions = [knn_prediction, rf_prediction, svm_prediction]
+
+    
+    # calculating chance of acceptance and rejection
+    final_acceptance_chance = 0
+    final_rejection_chance = 0
+    for pred in all_predictions:
+        final_acceptance_chance += pred['acceptance_chance']
+        final_rejection_chance += pred['rejection_chance']
+    final_acceptance_chance /= 3
+    final_rejection_chance /= 3
+
+    print('final acceptance chance', final_acceptance_chance)
+    print('final rejection chance', final_rejection_chance)
+
+    if final_acceptance_chance > final_rejection_chance:
+        final_prediction = 'Acceptance'
+    else:
+        final_prediction = 'Rejection'
+
+    
+    
+    final_prediction_info = {
+        'final_prediction': final_prediction, 
+        'acceptance_chance': final_acceptance_chance, 
+        'rejection_chance': final_rejection_chance
+    }
+
+    return final_prediction_info
     
 
 
+
+def classify_college(acceptance_chance):
+    if acceptance_chance >= 70:
+        return ['Safe', 'green']
+    elif acceptance_chance >= 35:
+        return ['Moderate', 'orange']
+    else:
+        return ['Reach', 'red']
+
+
+    
 def get_predictions(college_name, student_info):
 
     college_name = get_corrected_uni_name(college_name)
@@ -375,12 +445,25 @@ def get_predictions(college_name, student_info):
         print('prediction using rf', rf_prediction['prediction'], rf_prediction['acceptance_chance'])
         print('prediction using svm', svm_prediction['prediction'], svm_prediction['acceptance_chance'], svm_prediction['accuracy'] )
 
+        final_prediction = get_final_prediction(knn_prediction, rf_prediction, svm_prediction)
+        school_type = classify_college(final_prediction.get('acceptance_chance'))
+        print(school_type[1])
+
         context = {
             'college_name': college_name,
-            'prediction': 'yellow',
             'error': False,
             'processed': True,
-            'profile_updated': True
+            'profile_updated': True, 
+            'final_prediction': final_prediction, 
+            'knn_prediction': knn_prediction,
+            'rf_prediction': rf_prediction, 
+            'svm_prediction': svm_prediction, 
+            'final_prediction_acceptance': final_prediction['acceptance_chance'],
+            'knn_prediction_acceptance': knn_prediction['acceptance_chance'], 
+            'rf_prediction_acceptance': rf_prediction['acceptance_chance'], 
+            'svm_prediction_acceptance': svm_prediction['acceptance_chance'], 
+            'school_type': school_type[0],
+            'color': school_type[1]
         }
         
     return context
