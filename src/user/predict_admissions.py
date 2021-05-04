@@ -11,8 +11,6 @@ from sklearn import svm
 import math as m
 
 
-
-
 def get_corrected_uni_name(college_name):
 
     data_file_path = paths['university_admissions_data']
