@@ -109,3 +109,77 @@ ul.breadcrumb li a:hover {
     color: #1F1F29;
     text-decoration: underline;
 }
+
+
+/* ----------------- styling for top recommendations ------------------- */
+
+.top_recommendation {
+    padding: 20px;
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    margin-top: 15px;
+}
+
+.recommendation_heading {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1F1F29;
+    margin: 5px;
+}
+
+.top_recommendation_image {
+    width: 200px;
+    height: 100px;
+    position: center;
+    float: right;
+}
+
+.top_image_section {
+    padding: 10px;
+    border-left: #8A8A8B 1px;
+}
+
+.details_button {
+    border: 0;
+    background: linear-gradient(to right, #1F1F29 0%, #111113 100%);
+    border-radius: 3px;
+    color: #fff;
+    padding: 5px 30px;
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+}
+
+.details_button:hover {
+    background: #E0E0EC;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+/* styling for remaining recommendations */
+
+.recommendation_image {
+    height: 150px;
+    padding: 10px;
+}
+
+.recommendation_card {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    padding: 20px;
+    margin: 10px;
+}
+
+.recommendation_card p {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.recommendation-image {
+    display: flex;
+    justify-content: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}

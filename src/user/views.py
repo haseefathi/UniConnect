@@ -11,6 +11,7 @@ from django.template import RequestContext
 
 from user.university_search import university_search
 from user.predict_admissions import get_predictions
+from user.recommend_universities import get_recommendations
 
 def user_signup_view(request):
     form = SignUpForm(request.POST or None)
@@ -144,9 +145,21 @@ def admissions_predictor_view(request):
 
 
 def university_recommender_view(request):
-    context = {
 
-    }
+    current_user = request.user
+    if current_user.graduateadmissionsprofile.is_profile_updated:
+        student_info = {
+                'profile_updated': True,
+                'gre_verbal_score': current_user.graduateadmissionsprofile.gre_verbal_score,
+                'gre_quant_score': current_user.graduateadmissionsprofile.gre_quant_score,
+                'gre_awa_score': current_user.graduateadmissionsprofile.gre_awa_score,
+                'intended_semester': current_user.graduateadmissionsprofile.intended_semester,
+                'toefl_score': current_user.graduateadmissionsprofile.toefl_score,
+                'undergrad_gpa': current_user.graduateadmissionsprofile.undergrad_gpa,
+                'intended_field': current_user.graduateadmissionsprofile.intended_field
+            }
+        print(student_info)
+        context = get_recommendations(student_info)
     return render(request,'portal/university-recommender.html', context)
 
 

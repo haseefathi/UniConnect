@@ -1,6 +1,12 @@
 {% load widget_tweaks %} {% load static %} {% load custom_tags %}
 
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <!-- stylesheet for this page -->
     <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/form-stylesheets/recommender-style.css' %}">
 </head>
@@ -8,11 +14,58 @@
 <!-- breadcrumb section  -->
 <ul class="breadcrumb">
     <li>
-        <a href=""> Universities </a>
+        <a href=""> > Universities </a>
     </li>
     <li> Recommend Universities </li>
 </ul>
 
+<p class="main-heading">Your Recommendations</p>
+
 <div class="section">
-    <p class="section-heading">Your Recommended Universities</p>
+    <p class="section-heading">Top Recommendations &starf;</p>
+    <div class=" side-by-side">
+        <div class="side-by-side top_recommendation">
+            <div>
+                <p class="recommendation_heading">{{best_knn_recommendation|getitem:"recommendation"}}</p>
+                <hr>
+                <a class="details_button">Details</a>
+            </div>
+            <div class="top_image_section">
+                <img src="{{best_knn_recommendation|getitem:'image_link'}}" alt="college image" class="top_recommendation_image">
+                <!-- <div class="top_recommendation_image" style="background: url('{{cnn_image_link}}');"></div> -->
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+        <div class="side-by-side top_recommendation">
+            <div>
+                <p class="recommendation_heading">{{cnn_recommendation|getitem:"recommendation"}}</p>
+                <hr>
+                <a class="details_button">Details</a>
+            </div>
+            <div class="top_image_section">
+                <img src="{{cnn_recommendation|getitem:'image_link'}}" alt="college image" class="top_recommendation_image">
+                <!-- <div class="top_recommendation_image" style="background: url('{{cnn_image_link}}');"></div> -->
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <p class="section-heading">Other recommendations</p>
+    <div class="row">
+        {% for recommendation in remaining_recommendations %}
+        <div class="col-sm-4 ">
+            <div class="col-md-12 recommendation_card">
+                <div class="recommendation-image">
+                    <img src="{{recommendation|getitem:'image_link'}}" alt="campus image" class="recommendation_image">
+                </div>
+                <p>
+                    <span class="recommendation_heading">{{recommendation|getitem:"recommendation"}}</span>
+                    <a class="details_button center">Details</a>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
