@@ -160,6 +160,12 @@ def university_recommender_view(request):
             }
         print(student_info)
         context = get_recommendations(student_info)
+    
+    else:
+        context = {
+            'profile_updated': False
+        }
+        
     return render(request,'portal/university-recommender.html', context)
 
 

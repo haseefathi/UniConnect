@@ -54,15 +54,15 @@
 <div class="section">
     <p class="section-heading">Other recommendations</p>
     <div class="row">
-        {% for recommendation in remaining_recommendations %}
+        {% for rec in remaining_recommendations %}
         <div class="col-sm-4 ">
             <div class="col-md-12 recommendation_card">
                 <div class="recommendation-image">
-                    <img src="{{recommendation|getitem:'image_link'}}" alt="campus image" class="recommendation_image">
+                    <img src="{{rec|getitem:'image_link'}}" alt="campus image" class="recommendation_image">
                 </div>
                 <p>
-                    <span class="recommendation_heading">{{recommendation|getitem:"recommendation"}}</span>
-                    <a class="details_button center">Details</a>
+                    <span class="recommendation_heading">{{rec|getitem:"recommendation"}}</span>
+                    <a id="{{rec|getitem:'recommendation'}}" onclick='recommender_university_details(this.id)' class="details_button center">Details</a>
                 </p>
             </div>
         </div>
