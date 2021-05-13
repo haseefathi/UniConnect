@@ -148,6 +148,7 @@ def university_recommender_view(request):
 
     current_user = request.user
     if current_user.graduateadmissionsprofile.is_profile_updated:
+        print('student profile updated')
         student_info = {
                 'profile_updated': True,
                 'gre_verbal_score': current_user.graduateadmissionsprofile.gre_verbal_score,
@@ -158,14 +159,14 @@ def university_recommender_view(request):
                 'undergrad_gpa': current_user.graduateadmissionsprofile.undergrad_gpa,
                 'intended_field': current_user.graduateadmissionsprofile.intended_field
             }
-        print(student_info)
         context = get_recommendations(student_info)
     
     else:
+        print('student profile not updated')
         context = {
             'profile_updated': False
         }
-        
+
     return render(request,'portal/university-recommender.html', context)
 
 

@@ -183,3 +183,23 @@ ul.breadcrumb li a:hover {
     display: flex;
     justify-content: center;
 }
+
+
+/* for update profile button */
+
+#update-profile-button {
+    float: right;
+}
+
+.button {
+    background-color: #1F1F29;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #E0E0EC;
+    text-decoration: none;
+}

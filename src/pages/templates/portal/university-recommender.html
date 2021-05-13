@@ -19,6 +19,8 @@
     <li> Recommend Universities </li>
 </ul>
 
+{% if user.graduateadmissionsprofile.is_profile_updated %}
+
 <p class="main-heading">Your Recommendations</p>
 
 <div class="section">
@@ -28,11 +30,11 @@
             <div>
                 <p class="recommendation_heading">{{best_knn_recommendation|getitem:"recommendation"}}</p>
                 <hr>
-                <a class="details_button">Details</a>
+                <a class="details_button" id="{{best_knn_recommendation|getitem:'recommendation'}}" onclick='recommender_university_details(this.id)'>Details</a>
             </div>
             <div class="top_image_section">
                 <img src="{{best_knn_recommendation|getitem:'image_link'}}" alt="college image" class="top_recommendation_image">
-                <!-- <div class="top_recommendation_image" style="background: url('{{cnn_image_link}}');"></div> -->
+
                 <div style="clear:both;"></div>
             </div>
         </div>
@@ -40,11 +42,11 @@
             <div>
                 <p class="recommendation_heading">{{cnn_recommendation|getitem:"recommendation"}}</p>
                 <hr>
-                <a class="details_button">Details</a>
+                <a class="details_button" id="{{cnn_recommendation|getitem:'recommendation'}}" onclick='recommender_university_details(this.id)'>Details</a>
             </div>
             <div class="top_image_section">
                 <img src="{{cnn_recommendation|getitem:'image_link'}}" alt="college image" class="top_recommendation_image">
-                <!-- <div class="top_recommendation_image" style="background: url('{{cnn_image_link}}');"></div> -->
+
                 <div style="clear:both;"></div>
             </div>
         </div>
@@ -69,3 +71,14 @@
         {% endfor %}
     </div>
 </div>
+
+{% else %}
+
+<div class="section notification">
+    <p class="section-heading">Can't get recommendations for you without updating your Graduate Admissions Profile</p>
+    <p>Update your profile to get your recommendations!</p>
+    <a class="button" id="update-profile-button" onclick="showForm()"> Update Graduate Admissions Profile </a>
+    <div style="clear:both;"></div>
+</div>
+
+{% endif %}
