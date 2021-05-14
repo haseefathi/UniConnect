@@ -45,4 +45,3 @@ class GraduateAdmissionsProfile(models.Model):
     is_profile_updated = models.BooleanField(default = False)
 
 
-

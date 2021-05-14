@@ -217,8 +217,8 @@ def get_best_recommendation_knn(data, student_major, student_array):
     for name in student_best_uni_prediction:
         recommended_uni = name
 
-    # uni_image_link = get_university_images(recommended_uni)[0]
-    uni_image_link = 'https://base.imgix.net/files/base/ebm/asumag/image/2019/04/asumag_8934_uicrendering_0.png?auto=format&fit=crop&h=432&w=768'
+    uni_image_link = get_university_images(recommended_uni)[0]
+    # uni_image_link = 'https://base.imgix.net/files/base/ebm/asumag/image/2019/04/asumag_8934_uicrendering_0.png?auto=format&fit=crop&h=432&w=768'
 
     recommendation = {
         'recommendation': recommended_uni,
@@ -388,10 +388,10 @@ def get_knn_recommendation(student_info):
 
     for uni in accepted_unis_recommendations:
         recommendation = dict()
-        # current_uni_image_link = get_university_images(uni)[0]
+        current_uni_image_link = get_university_images(uni)[0]
         recommendation['recommendation'] =  uni
-        # recommendation['image_link'] = current_uni_image_link
-        recommendation['image_link'] = 'https://base.imgix.net/files/base/ebm/asumag/image/2019/04/asumag_8934_uicrendering_0.png?auto=format&fit=crop&h=432&w=768'
+        recommendation['image_link'] = current_uni_image_link
+        # recommendation['image_link'] = 'https://base.imgix.net/files/base/ebm/asumag/image/2019/04/asumag_8934_uicrendering_0.png?auto=format&fit=crop&h=432&w=768'
         all_knn_recommendations.append(recommendation)
 
     print(all_knn_recommendations)
@@ -406,11 +406,11 @@ def get_knn_recommendation(student_info):
 
 def get_recommendations(student_info):
 
-    # # top_recommendation_cnn = get_cnn_recommendation(student_info)
-    top_recommendation_cnn = {
-        'recommendation': 'University of Texas Dallas',
-        'image_link': 'https://media-exp1.licdn.com/dms/image/C4E1BAQESsYKpD2giAg/company-background_10000/0/1545159143732?e=2159024400&v=beta&t=5WALs4hWnJVwj4BcI87hm9V_A1IC00GJMWXjggi-Sd4'
-    }
+    top_recommendation_cnn = get_cnn_recommendation(student_info)
+    # top_recommendation_cnn = {
+    #     'recommendation': 'University of Texas Dallas',
+    #     'image_link': 'https://media-exp1.licdn.com/dms/image/C4E1BAQESsYKpD2giAg/company-background_10000/0/1545159143732?e=2159024400&v=beta&t=5WALs4hWnJVwj4BcI87hm9V_A1IC00GJMWXjggi-Sd4'
+    # }
 
     best_knn_recommendation, remaining_predictions = get_knn_recommendation(student_info)
     # knn_recommendation = {
