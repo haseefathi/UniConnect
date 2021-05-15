@@ -163,6 +163,17 @@
 
 </div>
 
+
+{% if positive_review_percentage != None %}
+<div class="section">
+    <p class="section-heading">
+        Reviews
+    </p>
+    <div id="reviews-chart"></div>
+</div>
+{% endif %}
+
+
 <div class="section">
     <p class="section-heading">
         Majors Offered ({{majors_count}})
@@ -205,7 +216,7 @@
 
 <script>
     function getFullWidthCoordinate(score) {
-        let coord = 100 + ((score - 130) * 19);
+        let coord = 124 + ((score - 130) * 24.8);
         console.log('modified coord ' + coord);
         return coord;
     }
@@ -317,6 +328,7 @@
         annotations: {
             xaxis: [{
                 x: getFullWidthCoordinate(average_quant_score),
+                //x: 620,
                 borderColor: '#779ecb',
                 label: {
                     borderColor: '#779ecb',
@@ -470,6 +482,38 @@
     gpa_chart.render();
 </script>
 
+
+<!-- script for proportion of positive and negative reviews -->
+<script>
+    let positive_percentage = parseFloat('{{positive_review_percentage|floatformat:"2"}}');
+    let negative_percentage = 100 - positive_percentage;
+
+    var options_reviews = {
+        series: [positive_percentage, negative_percentage],
+        chart: {
+            type: 'donut',
+            height: '200px',
+            width: '95%'
+        },
+        colors: ['#77dd77', '#F7372D'],
+        labels: ['Positive Reviews', 'Negative Reviews'],
+
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var reviews_chart = new ApexCharts(document.querySelector("#reviews-chart"), options_reviews);
+    reviews_chart.render();
+</script>
 
 
 

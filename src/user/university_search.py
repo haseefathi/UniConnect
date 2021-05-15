@@ -11,6 +11,8 @@ from apiclient.discovery import build
 
 from .histograms import get_gre_histogram, get_toefl_histogram, get_gpa_histogram
 
+# for sentiment analysis
+from .sentiment_analysis import get_sentiment_analysis
 
 def df_to_list(df):
     df_list = list()
@@ -36,6 +38,11 @@ def get_university_images(college_name):
             image_count += 1
 
     return image_links
+
+
+
+    
+
 
 
 def university_search(college_name):
@@ -133,6 +140,11 @@ def university_search(college_name):
             toefl_histogram = get_toefl_histogram(df_to_list(decision_data['toefl_scores'].dropna()))
             gpa_histogram = get_gpa_histogram(df_to_list(decision_data['gpa'].dropna()))
 
+
+            # sentiment analysis of reviews------------------------------------
+            positive_review_percentage = get_sentiment_analysis(college_name)
+            print('Percentage of postiive review', positive_review_percentage)
+
             # -----------------------------------------------------------------
             context = {
                 'college_name': college_name,
@@ -186,7 +198,10 @@ def university_search(college_name):
                 'verbal_histogram': verbal_histogram,
                 'quant_histogram': quant_histogram,
                 'toefl_histogram': toefl_histogram,
-                'gpa_histogram': gpa_histogram
+                'gpa_histogram': gpa_histogram,
+
+                # for reviews
+                'positive_review_percentage': positive_review_percentage
 
             }
     
