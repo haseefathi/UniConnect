@@ -3,6 +3,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 from .models import GraduateAdmissionsProfile
+from connect.admin import PublicProfileInline
+
 
 
 class GraduateAdmissionsProfileInline(admin.StackedInline):
@@ -11,7 +13,7 @@ class GraduateAdmissionsProfileInline(admin.StackedInline):
     verbose_name_plural = 'GraduateAdmissionsProfile'
 
 class UserAdmin(BaseUserAdmin):
-    inlines = (GraduateAdmissionsProfileInline,)
+    inlines = (GraduateAdmissionsProfileInline,PublicProfileInline, )
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
