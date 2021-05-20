@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     # pip libraries
     'widget_tweaks',
 
+    # my installed apps
+    'django_countries',
+
+    
     # my apps
     'pages',
     'user',
