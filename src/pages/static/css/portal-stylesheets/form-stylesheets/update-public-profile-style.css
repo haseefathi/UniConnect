@@ -59,10 +59,6 @@
     text-decoration: none;
 }
 
-.button-outside {
-    text-align: center;
-}
-
 
 /* breadcrumb  */
 
@@ -107,42 +103,4 @@ ul.breadcrumb li a {
 ul.breadcrumb li a:hover {
     color: #1F1F29;
     text-decoration: underline;
-}
-
-table {
-    width: 100%;
-    text-align: right;
-    margin-bottom: 30px;
-}
-
-table tr td {
-    width: 50%;
-    padding: 10px;
-}
-
-table tr th {
-    width: 50%;
-    padding: 10px;
-}
-
-
-/* --------------general profile component styling----------------------- */
-
-.update_notification {
-    border: 1px solid #000;
-    padding: 10px;
-}
-
-
-/* ----------styling for public profile section ------------------------ */
-
-.profile_section {
-    background-color: #e9faef;
-    padding: 10px 15px;
-    text-align: justify;
-}
-
-.profile_public_notification {
-    font-size: 1em;
-    color: #8f0606;
 }

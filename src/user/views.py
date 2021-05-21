@@ -96,7 +96,20 @@ def update_grad_adm_profile_view(request):
             print('form not valid')
 
     else:
-        form = UpdateGradAdmProfileForm()
+        current_user = request.user
+        initial_values = {}
+        if current_user.graduateadmissionsprofile.is_profile_updated:
+            initial_values = {
+                'degree': current_user.graduateadmissionsprofile.degree, 
+                'gre_verbal_score': current_user.graduateadmissionsprofile.gre_verbal_score,
+                'gre_quant_score': current_user.graduateadmissionsprofile.gre_quant_score,
+                'gre_awa_score': current_user.graduateadmissionsprofile.gre_awa_score,
+                'toefl_score':  current_user.graduateadmissionsprofile.toefl_score,
+                'intended_semester': current_user.graduateadmissionsprofile.intended_semester,
+                'undergraduate_gpa': current_user.graduateadmissionsprofile.undergrad_gpa,
+                'intended_field': current_user.graduateadmissionsprofile.intended_field
+            }
+        form = UpdateGradAdmProfileForm(initial = initial_values)
 
     context = {
         'form': form
