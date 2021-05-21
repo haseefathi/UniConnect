@@ -19,4 +19,6 @@ class PublicProfile(models.Model):
     date_of_birth = models.DateField(blank = True, null = True)
     profile = models.TextField(blank = True)
 
+    profile_updated = models.BooleanField(default = False)
+
     

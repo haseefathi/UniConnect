@@ -26,10 +26,23 @@
     color: #700101;
 }
 
+.section-subheading {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1F1F29;
+}
+
 .side-by-side {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+}
+
+.extra-info {
+    background-color: #F7F3C6;
+    padding: 5px;
+    font-size: 0.8em;
+    color: #8A8A8B;
 }
 
 .button {
@@ -110,4 +123,26 @@ table tr td {
 table tr th {
     width: 50%;
     padding: 10px;
+}
+
+
+/* --------------general profile component styling----------------------- */
+
+.update_notification {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+
+/* ----------styling for public profile section ------------------------ */
+
+.profile_section {
+    background-color: #e9faef;
+    padding: 10px 15px;
+    text-align: justify;
+}
+
+.profile_public_notification {
+    font-size: 1em;
+    color: #8f0606;
 }

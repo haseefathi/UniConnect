@@ -26,9 +26,63 @@
 <img class="profile-pic" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic"> {% endif %}
 
 <div class="side-by-side">
+
+    <div class="section">
+        <p class="section-heading">Public Profile</p>
+        <hr>
+        <p class="extra-info">&#9432; This information can be seen by others when you make your profile public.</p>
+
+        {% if user.publicprofile.profile_updated %}
+
+        <div class="profile_section">
+            <p class="section-subheading" id="profile_heading">Profile</p>
+            <p>{{user.publicprofile.profile}}</p>
+        </div>
+
+        <table>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ user.publicprofile.date_of_birth }}</td>
+            </tr>
+            <tr>
+                <th>Accepted University</th>
+                <td> {{ user.publicprofile.accepted_university }}
+                </td>
+            </tr>
+            <tr>
+                <th>Origin</th>
+                <td> {{ user.publicprofile.origin_city }}, {{ user.publicprofile.origin_country.name }} <img src='{{user.publicprofile.origin_country.flag}}'>
+                </td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td> {{ user.publicprofile.destination_city }}, {{ user.publicprofile.destination_country.name }} <img src='{{user.publicprofile.destination_country.flag}}'>
+                </td>
+            </tr>
+
+        </table>
+        <div class="profile_public_notification">
+            {% if user.publicprofile.profile_public %} Your profile is public and can be seen by others. {% else %} Your profile is private and is not visible to others. {% endif %}
+        </div>
+
+        {% else %}
+        <div class="update_notification">
+            <p>Looks like you haven't created a public profile yet!</p>
+        </div>
+
+        {% endif %}
+        <br>
+        <p class="button-outside">
+            <a class="button" id="update-public-profile-button" onclick="showPublicProfileUpdateForm()"> {% if user.publicprofile.profile_updated %}Update{% else %}Create{% endif %} Public Profile </a>
+        </p>
+
+        <div style="clear: both;"></div>
+    </div>
+
     <div class="section">
         <p class="section-heading">Your Graduate Admissions Profile</p>
         <hr>
+        <p class="extra-info">&#9432; This information is not visible to others.</p>
         <table>
             <tr>
                 <th>Degree</th>
@@ -72,8 +126,5 @@
         <div style="clear: both;"></div>
 
     </div>
-    <div class="section">
-        <p class="section-heading">Some Other Profile</p>
-        <hr> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam, alias rerum ullam quo fugiat sapiente illo sit debitis! Amet et quasi atque nostrum repellendus, cumque enim eveniet molestias beatae voluptatibus.
-    </div>
+
 </div>

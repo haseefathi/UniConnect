@@ -15,10 +15,39 @@ function getCookie(name) {
     return cookieValue;
 }
 
+
+
+// function for showing the Update Public Profile Forms
 function showForm() {
     showLoadingSign();
     clearNavbarHighlight();
-    document.getElementById("nav-universities").classList.add("active");
+    document.getElementById("nav-profile").classList.add("active");
+    $.ajax({
+        url: '/user/update-public-profile',
+        type: 'GET',
+        dataType: 'html',
+        data: {
+            // 'csrfmiddlewaretoken': getCookie('csrftoken'),
+            //'initialrender': true,
+        },
+        success: function(content) {
+            closeLoadingSign();
+            $('#mainContent').html(content);
+            scrollToTop();
+
+        },
+        failure: function() {
+            alert('Something wrong with the server bro...');
+        }
+    });
+}
+
+
+// function for showing the Update Graduate Admissions Profile Forms
+function showForm() {
+    showLoadingSign();
+    clearNavbarHighlight();
+    document.getElementById("nav-profile").classList.add("active");
     $.ajax({
         url: '/user/update-grad-adm-profile',
         type: 'GET',
@@ -38,6 +67,8 @@ function showForm() {
         }
     });
 }
+
+
 
 
 function universitySearch() {

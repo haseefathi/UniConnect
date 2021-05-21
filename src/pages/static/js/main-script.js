@@ -1,5 +1,5 @@
 window.onload = function() {
-    showUniversities();
+    showProfile();
 };
 
 function scrollToTop() {
@@ -79,7 +79,7 @@ function showProfile(event) {
 function showGraduateAdmissionsProfileUpdateForm(event) {
     showLoadingSign();
     clearNavbarHighlight();
-    document.getElementById("nav-universities").classList.add("active");
+    document.getElementById("nav-profile").classList.add("active");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -90,6 +90,24 @@ function showGraduateAdmissionsProfileUpdateForm(event) {
     };
     scrollToTop();
     xhttp.open("GET", "/user/update-grad-adm-profile/", true);
+    xhttp.send();
+}
+
+
+function showPublicProfileUpdateForm(event) {
+    showLoadingSign();
+    clearNavbarHighlight();
+    document.getElementById("nav-profile").classList.add("active");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+            closeLoadingSign();
+            document.getElementById("mainContent").innerHTML = response;
+        }
+    };
+    scrollToTop();
+    xhttp.open("GET", "/user/update_public_profile/", true);
     xhttp.send();
 }
 

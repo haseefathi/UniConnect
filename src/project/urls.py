@@ -33,6 +33,7 @@ urlpatterns = [
 
     # login urls - gives all the authentication views 
     path('user/', include('user.urls'), name='signup'),
+    path('user/', include('connect.urls'), name='connect'),
     path('user/', include('django.contrib.auth.urls')),
 
 ]
