@@ -10,7 +10,7 @@
     <!-- My javascript -->
     <script src="{% static 'js/main-script.js' %}"></script>
 
-    <!-- jqeury cookie -->
+    <!-- jquery cookie -->
     <script src="{% static 'js/jquery.cookie.js' %}"></script>
 
     <!-- ajax script for forms -->
@@ -80,6 +80,13 @@
                             </a>
                         </li>
 
+                        <li onclick="showProfile()">
+                            <a class="active" id="nav-profile">
+                                <span class="icon"><i class="fas fa-id-card"></i></span>
+                                <span class="title">Your Profile</span>
+                            </a>
+                        </li>
+
                         <li>
                             <a id="nav-universities" onclick="showUniversities()">
                                 <span class="icon"><i class="fas fa-university"></i></span>
@@ -94,12 +101,7 @@
                         </li> -->
 
 
-                        <li onclick="showProfile()">
-                            <a class="active" id="nav-profile">
-                                <span class="icon"><i class="fas fa-id-card"></i></span>
-                                <span class="title">Your Profile</span>
-                            </a>
-                        </li>
+
 
                     </ul>
                 </div>

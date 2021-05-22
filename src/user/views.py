@@ -13,6 +13,8 @@ from user.university_search import university_search
 from user.predict_admissions import get_predictions
 from user.recommend_universities import get_recommendations
 
+from connect.models import PublicProfile
+
 def user_signup_view(request):
     form = SignUpForm(request.POST or None)
     if request.method == 'POST':
@@ -35,6 +37,12 @@ def user_signup_view(request):
             grad_profile.gender = gender
             grad_profile.user = u
             grad_profile.save()
+
+            u.refresh_from_db()
+            public_profile = PublicProfile()
+            public_profile.user = u
+            public_profile.save()
+
 
             user = authenticate(username=u.username, password=password)
             login(request, user)

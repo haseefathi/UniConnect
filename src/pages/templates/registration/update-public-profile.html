@@ -9,14 +9,13 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-
     <!-- stylesheet for this page -->
     <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/form-stylesheets/update-public-profile-style.css' %}">
 </head>
 
 <ul class="breadcrumb">
     <li><a onclick="showProfile()">> Profile</a></li>
-    <li>Edit Public Profile Profile</li>
+    <li>Edit Public Profile</li>
 </ul>
 
 <p class="main-heading">{{user.first_name|title}} {{user.last_name|title}}'s Public Profile</p>
@@ -25,8 +24,40 @@
 <img class="profile-pic" src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic"> {% else %}
 <img class="profile-pic" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic"> {% endif %}
 
+
+
 <div class="section">
-    <form action="">
-        {{form.as_p}}
+    <p class="section-heading">Edit Public Profile</p>
+    <form method="POST" action="{% url 'UpdatePublicProfile' %}">{% csrf_token %} {{ form.non_field_errors }}
+        <div class="side-by-side">
+            <div>
+                <p class="subheading">Personal Details</p>
+                <hr>
+                <br>{{form.profile.errors}} {{form.profile.label}} {% render_field form.profile placeholder='Something about yourself...' class='form-field' maxlength='500' rows='9' id="profile_textarea" %}
+                <br> {{ form.date_of_birth.errors }} {{form.date_of_birth.label}} {% render_field form.date_of_birth placeholder='DOB' class='form-field'%}
+                <br> {{ form.origin_city.errors }} {{form.origin_city.label}} {% render_field form.origin_city placeholder='Current City' class='form-field'%}
+                <br> {{ form.origin_country.errors }} Current Country {% render_field form.origin_country placeholder='Current Country' class='form-field'%}
+            </div>
+            <div>
+                <p class="subheading">College Details</p>
+                <hr>
+                <br>{{form.accepted_university.errors}} {{form.accepted_university.label}}: {% render_field form.accepted_university placeholder='College Name' class='form-field' %}
+                <br> {{ form.destination_city.errors }} {{form.destination_city.label}} {% render_field form.destination_city placeholder='City' class='form-field'%}
+                <br> {{ form.destination_country.errors }} {{form.destination_country.label}} {% render_field form.destination_country placeholder='Country' class='form-field'%}
+                <br> {{ form.degree.errors }} {{form.degree.label}} {% render_field form.degree placeholder='Degree' class='form-field'%}
+                <br> {{ form.major.errors }} {{form.major.label}} {% render_field form.major placeholder='Major' class='form-field'%}
+                <div class="side-by-side">
+                    <div>
+                        {{ form.starting_semester.errors }} {{form.starting_semester.label}} {% render_field form.starting_semester placeholder='Starting Semester' class='form-field'%}
+                    </div>
+                    <div>
+                        {{ form.starting_year.errors }} {{form.starting_year.label}} {% render_field form.starting_year placeholder='Starting Year' class='form-field'%}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <button type="submit" id="update-profile-button">Update Public Profile</button>
+        <div style="clear: both;"></div>
     </form>
 </div>

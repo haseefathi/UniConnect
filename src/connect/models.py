@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 
 from django_countries.fields import CountryField
 
+DEGREE_CHOICES = (
+    ('ms', 'MS'),
+    ('phd', 'PhD')
+)
+
+STARTING_SEMESTER_CHOICES = (
+    ('F', 'Fall'),
+    ('S', 'Spring')
+)
+
 
 class PublicProfile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key=True)
@@ -20,5 +30,10 @@ class PublicProfile(models.Model):
     profile = models.TextField(blank = True)
 
     profile_updated = models.BooleanField(default = False)
+
+    degree = models.CharField(choices = DEGREE_CHOICES, default = 'ms', max_length = 3)
+    starting_semester = models.CharField(choices = STARTING_SEMESTER_CHOICES, max_length = 5, blank = True, null=True, default = 'F')
+
+    starting_year = models.IntegerField(blank = True, null = True)
 
     

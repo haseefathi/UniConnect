@@ -27,18 +27,18 @@
             <div>
                 <p class="subheading">Application Information</p>
                 <hr>
-                <br>{{form.degree.errors}} {% render_field form.degree placeholder='Degree' class='form-field'%}
-                <br> {{ form.intended_semester.errors }} {% render_field form.intended_semester placeholder='Last Name' class='form-field'%}
-                <br> {{ form.intended_field.errors }} {% render_field form.intended_field placeholder='Intended Field (Eg. Computer Science)' class='form-field'%}
-                <br> {{ form.undergraduate_gpa.errors }} {% render_field form.undergraduate_gpa placeholder='Undergraduate GPA (0-4)' class='form-field'%}
+                <br>{{form.degree.errors}} {{form.degree.label}} {% render_field form.degree placeholder='Degree' class='form-field'%}
+                <br> {{ form.intended_semester.errors }} {{form.intended_semester.label}} {% render_field form.intended_semester placeholder='Last Name' class='form-field'%}
+                <br> {{ form.intended_field.errors }} {{form.intended_field.label}} {% render_field form.intended_field placeholder='Intended Field (Eg. Computer Science)' class='form-field'%}
+                <br> {{ form.undergraduate_gpa.errors }} {{form.undergraduate_gpa.label}} {% render_field form.undergraduate_gpa placeholder='Undergraduate GPA (0-4)' class='form-field'%}
             </div>
             <div>
                 <p class="subheading">Test Scores</p>
                 <hr>
-                <br>{{form.gre_verbal_score.errors}} {% render_field form.gre_verbal_score placeholder='GRE Verbal Score' class='form-field'%}
-                <br>{{form.gre_quant_score.errors}} {% render_field form.gre_quant_score placeholder='GRE Quantitative Score' class='form-field'%}
-                <br>{{form.gre_awa_score.errors}} {% render_field form.gre_awa_score placeholder='GRE AWA Score' class='form-field'%}
-                <br>{{form.toefl_score.errors}} {% render_field form.toefl_score placeholder='TOEFL Score' class='form-field'%}
+                <br>{{form.gre_verbal_score.errors}} {{form.gre_verbal_score.label}} {% render_field form.gre_verbal_score placeholder='GRE Verbal Score' class='form-field'%}
+                <br>{{form.gre_quant_score.errors}} {{form.gre_quant_score.label}} {% render_field form.gre_quant_score placeholder='GRE Quantitative Score' class='form-field'%}
+                <br>{{form.gre_awa_score.errors}} {{form.gre_awa_score.label}} {% render_field form.gre_awa_score placeholder='GRE AWA Score' class='form-field'%}
+                <br>{{form.toefl_score.errors}} {{form.toefl_score.label}} {% render_field form.toefl_score placeholder='TOEFL Score' class='form-field'%}
             </div>
 
         </div>

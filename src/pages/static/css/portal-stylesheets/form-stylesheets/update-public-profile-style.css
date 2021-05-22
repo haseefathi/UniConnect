@@ -32,6 +32,14 @@
     color: #1F1F29;
 }
 
+.subheading {
+    color: #6E6E92;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
 .side-by-side {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -57,6 +65,25 @@
 .button:hover {
     background-color: #E0E0EC;
     text-decoration: none;
+}
+
+
+/* styling for form fields */
+
+.form-field {
+    height: 43px;
+    padding: 0 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    outline: 0;
+    transition: .2s;
+    width: 100%;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.form-field:focus {
+    border-color: #6E6E92;
 }
 
 
@@ -103,4 +130,28 @@ ul.breadcrumb li a {
 ul.breadcrumb li a:hover {
     color: #1F1F29;
     text-decoration: underline;
+}
+
+
+/* -------------------------- personal details form section styling --------------------------------- */
+
+#profile_textarea {
+    height: auto;
+    resize: none;
+}
+
+button {
+    background-color: #1F1F29;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    float: right;
+}
+
+button:hover {
+    background-color: #E0E0EC;
+    text-decoration: none;
+    color: teal;
 }
