@@ -28,8 +28,24 @@
 <div class="side-by-side">
 
     <div class="section">
-        <p class="section-heading">Public Profile</p>
+        <p class="section-heading pull-left">Public Profile</p>
+
+        <!-- toggle switch is only visible when profile has been created -->
+        {% if user.publicprofile.profile_updated %}
+        <label class="switch pull-right">
+            <input type="checkbox" id="togBtn" onchange = "change_profile_status(this)" {% if user.publicprofile.profile_public %} checked {% endif %}>
+            <div class="slider round">
+             <!--ADDED HTML -->
+             <span class="on">Public</span>
+             <span class="off">Private</span>
+             <!--END-->
+            </div>
+        </label> {% endif %}
+
+        <div style="clear: both;"></div>
+
         <hr>
+
         <p class="extra-info">&#9432; This information can be seen by others when you make your profile public.</p>
 
         {% if user.publicprofile.profile_updated %}
@@ -77,10 +93,13 @@
         </p>
 
         <div style="clear: both;"></div>
+
+
     </div>
 
     <div class="section">
         <p class="section-heading">Your Graduate Admissions Profile</p>
+        <div style="clear: both;"></div>
         <hr>
         <p class="extra-info">&#9432; This information is not visible to others.</p>
         <table>
@@ -125,6 +144,26 @@
 
         <div style="clear: both;"></div>
 
+    </div>
+
+</div>
+
+
+<!-- the modal that opens when trying to make profile public/private -->
+<div id="toggle_modal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Your profile is now: {% if user.publicprofile.profile_public %} Private {% else %} Public {% endif %} </h2>
+        </div>
+        <div class="modal-body">
+            <p>{% if not user.publicprofile.profile_public %} Your profile is currently public and can be seen by others. This allows people to find you.{% else %} Your profile is private and is not visible to others. This prevents people from finding you.
+                <br> {% endif %}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="confirm_button" class="modal_button"> Okay! </button>
+        </div>
     </div>
 
 </div>
