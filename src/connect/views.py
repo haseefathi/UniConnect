@@ -91,14 +91,14 @@ def make_profile_public_private(request):
 
     user.refresh_from_db()
 
-    print('inside make profile status function')
+    # print('inside make profile status function')
     new_status = request.POST.get('is_public')
 
     is_public = (new_status == 'true')
-    print('changing status to', is_public)
-    print('old value', user.publicprofile.profile_public)
-    print('changing value now')
+    # print('changing status to', is_public)
+    # print('old value', user.publicprofile.profile_public)
+    # print('changing value now')
     user.publicprofile.profile_public = is_public
     user.publicprofile.save()
-    print('after changing', user.publicprofile.profile_public)
+    # print('after changing', user.publicprofile.profile_public)
     return HttpResponse('Sucessful')

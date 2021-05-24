@@ -47,7 +47,7 @@
                         <li>
                             <i class="fas fa-user"></i>
                             <div class="profile_dd">
-                                <div class="dd_item">Profile</div>
+                                <div class="dd_item" onclick="showProfile()">Profile</div>
                                 <div class="dd_item">Change Password</div>
                                 <a href="{% url 'logout' %}">
                                     <div class="dd_item">Logout</div>
@@ -78,8 +78,15 @@
 
                         <li>
                             <a class="active" id="nav-dashboard" onclick="showDashboard()">
-                                <span class="icon"><i class="fas fa-home"></i></span>
+                                <span class="icon"><i class="fas fa-users"></i></span>
                                 <span class="title">Home</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="nav-chat">
+                                <span class="icon"><i class="fas fa-comments"></i></span>
+                                <span class="title">Chat</span>
                             </a>
                         </li>
 
@@ -96,6 +103,9 @@
                                 <span class="title">Universities</span>
                             </a>
                         </li>
+
+
+
                         <!-- <li>
                             <a id="nav-research" onclick="showResearch()">
                                 <span class="icon"><i class="fas fa-book-reader"></i></span>
