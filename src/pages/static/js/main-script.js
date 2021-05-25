@@ -1,5 +1,5 @@
 window.onload = function() {
-    showProfile();
+    showHome();
 };
 
 function scrollToTop() {
@@ -7,7 +7,7 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-function showDashboard() {
+function showHome() {
     showLoadingSign();
     clearNavbarHighlight();
     document.getElementById("nav-dashboard").classList.add("active");
@@ -20,7 +20,7 @@ function showDashboard() {
         }
     };
     scrollToTop();
-    xhttp.open("GET", "/dashboard", true);
+    xhttp.open("GET", "/connect_home", true);
     xhttp.send();
 }
 

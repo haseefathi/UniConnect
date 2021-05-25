@@ -13,20 +13,54 @@
     <li>> Home</li>
 </ul>
 
-<p class="main-heading">Connect</p>
-
+<p class="main-heading">Home</p>
 
 <div class="section description">
     <p class="section-heading">Connect with other students!</p>
-    <p>Your profile is currently <strong>{% if user.publicprofile.profile_public %}Public{% else %}Private{% endif %}.</strong></p>
+    <p>Get connected with other students to improve your admission experience. Your profile is currently <strong>{% if user.publicprofile.profile_public %}Public{% else %}Private{% endif %}.</strong></p>
 </div>
 
-<div class="section">
-    <p class="section-heading">Heading</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, officiis doloribus quibusdam quae sed dignissimos impedit error quidem repudiandae minima porro excepturi nulla doloremque repellat placeat mollitia, temporibus fugit optio.</p>
 
+<script>
+</script>
+
+<p class="main-heading">Connect</p>
+
+
+<div class="side-by-side">
+    <div>
+        <select name="filter_type" id="" class="form-field">
+            <option value="">Name</option>
+            <option value="">From</option>
+            <option value="">University</option>
+            <option value="">Destination</option>
+        </select>
+    </div>
+    <div>
+        <input type="text" placeholder="Search Term" class="form-field">
+    </div>
 </div>
 
-<div class="section">
-    Some content
+
+
+
+<div class="user_container">
+    {% for user in connect_users %}
+    <div class="user_cell">
+        <div class="user_details">
+            <ul>
+                <li class="picture_container">{% if user.graduateadmissionsprofile.gender == 'M' %}
+                    <img src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic" class="profile_picture"> {% else %}
+                    <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic" class="profile_picture"> {% endif %}</li>
+                <li class="name_container"><strong>Name</strong><br>{{user.first_name|title}} {{user.last_name|title}}</li>
+                <li class="university_container"><strong>Accepted University</strong><br>{{user.publicprofile.accepted_university}}</li>
+                <li class="from_container"><strong>From</strong><br>{{user.publicprofile.origin_city}}, {{user.publicprofile.origin_country.name}} <img src="{{user.publicprofile.origin_country.flag}}" alt=""></li>
+
+                <li class="destination_container"><strong>Destination</strong><br>{{user.publicprofile.destination_city}}, {{user.publicprofile.destination_country.name}} <img src="{{user.publicprofile.destination_country.flag}}" alt=""></li>
+                <li class="button_container"><button>View Profile</button></li>
+            </ul>
+
+        </div>
+    </div>
+    {% endfor %}
 </div>

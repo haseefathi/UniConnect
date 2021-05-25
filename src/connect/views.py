@@ -3,6 +3,9 @@ from .forms import UpdatePublicProfileForm
 from .models import PublicProfile
 from django.http import HttpResponse
 
+from django.contrib.auth.models import User
+
+
 # Create your views here.
 
 def update_public_profile_view(request):
@@ -102,3 +105,24 @@ def make_profile_public_private(request):
     user.publicprofile.save()
     # print('after changing', user.publicprofile.profile_public)
     return HttpResponse('Sucessful')
+
+
+
+def connect_home_view(request, *args, **kwargs):
+
+    logged_in_username = request.user.username
+
+    # getting all other users who have set their profiles as public
+    other_users = User.objects.exclude(username = logged_in_username)
+    
+    required_users = list()
+
+    for user in other_users:
+        if user.publicprofile.profile_public:
+            required_users.append(user)
+
+    context = {
+        'connect_users': required_users
+    }
+    
+    return render(request, 'portal/home.html', context)
