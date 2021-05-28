@@ -57,7 +57,7 @@ def update_public_profile_view(request):
         
         else:
             print(form.errors)
-            print('form is not valid')
+            print('form isnt valid')
         
     else:
 
