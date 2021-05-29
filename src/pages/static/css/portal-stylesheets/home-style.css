@@ -286,7 +286,7 @@ fieldset legend {
 /* filter form field styling  */
 
 .filter_form_field {
-    height: 23px;
+    height: 29px;
     padding: 0 5px;
     border: 1px solid #E0E0EC;
     border-radius: 2px;
@@ -294,30 +294,11 @@ fieldset legend {
     transition: .2s;
     width: 100%;
     font-size: 1em;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
 .filter_form_field:focus {
     border-color: #6E6E92;
-}
-
-#apply_filters_container {
-    text-align: center;
-}
-
-#apply_filters {
-    background-color: #6E6E92;
-    padding: 5px 20px;
-    border: none;
-    border-radius: 2px;
-    color: white;
-    transition: 0.3s;
-    box-shadow: 1px 1px 5px lightgrey;
-}
-
-#apply_filters:hover {
-    background-color: #9393be;
-    box-shadow: none;
 }
 
 
