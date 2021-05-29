@@ -65,9 +65,9 @@ h2 {
     cursor: pointer;
 }
 
-.side-by-side {
+.filter_side_by_side {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 6fr;
 }
 
 
@@ -166,6 +166,42 @@ ul.breadcrumb li a:hover {
 .user_container {
     display: flex;
     flex-direction: column;
+    /* border-left: solid 2px #A2A2A2; */
+    padding-left: 20px;
+}
+
+.user_list_container {
+    height: 78vh;
+    overflow: auto;
+    padding-right: 10px;
+}
+
+
+/* width */
+
+.user_list_container::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+.user_list_container::-webkit-scrollbar-track {
+    background: #f8f8f8;
+}
+
+
+/* Handle */
+
+.user_list_container::-webkit-scrollbar-thumb {
+    background: #b7b7db;
+}
+
+
+/* Handle on hover */
+
+.user_list_container::-webkit-scrollbar-thumb:hover {
+    background: #1F1F29;
 }
 
 .user_cell {
@@ -176,10 +212,6 @@ ul.breadcrumb li a:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.user_cell:first-of-type {
-    margin-top: 30px;
 }
 
 .user_details {
@@ -197,7 +229,7 @@ ul.breadcrumb li a:hover {
 
 .user_details .picture_container {
     width: 7%;
-    padding-left: 30px;
+    padding-left: 10px;
 }
 
 .user_details .name_container {
@@ -222,11 +254,203 @@ ul.breadcrumb li a:hover {
 
 .user_details .button_container button {
     border: none;
-    padding: 3px 5px;
-    background-color: aliceblue;
-    transition: 0.1s;
+    padding: 20px 5px;
+    background-color: white;
+    transition: 0.25s;
+    color: #111113;
+    box-shadow: 1px 1px 5px lightgrey;
+    border-radius: 5px;
 }
 
 .user_details .button_container button:hover {
     background-color: bisque;
+    box-shadow: none;
+}
+
+
+/* ------------------- styling for connect section ----------------------------  */
+
+
+/* the heading for each section under connect section */
+
+fieldset legend {
+    border-bottom: lightslategray 2px solid;
+    padding-bottom: 10px;
+    /* color: slategray; */
+    font-size: 1.3em;
+    color: #000;
+    font-weight: bolder;
+}
+
+
+/* filter form field styling  */
+
+.filter_form_field {
+    height: 23px;
+    padding: 0 5px;
+    border: 1px solid #E0E0EC;
+    border-radius: 2px;
+    outline: 0;
+    transition: .2s;
+    width: 100%;
+    font-size: 1em;
+    margin-bottom: 3px;
+}
+
+.filter_form_field:focus {
+    border-color: #6E6E92;
+}
+
+#apply_filters_container {
+    text-align: center;
+}
+
+#apply_filters {
+    background-color: #6E6E92;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 1px 1px 5px lightgrey;
+}
+
+#apply_filters:hover {
+    background-color: #9393be;
+    box-shadow: none;
+}
+
+
+/* ------------------------------- floating label styling -----------------------------------  */
+
+.floating-label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.floating-input,
+.floating-select {
+    font-size: 14px;
+    padding: 4px 4px;
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: white;
+    margin-top: 25px;
+    border: none;
+    /* border-bottom: 1px solid #757575; */
+}
+
+.floating-input:focus,
+.floating-select:focus {
+    outline: none;
+    border-bottom: 2px solid #5264AE;
+}
+
+.to_float {
+    color: #999;
+    font-size: 14px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 5px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.floating-input:focus~.to_float,
+.floating-input:not(:placeholder-shown)~.to_float {
+    top: -18px;
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.floating-select:focus~.to_float,
+.floating-select:not([value=""]):valid~.to_float {
+    top: -18px;
+    font-size: 14px;
+    color: #5264AE;
+}
+
+
+/* active state */
+
+.floating-input:focus~.bar:before,
+.floating-input:focus~.bar:after,
+.floating-select:focus~.bar:before,
+.floating-select:focus~.bar:after {
+    width: 50%;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.floating-textarea {
+    min-height: 30px;
+    max-height: 260px;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+
+/* highlighter */
+
+.highlight {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    top: 15%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
+/* active state */
+
+.floating-input:focus~.highlight,
+.floating-select:focus~.highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+
+/* animation */
+
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
 }

@@ -121,8 +121,40 @@ def connect_home_view(request, *args, **kwargs):
         if user.publicprofile.profile_public:
             required_users.append(user)
 
+
+
+    def get_available_values(users):
+        available_unis = list()
+        available_cities = list()
+        available_countries = list()
+
+        for user in users:
+            if user.publicprofile.accepted_university not in available_unis:
+                available_unis.append(user.publicprofile.accepted_university)
+
+            if user.publicprofile.origin_city not in available_cities:
+                available_cities.append(user.publicprofile.origin_city)
+            
+            if user.publicprofile.destination_city not in available_cities:
+                available_cities.append(user.publicprofile.destination_city)
+
+            if user.publicprofile.origin_country.name not in available_countries:
+                available_countries.append(user.publicprofile.origin_country)
+            
+            if user.publicprofile.destination_country.name not in available_countries:
+                available_countries.append(user.publicprofile.destination_country)
+
+        return available_unis, available_cities, available_countries
+
+    
+    unis, cities, countries = get_available_values(required_users)
+
+
     context = {
-        'connect_users': required_users
+        'connect_users': required_users,
+        'universities': unis, 
+        'cities': cities, 
+        'countries': countries
     }
     
     return render(request, 'portal/home.html', context)
