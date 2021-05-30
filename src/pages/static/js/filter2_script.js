@@ -1,5 +1,5 @@
 function filter_users(key) {
-
+    console.log('new file yo');
     var input, container_classname, value_classname, filter, i;
 
     var checkbox = false;
@@ -44,22 +44,52 @@ function filter_users(key) {
     if (!checkbox) {
         filter = input.value.toUpperCase().trim();
 
-        let all_user_divs = document.getElementsByClassName("user_cell");
+        let user_visibilities = getUserVisibilities();
+        let visible_users = user_visibilities[0];
+        let hidden_users = user_visibilities[1];
 
-        for (i = 0; i < all_user_divs.length; i++) {
+        console.log('currently visible: ' + visible_users.length);
+        console.log('currently hidden: ' + hidden_users.length);
 
-            let container = all_user_divs[i].getElementsByClassName(container_classname)[0];
+        // remove from currently visible users
+        for (i = 0; i < visible_users.length; i++) {
+
+            let container = visible_users[i].getElementsByClassName(container_classname)[0];
             let value = container.getElementsByClassName(value_classname)[0];
             value = value.innerText.toUpperCase().trim();
             console.log('value');
 
-            let user_cell_element = all_user_divs[i];
+            // let user_details_container = visible_users[i].parentNode;
+            // let user_cell_element = user_details_container.parentNode;
+
+            let user_cell_element = visible_users[i];
 
             if (value.indexOf(filter) > -1) {
                 user_cell_element.style.display = "block";
             } else {
                 user_cell_element.style.display = "none";
             }
+
+        }
+
+        // filter from hidden users
+        for (i = 0; i < hidden_users.length; i++) {
+            let container = hidden_users[i].getElementsByClassName(container_classname)[0];
+            let value = container.getElementsByClassName(value_classname)[0];
+            value = value.innerText.toUpperCase().trim();
+            console.log('value');
+
+            // let user_details_container = visible_users[i].parentNode;
+            // let user_cell_element = user_details_container.parentNode;
+
+            let user_cell_element = hidden_users[i];
+
+            if (value.indexOf(filter) > -1) {
+                user_cell_element.style.display = "block";
+            } else {
+                user_cell_element.style.display = "none";
+            }
+
 
         }
 
@@ -91,4 +121,26 @@ function filter_users(key) {
     }
 
 
+}
+
+
+function getUserVisibilities() {
+    // console.log('getting visible users');
+    let all_user_divs = document.getElementsByClassName("user_cell");
+    let visible_users = [];
+    let hidden_users = [];
+    // console.log(all_user_divs[0].getElementsByClassName('name_value')[0].innerText);
+    // console.log(all_user_divs[0].);
+
+    for (let i = 0; i < all_user_divs.length; i++) {
+        if (window.getComputedStyle(all_user_divs[i]).display === "none") {
+            console.log(all_user_divs[i].getElementsByClassName('name_value')[0].innerText + " is hidden");
+            hidden_users.push(all_user_divs[i]);
+        } else {
+            console.log(all_user_divs[i].getElementsByClassName('name_value')[0].innerText + " is visible");
+            visible_users.push(all_user_divs[i]);
+        }
+    }
+    // console.log("visible u: " + visible_users.length);
+    return [visible_users, hidden_users];
 }

@@ -29,36 +29,94 @@
             <legend>Filters</legend>
 
             <section>
-                <p>Name: <input type="text" name="filter_user_name" id="filter_user_name" class="filter_form_field" placeholder="Name of user" onkeyup="filter_users('name')"></p>
+                <!-- <p>Name: <input type="text" name="filter_user_name" id="filter_user_name" class="filter_form_field" placeholder="Name of user" onkeyup="filter_users('name')"></p> -->
+
+                <div class="floating-label">
+                    <input class="floating-input" name="filter_user_name" id="filter_user_name" type="text" placeholder=" " oninput="filter_users()">
+                    <span class="highlight"></span>
+                    <label class="to_float">Name</label>
+                </div>
+            </section>
+
+
+            <section>
+                <div class="side-by-side">
+                    <div>
+                        <label class="checkbox_container">Male
+                            <input type="checkbox" id="male_checkbox" name="male_checkbox" value="M" checked onchange="filter_users()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="checkbox_container">Female
+                            <input type="checkbox" id="female_checkbox" name="female_checkbox" value="F" checked onchange="filter_users()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
             </section>
             <hr>
 
             <section>
-                <p>Gender</p>
-                <input type="checkbox" id="female_checkbox" name="female_checkbox" value="f">
-                <label for="female_checkbox"> Male</label> &nbsp;
-                <input type="checkbox" id="male_checkbox" name="male_checkbox" value="m">
-                <label for="male_checkbox"> Female</label><br>
+                <!-- <p>Accepted University</p>
+                <input type="text" name="accepted_uni_filter" id="accepted_uni_filter" class="filter_form_field" list="accepted_uni_list" placeholder="University Name" onkeyup="filter_users('uni')"> -->
+
+                <div class="floating-label">
+                    <input class="floating-input space_top" name="accepted_uni_filter" id="accepted_uni_filter" type="text" placeholder=" " oninput="filter_users()">
+                    <span class="highlight"></span>
+                    <label class="to_float">Accepted University</label>
+                </div>
+
+                <div class="floating-label">
+                    <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="">
+                        <option value=" "> </option>
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="highlight"></span>
+                    <label class="to_float">Starting Year</label>
+                </div>
+
             </section>
             <hr>
 
             <section>
-                <p>Accepted University</p>
-                <input type="text" name="accepted_uni_filter" id="accepted_uni_filter" class="filter_form_field" list="accepted_uni_list" placeholder="University Name" onkeyup="filter_users('uni')">
+                <p class="filter_desc_label"><i class="fas fa-map-marker-alt"></i> Origin Address</p>
+                <!-- <input type="text" name="filter_origin_city" id="filter_origin_city" class="filter_form_field" placeholder="Origin City" list="cities" onkeyup="filter_users('o_city')">
+                <input type="text" name="filter_origin_country" id="filter_origin_country" class="filter_form_field" placeholder="Origin Country" list="countries" onkeyup="filter_users('o_country')"> -->
+
+                <div class="floating-label">
+                    <input class="floating-input space_top" name="filter_origin_city" id="filter_origin_city" type="text" placeholder=" " oninput="filter_users()" list="cities">
+                    <span class="highlight"></span>
+                    <label class="to_float">City</label>
+                </div>
+                <div class="floating-label">
+                    <input class="floating-input space_top" name="filter_origin_country" list="countries" id="filter_origin_country" type="text" placeholder=" " oninput="filter_users()">
+                    <span class="highlight"></span>
+                    <label class="to_float">Country</label>
+                </div>
             </section>
             <hr>
 
             <section>
-                <p>Origin Address</p>
-                <input type="text" name="filter_origin_city" id="filter_origin_city" class="filter_form_field" placeholder="Origin City" list="cities" onkeyup="filter_users('o_city')">
-                <input type="text" name="filter_origin_country" id="filter_origin_country" class="filter_form_field" placeholder="Origin Country" list="countries" onkeyup="filter_users('o_country')">
-            </section>
-            <hr>
+                <p class="filter_desc_label"><i class="fas fa-map-marker-alt"></i> Destination Address</p>
 
-            <section>
-                <p>Destination Address</p>
-                <input type="text" name="filter_dest_city" id="filter_dest_city" class="filter_form_field" list="cities" placeholder="Destination City" onkeyup="filter_users('d_city')">
-                <input type="text" name="filter_dest_country" id="filter_dest_country" class="filter_form_field" list="countries" placeholder="Destination Country" onkeyup="filter_users('d_country')">
+                <!-- <input type="text" name="filter_dest_city" id="filter_dest_city" class="filter_form_field" list="cities" placeholder="Destination City" onkeyup="filter_users('d_city')">
+                <input type="text" name="filter_dest_country" id="filter_dest_country" class="filter_form_field" list="countries" placeholder="Destination Country" onkeyup="filter_users('d_country')"> -->
+
+                <div class="floating-label">
+                    <input class="floating-input space_top" name="filter_dest_city" id="filter_dest_city" type="text" placeholder=" " oninput="filter_users()">
+                    <span class="highlight"></span>
+                    <label class="to_float">City</label>
+                </div>
+                <div class="floating-label">
+                    <input class="floating-input space_top" name="filter_dest_country" id="filter_dest_country" type="text" placeholder=" " oninput="filter_users()" list="countries">
+                    <span class="highlight"></span>
+                    <label class="to_float">Country</label>
+                </div>
+
+
             </section>
             <hr>
 
@@ -90,7 +148,7 @@
     <div class="user_container">
         <fieldset>
             <legend>Users</legend>
-
+            <p id="no_users_message" style="display:none;">No such users found!</p>
             <div class="user_list_container" id="outer_user_container">
 
                 {% for user in connect_users %}
@@ -99,15 +157,24 @@
                         <ul class="user_details_list_container">
                             <li class="picture_container">{% if user.graduateadmissionsprofile.gender == 'M' %}
                                 <img src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic" class="profile_picture"> {% else %}
-                                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic" class="profile_picture"> {% endif %}</li>
+                                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic" class="profile_picture"> {% endif %}
+                                <span class="gender_value">{{user.graduateadmissionsprofile.gender}}</span>
+                            </li>
+
+
                             <li class="name_container"><strong>Name</strong><br><span class="name_value">{{user.first_name|title}} {{user.last_name|title}}</span></li>
 
                             <li class="university_container"><strong>Accepted University</strong><br><span class="university_value">{{user.publicprofile.accepted_university}}</span></li>
 
-                            <li class="from_container"><strong>From</strong><br><span class="o_city_value">{{user.publicprofile.origin_city}}</span>, <span class="o_country_value">{{user.publicprofile.origin_country.name}} </span><img src="{{user.publicprofile.origin_country.flag}}"
+                            <li class="starting_container"><strong>Starting</strong><br>
+                                <!-- <span class="starting_semester_value">
+                                {% if user.publicprofile.starting_semester == 'F' %} Fall{% else %} Spring{% endif %}</span>,  -->
+                                <span class="starting_year_value">{{user.publicprofile.starting_year}}</span></li>
+
+                            <li class="from_container"><strong>From</strong><br><span class="o_city_value">{{user.publicprofile.origin_city}}</span>, <span class="o_country_value"><br>{{user.publicprofile.origin_country.name}} </span><img src="{{user.publicprofile.origin_country.flag}}"
                                     alt=""></li>
 
-                            <li class="destination_container"><strong>Destination</strong><br><span class="d_city_value">{{user.publicprofile.destination_city}}</span>, <span class="d_country_value">{{user.publicprofile.destination_country.name}}</span> <img src="{{user.publicprofile.destination_country.flag}}"
+                            <li class="destination_container"><strong>Destination</strong><br><span class="d_city_value">{{user.publicprofile.destination_city}}</span>,<br><span class="d_country_value">{{user.publicprofile.destination_country.name}}</span> <img src="{{user.publicprofile.destination_country.flag}}"
                                     alt=""></li>
                             <li class="button_container"><button>Profile</button></li>
                         </ul>

@@ -65,6 +65,12 @@ h2 {
     cursor: pointer;
 }
 
+.side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
 .filter_side_by_side {
     display: grid;
     grid-template-columns: 1fr 6fr;
@@ -188,6 +194,7 @@ ul.breadcrumb li a:hover {
 
 .user_list_container::-webkit-scrollbar-track {
     background: #f8f8f8;
+    border-radius: 30px;
 }
 
 
@@ -195,13 +202,14 @@ ul.breadcrumb li a:hover {
 
 .user_list_container::-webkit-scrollbar-thumb {
     background: #b7b7db;
+    border-radius: 30px;
 }
 
 
 /* Handle on hover */
 
 .user_list_container::-webkit-scrollbar-thumb:hover {
-    background: #1F1F29;
+    background: #9797b6;
 }
 
 .user_cell {
@@ -223,7 +231,8 @@ ul.breadcrumb li a:hover {
     /* background-color: yellow; */
     font-size: 1.2em;
     vertical-align: middle;
-    padding-top: 0.7%;
+    padding-top: 5px;
+    padding-bottom: 5px;
     /* background-color: yellow; */
 }
 
@@ -233,23 +242,27 @@ ul.breadcrumb li a:hover {
 }
 
 .user_details .name_container {
-    width: 14%;
+    width: 13%;
 }
 
 .user_details .university_container {
-    width: 21%;
+    width: 17%;
+}
+
+.user_details .starting_container {
+    width: 11%;
 }
 
 .user_details .from_container {
-    width: 25%;
+    width: 20%;
 }
 
 .user_details .destination_container {
-    width: 25%;
+    width: 24%;
 }
 
 .user_details .button_container {
-    width: 5%;
+    width: 4%;
 }
 
 .user_details .button_container button {
@@ -274,7 +287,7 @@ ul.breadcrumb li a:hover {
 /* the heading for each section under connect section */
 
 fieldset legend {
-    border-bottom: lightslategray 2px solid;
+    border-bottom: #b7b7db 2px solid;
     padding-bottom: 10px;
     /* color: slategray; */
     font-size: 1.3em;
@@ -301,6 +314,14 @@ fieldset legend {
     border-color: #6E6E92;
 }
 
+.gender_value {
+    display: none;
+}
+
+.filter_desc_label {
+    font-weight: bold;
+}
+
 
 /* ------------------------------- floating label styling -----------------------------------  */
 
@@ -311,13 +332,13 @@ fieldset legend {
 
 .floating-input,
 .floating-select {
-    font-size: 14px;
+    font-size: 0.8em;
     padding: 4px 4px;
     display: block;
     width: 100%;
-    height: 30px;
-    background-color: white;
-    margin-top: 25px;
+    height: 25px;
+    background-color: #f3f3f5;
+    margin-top: 20px;
     border: none;
     /* border-bottom: 1px solid #757575; */
 }
@@ -325,12 +346,12 @@ fieldset legend {
 .floating-input:focus,
 .floating-select:focus {
     outline: none;
-    border-bottom: 2px solid #5264AE;
+    border-bottom: 2px solid #6E6E92;
 }
 
 .to_float {
     color: #999;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
@@ -344,15 +365,15 @@ fieldset legend {
 .floating-input:focus~.to_float,
 .floating-input:not(:placeholder-shown)~.to_float {
     top: -18px;
-    font-size: 14px;
-    color: #5264AE;
+    font-size: 10px;
+    color: #6E6E92;
 }
 
 .floating-select:focus~.to_float,
 .floating-select:not([value=""]):valid~.to_float {
-    top: -18px;
+    top: -1px;
     font-size: 14px;
-    color: #5264AE;
+    color: #6E6E92;
 }
 
 
@@ -408,7 +429,7 @@ fieldset legend {
 
 @-webkit-keyframes inputHighlighter {
     from {
-        background: #5264AE;
+        background: #6E6E92;
     }
     to {
         width: 0;
@@ -418,7 +439,7 @@ fieldset legend {
 
 @-moz-keyframes inputHighlighter {
     from {
-        background: #5264AE;
+        background: #6E6E92;
     }
     to {
         width: 0;
@@ -428,10 +449,102 @@ fieldset legend {
 
 @keyframes inputHighlighter {
     from {
-        background: #5264AE;
+        background: #6E6E92;
     }
     to {
         width: 0;
         background: transparent;
     }
+}
+
+.space_top {
+    margin-top: 25px;
+}
+
+
+/* ------------------------------------------------ custom checkbox styling --------------------------- */
+
+
+/* Customize the label (the container) */
+
+.checkbox_container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: normal;
+}
+
+
+/* Hide the browser's default checkbox */
+
+.checkbox_container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.checkbox_container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.checkbox_container input:checked~.checkmark {
+    background-color: #9797b6;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.checkbox_container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.checkbox_container .checkmark:after {
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
