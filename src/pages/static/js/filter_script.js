@@ -1,5 +1,7 @@
 function filter_users(key) {
 
+    console.log('filtering og');
+
     var input, container_classname, value_classname, filter, i;
 
     var checkbox = false;

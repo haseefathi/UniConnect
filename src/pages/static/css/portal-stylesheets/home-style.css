@@ -148,25 +148,6 @@ ul.breadcrumb li a:hover {
 }
 
 
-/* ------------------------------ form field styling ------------------------------------ */
-
-.form-field {
-    height: 43px;
-    padding: 0 16px;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    outline: 0;
-    transition: .2s;
-    width: 100%;
-    font-size: 1em;
-    margin-bottom: 3px;
-}
-
-.form-field:focus {
-    border-color: #6E6E92;
-}
-
-
 /* ----------------------- styling for connect users list ------------------------------  */
 
 .user_container {
@@ -364,15 +345,15 @@ fieldset legend {
 
 .floating-input:focus~.to_float,
 .floating-input:not(:placeholder-shown)~.to_float {
-    top: -18px;
+    top: -17px;
     font-size: 10px;
     color: #6E6E92;
 }
 
 .floating-select:focus~.to_float,
 .floating-select:not([value=""]):valid~.to_float {
-    top: -1px;
-    font-size: 14px;
+    top: -17px;
+    font-size: 9px;
     color: #6E6E92;
 }
 
@@ -458,7 +439,7 @@ fieldset legend {
 }
 
 .space_top {
-    margin-top: 25px;
+    margin-top: 23px;
 }
 
 

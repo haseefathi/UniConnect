@@ -1,0 +1,188 @@
+.main-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1F1F29;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 65%;
+    display: block;
+    margin: 0 auto;
+}
+
+.section {
+    padding: 30px;
+    background-color: #fff;
+    margin: 20px 0px;
+    font-size: 1.1em;
+    word-wrap: break-word;
+}
+
+.section-heading {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #700101;
+}
+
+.section-subheading {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1F1F29;
+}
+
+.side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.extra-info {
+    background-color: #F7F3C6;
+    padding: 5px;
+    font-size: 0.8em;
+    color: #8A8A8B;
+}
+
+.button {
+    background-color: #1F1F29;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #E0E0EC;
+    text-decoration: none;
+}
+
+.uneven_side_by_side {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+
+/* --------------------------------- breadcrumb styling -----------------------------------------  */
+
+
+/* Style the list */
+
+ul.breadcrumb {
+    padding: 5px 10px;
+    list-style: none;
+    background-color: #e9e9e9;
+}
+
+
+/* Display list items side by side */
+
+ul.breadcrumb li {
+    display: inline;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+
+/* Add a slash symbol (/) before/behind each list item */
+
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: ">\00a0";
+}
+
+
+/* Add a color to all links inside the list */
+
+ul.breadcrumb li a {
+    color: #8A8A8B;
+    text-decoration: none;
+}
+
+
+/* Add a color on mouse-over */
+
+ul.breadcrumb li a:hover {
+    color: #1F1F29;
+    text-decoration: underline;
+}
+
+
+/* ------------------------------ profile page styling ------------------------------------- */
+
+.uneven_side_by_side .left {
+    background-color: ghostwhite;
+    border: 1px solid lightgray;
+    padding: 20px;
+}
+
+.uneven_side_by_side .right {
+    /* background-color: antiquewhite; */
+    padding: 20px;
+}
+
+.profile_writeup_section {
+    border: 1px solid lightgray;
+}
+
+
+/* ----------------------------------- table styling -------------------------------- */
+
+table {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+table tr td {
+    width: 50%;
+    padding: 10px;
+    color: grey;
+}
+
+table tr th {
+    width: 50%;
+    padding: 10px;
+}
+
+table.table_details {
+    font-size: 1.2em;
+}
+
+table.location_details td {
+    color: black;
+}
+
+.origin {
+    background-color: rgb(250, 232, 225);
+    border-radius: 15px;
+    /* box-shadow: 1px 1px 5px lightgrey; */
+}
+
+.destination {
+    background-color: rgb(211, 238, 211);
+    border-radius: 15px;
+    /* box-shadow: 1px 1px 5px lightgrey; */
+}
+
+.location_heading {
+    text-align: center;
+    color: rgb(68, 68, 68);
+    text-decoration: underline;
+}
+
+.connect_button {
+    border: none;
+    width: 100%;
+    transition: 0.2s;
+    box-shadow: 1px 1px 5px lightgrey;
+}
+
+.connect_button:hover {
+    color: rgb(68, 68, 68);
+    box-shadow: none;
+}

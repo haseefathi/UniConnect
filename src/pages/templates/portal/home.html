@@ -32,7 +32,7 @@
                 <!-- <p>Name: <input type="text" name="filter_user_name" id="filter_user_name" class="filter_form_field" placeholder="Name of user" onkeyup="filter_users('name')"></p> -->
 
                 <div class="floating-label">
-                    <input class="floating-input" name="filter_user_name" id="filter_user_name" type="text" placeholder=" " oninput="filter_users()">
+                    <input class="floating-input" name="filter_user_name" id="filter_user_name" type="text" placeholder=" " oninput="filter_users('name')">
                     <span class="highlight"></span>
                     <label class="to_float">Name</label>
                 </div>
@@ -43,13 +43,13 @@
                 <div class="side-by-side">
                     <div>
                         <label class="checkbox_container">Male
-                            <input type="checkbox" id="male_checkbox" name="male_checkbox" value="M" checked onchange="filter_users()">
+                            <input type="checkbox" id="male_checkbox" name="male_checkbox" value="M" checked onchange="filter_users('m_gender')">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div>
                         <label class="checkbox_container">Female
-                            <input type="checkbox" id="female_checkbox" name="female_checkbox" value="F" checked onchange="filter_users()">
+                            <input type="checkbox" id="female_checkbox" name="female_checkbox" value="F" checked onchange="filter_users('f_gender')">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -62,13 +62,13 @@
                 <input type="text" name="accepted_uni_filter" id="accepted_uni_filter" class="filter_form_field" list="accepted_uni_list" placeholder="University Name" onkeyup="filter_users('uni')"> -->
 
                 <div class="floating-label">
-                    <input class="floating-input space_top" name="accepted_uni_filter" id="accepted_uni_filter" type="text" placeholder=" " oninput="filter_users()">
+                    <input class="floating-input space_top" name="accepted_uni_filter" id="accepted_uni_filter" type="text" placeholder=" " oninput="filter_users('uni')" list="accepted_uni_list">
                     <span class="highlight"></span>
                     <label class="to_float">Accepted University</label>
                 </div>
 
                 <div class="floating-label">
-                    <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="">
+                    <select class="floating-select space_top" onclick="this.setAttribute('value', this.value);" value="">
                         <option value=" "> </option>
                         {% for year in years %}
                         <option value="{{ year }}">{{ year }}</option>
@@ -87,12 +87,12 @@
                 <input type="text" name="filter_origin_country" id="filter_origin_country" class="filter_form_field" placeholder="Origin Country" list="countries" onkeyup="filter_users('o_country')"> -->
 
                 <div class="floating-label">
-                    <input class="floating-input space_top" name="filter_origin_city" id="filter_origin_city" type="text" placeholder=" " oninput="filter_users()" list="cities">
+                    <input class="floating-input space_top" name="filter_origin_city" id="filter_origin_city" type="text" placeholder=" " oninput="filter_users('o_city')" list="cities">
                     <span class="highlight"></span>
                     <label class="to_float">City</label>
                 </div>
                 <div class="floating-label">
-                    <input class="floating-input space_top" name="filter_origin_country" list="countries" id="filter_origin_country" type="text" placeholder=" " oninput="filter_users()">
+                    <input class="floating-input space_top" name="filter_origin_country" list="countries" id="filter_origin_country" type="text" placeholder=" " oninput="filter_users('o_country')">
                     <span class="highlight"></span>
                     <label class="to_float">Country</label>
                 </div>
@@ -106,12 +106,12 @@
                 <input type="text" name="filter_dest_country" id="filter_dest_country" class="filter_form_field" list="countries" placeholder="Destination Country" onkeyup="filter_users('d_country')"> -->
 
                 <div class="floating-label">
-                    <input class="floating-input space_top" name="filter_dest_city" id="filter_dest_city" type="text" placeholder=" " oninput="filter_users()">
+                    <input class="floating-input space_top" name="filter_dest_city" id="filter_dest_city" type="text" placeholder=" " oninput="filter_users('d_city')">
                     <span class="highlight"></span>
                     <label class="to_float">City</label>
                 </div>
                 <div class="floating-label">
-                    <input class="floating-input space_top" name="filter_dest_country" id="filter_dest_country" type="text" placeholder=" " oninput="filter_users()" list="countries">
+                    <input class="floating-input space_top" name="filter_dest_country" id="filter_dest_country" type="text" placeholder=" " oninput="filter_users('d_country')" list="countries">
                     <span class="highlight"></span>
                     <label class="to_float">Country</label>
                 </div>
@@ -175,8 +175,10 @@
                                     alt=""></li>
 
                             <li class="destination_container"><strong>Destination</strong><br><span class="d_city_value">{{user.publicprofile.destination_city}}</span>,<br><span class="d_country_value">{{user.publicprofile.destination_country.name}}</span> <img src="{{user.publicprofile.destination_country.flag}}"
-                                    alt=""></li>
-                            <li class="button_container"><button>Profile</button></li>
+                                    alt="">
+                            </li>
+
+                            <li class="button_container"><button value="{{user.username}}" onclick="lookup_profile(this.value)">Profile</button></li>
                         </ul>
 
                     </div>

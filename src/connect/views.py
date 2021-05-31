@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 from django.contrib.auth.models import User
 
+from datetime import date
 
 # Create your views here.
 
@@ -163,3 +164,24 @@ def connect_home_view(request, *args, **kwargs):
     }
     
     return render(request, 'portal/home.html', context)
+
+
+def calculate_age(born):
+    today = date.today()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+
+def dynamic_user_profile_lookup_view(request, my_username):
+    # print('username in dynamic view', my_username)
+    lookup_user = User.objects.get(username = my_username)
+
+    age = calculate_age(lookup_user.publicprofile.date_of_birth)
+
+    context = {
+        'lookup_user': lookup_user, 
+        'age': age
+    }
+
+    # print(lookup_user.last_name)
+    
+    return render(request, 'portal/user_profile_details.html', context)
