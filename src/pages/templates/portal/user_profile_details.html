@@ -73,7 +73,7 @@
                         </tr>
                         <tr>
                             <th>Country</th>
-                            <td>{{lookup_user.publicprofile.origin_country.name }} <img src="{{user.publicprofile.origin_country.flag}}" alt=""></td>
+                            <td>{{lookup_user.publicprofile.origin_country.name }} <img src="{{lookup_user.publicprofile.origin_country.flag}}" alt=""></td>
                         </tr>
                     </table>
                 </div>
@@ -86,13 +86,13 @@
                         </tr>
                         <tr>
                             <th>Country</th>
-                            <td>{{lookup_user.publicprofile.destination_country.name }} <img src="{{user.publicprofile.destination_country.flag}}" alt=""></td>
+                            <td>{{lookup_user.publicprofile.destination_country.name }} <img src="{{lookup_user.publicprofile.destination_country.flag}}" alt=""></td>
                         </tr>
                     </table>
                 </div>
             </div>
 
-            <button class="button connect_button">Connect with {{lookup_user.first_name|title}}</button>
+            <button class="button connect_button"><i class="fas fa-comment"></i> Connect with {{lookup_user.first_name|title}}</button>
 
         </div>
     </div>

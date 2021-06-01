@@ -180,6 +180,9 @@ table.location_details td {
     width: 100%;
     transition: 0.2s;
     box-shadow: 1px 1px 5px lightgrey;
+    font-size: 1.2em;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .connect_button:hover {

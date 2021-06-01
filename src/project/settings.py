@@ -45,12 +45,16 @@ INSTALLED_APPS = [
 
     # my installed apps
     'django_countries',
+    # chat app
+    'django_private_chat',
 
     
     # my apps
     'pages',
     'user',
     'connect',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -150,4 +154,11 @@ LOGIN_REDIRECT_URL = '/home'
 
 # goes to this page after user logs out
 LOGOUT_REDIRECT_URL = 'login' # new
+
+
+
+# server and port for asyncio settings 
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
 
