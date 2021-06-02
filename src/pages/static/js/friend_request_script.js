@@ -30,6 +30,19 @@ function accept_friend_request(request_id) {
 }
 
 
+function send_friend_request(to_username) {
+    let send_url = '/user/send_friend_request/';
+    let csrf_value = getCookie('csrftoken');
+
+    console.log('sending the request')
+        //sending the request the request
+    $.post(send_url, {
+        to_username: to_username,
+        csrfmiddlewaretoken: csrf_value
+    });
+}
+
+
 function remove_element(request_id) {
     let container_id = `container_request_${request_id}`;
     let user_container = document.getElementById(container_id);

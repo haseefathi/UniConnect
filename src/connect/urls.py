@@ -9,7 +9,7 @@ urlpatterns = [
     path('profile/<str:my_username>/',dynamic_user_profile_lookup_view, name = 'dynamic_user_profile' ),
 
     # urls for showing, accepting, sending friend requests, deleting
-    path('send_friend_request/<str:my_username>',send_friend_request, name = 'send friend request' ), 
+    path('send_friend_request/',send_friend_request, name = 'send friend request' ), 
     path('accept_friend_request/',accept_friend_request, name = 'accept friend request' ), 
     path('delete_friend_request/',delete_friend_request, name = 'delete friend request' ),
     path('friend_requests/' ,show_friend_requests, name = 'show friend requests' ), 

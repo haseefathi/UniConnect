@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 from django_countries.fields import CountryField
 
@@ -36,8 +36,6 @@ class PublicProfile(models.Model):
 
     starting_year = models.IntegerField(blank = True, null = True)
 
-    friends = models.ManyToManyField(User, blank = True, related_name='friends')
-
 
 class Friend_Request(models.Model):
     from_user = models.ForeignKey(
@@ -45,6 +43,14 @@ class Friend_Request(models.Model):
     )
     to_user = models.ForeignKey(
         User, related_name='to_user', on_delete=models.CASCADE
+    )
+
+class Friendships(models.Model):
+    subject = models.ForeignKey(
+        User, related_name='subject', on_delete=models.CASCADE
+    )
+    friend = models.ForeignKey(
+        User, related_name='friend', on_delete=models.CASCADE
     )
 
 

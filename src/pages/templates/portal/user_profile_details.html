@@ -93,8 +93,10 @@
                     </table>
                 </div>
             </div>
-            <a href="/user/send_friend_request/{{lookup_user.username}}">Send friend request</a>
-            <button class="button connect_button"><i class="fas fa-comment"></i> Connect with {{lookup_user.first_name|title}}</button>
+            {% if not is_friended %}
+            <button class="button connect_button" onclick="send_friend_request('{{lookup_user.username}}')"><i class="fas fa-paper-plane"></i> Send request to {{lookup_user.first_name|title}}</button> {% else %}
+
+            <button class="button connect_button"><i class="fas fa-comment"></i> Message {{lookup_user.first_name|title}}</button> {% endif %}
 
         </div>
     </div>

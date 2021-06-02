@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .forms import UpdatePublicProfileForm
-from .models import PublicProfile, Friend_Request
+from .models import PublicProfile, Friend_Request, Friendships
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
@@ -185,7 +185,8 @@ def dynamic_user_profile_lookup_view(request, my_username):
 
     context = {
         'lookup_user': lookup_user, 
-        'age': age
+        'age': age, 
+        'is_friended': is_friended(request.user, lookup_user)
     }
 
     # print(lookup_user.last_name)
@@ -193,18 +194,33 @@ def dynamic_user_profile_lookup_view(request, my_username):
     return render(request, 'portal/user_profile_details.html', context)
 
 
+def is_friended(from_user, to_user):
+    return Friendships.objects.filter(subject = from_user, friend = to_user).exists()
+
 
 @login_required
-def send_friend_request(request, my_username):
+def send_friend_request(request):
 
+    print('in send request view')
     from_user = request.user
-    to_user = User.objects.get(username = my_username)
 
-    friend_request, created = Friend_Request.objects.get_or_create(from_user = from_user, to_user = to_user)
-    if created:
-        return HttpResponse('Friend request successfully sent!')
+    to_username = request.POST.get('to_username')
+    to_user = User.objects.get(username = to_username)
+
+    friended = is_friended(from_user, to_user)
+    print('friended', friended)
+
+    if not friended:    
+        print('not friends... sending request')
+        # the person is not friends...so send request
+        friend_request, created = Friend_Request.objects.get_or_create(from_user = from_user, to_user = to_user)
+        if created:
+            return HttpResponse('Friend request successfully sent!')
+        else:
+            return HttpResponse('Friend request already sent!')
     else:
-        return HttpResponse('Friend request already sent!')
+        return HttpResponse('Already friends')
+
 
 
 
@@ -212,18 +228,22 @@ def send_friend_request(request, my_username):
 def accept_friend_request(request):
     print('in accept view')
     requestID = request.POST.get('request_id')
+
     friend_request = Friend_Request.objects.get(id = requestID)
+
     if friend_request.to_user == request.user:
-        friend_request.to_user.friends.add(friend_request.from_user)
-        friend_request.from_user.friends.add(friend_request.to_user)
+        friendship_a2b, created_a2b = Friendships.objects.get_or_create(subject = request.user, friend = friend_request.from_user)
+        friendship_b2a, created_b2a = Friendships.objects.get_or_create(subject = friend_request.from_user, friend = request.user)
         friend_request.delete()
-        return HttpResponse('friend request accepted')
         print('request accepted ------------------------------------------')
+        return HttpResponse('friend request accepted')
+        
     else:
         return HttpResponse('friend request not accepted')
 
 
 def show_friend_requests(request):
+
     logged_in_user = request.user
 
     user_friend_requests = Friend_Request.objects.filter(to_user = logged_in_user)
