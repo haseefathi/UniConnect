@@ -36,5 +36,16 @@ class PublicProfile(models.Model):
 
     starting_year = models.IntegerField(blank = True, null = True)
 
+    friends = models.ManyToManyField(User, blank = True, related_name='friends')
+
+
+class Friend_Request(models.Model):
+    from_user = models.ForeignKey(
+        User, related_name='from_user', on_delete=models.CASCADE
+    )
+    to_user = models.ForeignKey(
+        User, related_name='to_user', on_delete=models.CASCADE
+    )
+
 
     

@@ -1,5 +1,5 @@
 window.onload = function() {
-    showHome();
+    showFriendRequests();
 };
 
 function scrollToTop() {
@@ -42,10 +42,10 @@ function showUniversities(event) {
     xhttp.send();
 }
 
-function showResearch(event) {
+function showFriendRequests(event) {
     showLoadingSign();
     clearNavbarHighlight();
-    document.getElementById("nav-research").classList.add("active");
+    document.getElementById("nav-requests").classList.add("active");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -55,7 +55,7 @@ function showResearch(event) {
         }
     };
     scrollToTop();
-    xhttp.open("GET", "/research", true);
+    xhttp.open("GET", "/user/friend_requests", true);
     xhttp.send();
 }
 

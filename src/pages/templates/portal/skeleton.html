@@ -3,10 +3,9 @@
 <head>
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-
 
     <!-- script for the toggle switch in profile -->
     <script src="{%  static 'js/datatable.js' %}"></script>
@@ -32,6 +31,9 @@
     <!-- script for dynamically looking up users -->
     <script src="{%  static 'js/user_lookup_script.js' %}"></script>
 
+    <!-- script for friend request functionality -->
+    <script src="{%  static 'js/friend_request_script.js' %}"></script>
+
 
     <link rel="stylesheet" href="{%  static 'css/skeleton-style.css' %}">
 </head>
@@ -52,7 +54,7 @@
                 <div class="logo">
                     UniConnect
                 </div>
-                <div class="right_menu">
+                <!-- <div class="right_menu">
                     <ul>
                         <li>
                             <i class="fas fa-user"></i>
@@ -65,7 +67,7 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="main_container">
@@ -88,8 +90,15 @@
 
                         <li>
                             <a class="active" id="nav-dashboard" onclick="showHome()">
-                                <span class="icon"><i class="fas fa-users"></i></span>
-                                <span class="title">Connect</span>
+                                <span class="icon"><i class="fas fa-search"></i></span>
+                                <span class="title">Find Connections</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="nav-requests" onclick="showFriendRequests()">
+                                <span class="icon"><i class="fas fa-user-plus"></i></span>
+                                <span class="title">Requests</span>
                             </a>
                         </li>
 
@@ -100,13 +109,6 @@
                             </a>
                         </li>
 
-                        <li onclick="showProfile()">
-                            <a class="active" id="nav-profile">
-                                <span class="icon"><i class="fas fa-id-card"></i></span>
-                                <span class="title">Your Profile</span>
-                            </a>
-                        </li>
-
                         <li>
                             <a id="nav-universities" onclick="showUniversities()">
                                 <span class="icon"><i class="fas fa-university"></i></span>
@@ -114,16 +116,20 @@
                             </a>
                         </li>
 
-
-
-                        <!-- <li>
-                            <a id="nav-research" onclick="showResearch()">
-                                <span class="icon"><i class="fas fa-book-reader"></i></span>
-                                <span class="title">Research<br>Interests</span>
+                        <li onclick="showProfile()">
+                            <a class="active" id="nav-profile">
+                                <span class="icon"><i class="fas fa-id-card"></i></span>
+                                <span class="title">Your Profile</span>
                             </a>
-                        </li> -->
+                        </li>
 
 
+                        <li>
+                            <a id="nav-chat" href="{% url 'logout' %}">
+                                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                                <span class="title">Log Out</span>
+                            </a>
+                        </li>
 
 
                     </ul>

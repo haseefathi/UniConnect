@@ -1,0 +1,80 @@
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/user_friend_requests_style.css' %}">
+</head>
+
+<!-- breadcrumb section  -->
+<ul class="breadcrumb">
+    <li>> Requests</li>
+</ul>
+
+<p class="main-heading">Requests</p>
+
+<div class="section description">
+    <p class="section-heading">View requests from others who would like to connect with you.</p>
+    <p>Accepting requests from people allows you to message them. Currently, your profile is <strong>{% if user.publicprofile.profile_public %}Public{% else %}Private{% endif %}.</strong></p>
+    {% if not user.publicprofile.profile_public %}
+    <p class="extra-info">&#9432; Since your profile is private, you will not be able to receive requests. You can change the visibility of your profile in the profile section. </p>
+    {% endif %}
+</div>
+
+
+
+{% if requests_available %}
+
+<div class="user_container">
+    <fieldset>
+        <legend id="request_message">You have pending requests.</legend>
+
+        <div class="user_list_container" id="outer_user_container">
+
+            {% for request in requests %}
+            <div class="user_cell" id="container_request_{{request.id}}">
+                <div class="user_details">
+                    <ul class="user_details_list_container">
+                        <li class="picture_container">{% if request.from_user.graduateadmissionsprofile.gender == 'M' %}
+                            <img src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic" class="profile_picture"> {% else %}
+                            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic" class="profile_picture"> {% endif %}
+                        </li>
+
+
+                        <li class="name_container"><strong>Name</strong><br><span class="name_value">{{request.from_user.first_name|title}} {{request.from_user.last_name|title}}</span></li>
+
+                        <li class="university_container"><strong>Accepted University</strong><br><span class="university_value">{{request.from_user.publicprofile.accepted_university}}</span></li>
+
+
+                        <li class="from_container"><strong>From</strong><br><span class="o_city_value">{{request.from_user.publicprofile.origin_city}}</span>, <span class="o_country_value">{{request.from_user.publicprofile.origin_country.name}} </span><img src="{{request.from_user.publicprofile.origin_country.flag}}"
+                                alt="">
+                        </li>
+
+                        <li class="button_container accept_button"><button value="{{user.username}}" onclick="accept_friend_request({{request.id}})"><i class="fas fa-check-circle"></i><br>Accept</button></li>
+                        <li class="button_container delete_button"><button value="{{user.username}}" onclick="delete_friend_request({{request.id}})"><i class="fas fa-times-circle"></i><br>Delete</button></li>
+
+                    </ul>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </fieldset>
+</div>
+
+
+
+{% else %}
+
+<div class="user_container">
+    <fieldset>
+        <legend>You have no pending requests.</legend>
+    </fieldset>
+</div>
+
+{% endif %}

@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render
 from .forms import UpdatePublicProfileForm
-from .models import PublicProfile
+from .models import PublicProfile, Friend_Request
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+
 
 from django.contrib.auth.models import User
 
@@ -112,6 +114,7 @@ def make_profile_public_private(request):
 def connect_home_view(request, *args, **kwargs):
 
     logged_in_username = request.user.username
+    logged_in_user = request.user
 
     # getting all other users who have set their profiles as public
     other_users = User.objects.exclude(username = logged_in_username)
@@ -154,6 +157,7 @@ def connect_home_view(request, *args, **kwargs):
     
     unis, cities, countries, years = get_available_values(required_users)
 
+    
 
     context = {
         'connect_users': required_users,
@@ -171,6 +175,8 @@ def calculate_age(born):
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
+
+
 def dynamic_user_profile_lookup_view(request, my_username):
     # print('username in dynamic view', my_username)
     lookup_user = User.objects.get(username = my_username)
@@ -185,3 +191,69 @@ def dynamic_user_profile_lookup_view(request, my_username):
     # print(lookup_user.last_name)
     
     return render(request, 'portal/user_profile_details.html', context)
+
+
+
+@login_required
+def send_friend_request(request, my_username):
+
+    from_user = request.user
+    to_user = User.objects.get(username = my_username)
+
+    friend_request, created = Friend_Request.objects.get_or_create(from_user = from_user, to_user = to_user)
+    if created:
+        return HttpResponse('Friend request successfully sent!')
+    else:
+        return HttpResponse('Friend request already sent!')
+
+
+
+@login_required
+def accept_friend_request(request):
+    print('in accept view')
+    requestID = request.POST.get('request_id')
+    friend_request = Friend_Request.objects.get(id = requestID)
+    if friend_request.to_user == request.user:
+        friend_request.to_user.friends.add(friend_request.from_user)
+        friend_request.from_user.friends.add(friend_request.to_user)
+        friend_request.delete()
+        return HttpResponse('friend request accepted')
+        print('request accepted ------------------------------------------')
+    else:
+        return HttpResponse('friend request not accepted')
+
+
+def show_friend_requests(request):
+    logged_in_user = request.user
+
+    user_friend_requests = Friend_Request.objects.filter(to_user = logged_in_user)
+    requests_available = (len(user_friend_requests) != 0)
+
+    context = {
+        'requests': user_friend_requests, 
+        'requests_available': requests_available
+    }
+
+    return render(request, 'portal/user_friend_requests.html', context)
+
+
+
+def delete_friend_request(request):
+    requestID = request.POST.get('request_id')
+    print(requestID,'in view')
+    friend_request = Friend_Request.objects.get(id = requestID)
+    if friend_request.to_user == request.user:
+        friend_request.delete()
+        return HttpResponse('friend request deleted')
+    else:
+        return HttpResponse('something is wrong')
+
+
+
+
+
+
+
+
+
+
