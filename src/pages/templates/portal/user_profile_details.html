@@ -93,9 +93,9 @@
                     </table>
                 </div>
             </div>
-            {% if not is_friended %}
-            <button class="button connect_button" onclick="send_friend_request('{{lookup_user.username}}')"><i class="fas fa-paper-plane"></i> Send request to {{lookup_user.first_name|title}}</button> {% else %}
-
+            {% if not is_friended %} {% if not is_requested %}
+            <button class="button connect_button" id="send_request_button" onclick="send_friend_request('{{lookup_user.username}}')"><i class="fas fa-paper-plane"></i> Send request to {{lookup_user.first_name|title}}</button> {% else %}
+            <button class="button connect_button" id="send_request_button_disabled" disabled><i class="fas fa-check-circle"></i> Request has been sent!</button> {% endif %} {% else %}
             <button class="button connect_button"><i class="fas fa-comment"></i> Message {{lookup_user.first_name|title}}</button> {% endif %}
 
         </div>

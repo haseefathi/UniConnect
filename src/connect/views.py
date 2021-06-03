@@ -123,7 +123,8 @@ def connect_home_view(request, *args, **kwargs):
 
     for user in other_users:
         if user.publicprofile.profile_public:
-            required_users.append(user)
+            if not is_friended(logged_in_user, user):
+                required_users.append(user)
 
 
 
@@ -186,7 +187,8 @@ def dynamic_user_profile_lookup_view(request, my_username):
     context = {
         'lookup_user': lookup_user, 
         'age': age, 
-        'is_friended': is_friended(request.user, lookup_user)
+        'is_friended': is_friended(request.user, lookup_user), 
+        'is_requested': is_requested(request.user, lookup_user)
     }
 
     # print(lookup_user.last_name)
@@ -196,6 +198,9 @@ def dynamic_user_profile_lookup_view(request, my_username):
 
 def is_friended(from_user, to_user):
     return Friendships.objects.filter(subject = from_user, friend = to_user).exists()
+
+def is_requested(from_user, to_user):
+    return Friend_Request.objects.filter(from_user = from_user, to_user = to_user).exists()
 
 
 @login_required
@@ -242,19 +247,23 @@ def accept_friend_request(request):
         return HttpResponse('friend request not accepted')
 
 
-def show_friend_requests(request):
+def show_friends(request):
 
     logged_in_user = request.user
 
     user_friend_requests = Friend_Request.objects.filter(to_user = logged_in_user)
+    user_friends = Friendships.objects.filter(subject = logged_in_user)
     requests_available = (len(user_friend_requests) != 0)
+    friends_available = (len(user_friends) != 0 )
 
     context = {
         'requests': user_friend_requests, 
-        'requests_available': requests_available
+        'requests_available': requests_available, 
+        'friends': user_friends, 
+        'friends_available': friends_available
     }
 
-    return render(request, 'portal/user_friend_requests.html', context)
+    return render(request, 'portal/user_friends.html', context)
 
 
 

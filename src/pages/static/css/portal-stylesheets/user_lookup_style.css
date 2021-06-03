@@ -189,3 +189,13 @@ table.location_details td {
     color: rgb(68, 68, 68);
     box-shadow: none;
 }
+
+button#send_request_button_disabled {
+    background-color: #808080;
+    color: #fff;
+}
+
+button#send_request_button_disabled:hover {
+    color: #fff;
+    background-color: #808080;
+}

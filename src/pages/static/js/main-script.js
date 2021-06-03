@@ -1,5 +1,5 @@
 window.onload = function() {
-    showFriendRequests();
+    showFriends();
 };
 
 function scrollToTop() {
@@ -42,7 +42,7 @@ function showUniversities(event) {
     xhttp.send();
 }
 
-function showFriendRequests(event) {
+function showFriends(event) {
     showLoadingSign();
     clearNavbarHighlight();
     document.getElementById("nav-requests").classList.add("active");
@@ -55,7 +55,7 @@ function showFriendRequests(event) {
         }
     };
     scrollToTop();
-    xhttp.open("GET", "/user/friend_requests", true);
+    xhttp.open("GET", "/user/friends_friend_requests", true);
     xhttp.send();
 }
 

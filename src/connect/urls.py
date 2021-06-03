@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import update_public_profile_view, make_profile_public_private, dynamic_user_profile_lookup_view, send_friend_request, accept_friend_request, show_friend_requests, delete_friend_request
+from .views import update_public_profile_view, make_profile_public_private, dynamic_user_profile_lookup_view, send_friend_request, accept_friend_request, show_friends, delete_friend_request
 
 from django_private_chat import urls as django_private_chat_urls
 
@@ -12,7 +12,7 @@ urlpatterns = [
     path('send_friend_request/',send_friend_request, name = 'send friend request' ), 
     path('accept_friend_request/',accept_friend_request, name = 'accept friend request' ), 
     path('delete_friend_request/',delete_friend_request, name = 'delete friend request' ),
-    path('friend_requests/' ,show_friend_requests, name = 'show friend requests' ), 
+    path('friends_friend_requests/' ,show_friends, name = 'show friend requests' ), 
 
 
     # urls for chat
