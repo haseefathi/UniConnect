@@ -102,7 +102,7 @@ function add_friend_to_list(request_id, username) {
                 <p>${friend_name}</p>
             </div>
             <div class="button_container">
-                <button><i class="fas fa-comment"></i></button>
+                <button onclick="open_chat('${username}')"><i class="fas fa-comment"></i></button>
             </div>
         </div>
     `;

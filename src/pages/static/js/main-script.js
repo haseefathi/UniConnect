@@ -76,6 +76,8 @@ function showProfile(event) {
     xhttp.send();
 }
 
+
+
 function showGraduateAdmissionsProfileUpdateForm(event) {
     showLoadingSign();
     clearNavbarHighlight();

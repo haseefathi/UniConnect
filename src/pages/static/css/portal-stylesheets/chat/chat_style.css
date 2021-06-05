@@ -1,0 +1,382 @@
+.main-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1F1F29;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.profile-pic {
+    width: 65%;
+    display: block;
+    margin: 0 auto;
+}
+
+.section {
+    padding: 30px;
+    background-color: #fff;
+    margin: 20px 0px;
+    font-size: 1.1em;
+    word-wrap: break-word;
+}
+
+.description {
+    background-color: #F7F3C6;
+}
+
+.section-heading {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #700101;
+}
+
+.section-subheading {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1F1F29;
+}
+
+.side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.extra-info {
+    background-color: #f8f6e0;
+    padding: 5px;
+    font-size: 0.8em;
+    color: #8A8A8B;
+    border: 1px lightgray solid;
+    border-radius: 3px;
+}
+
+.button {
+    background-color: #1F1F29;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #E0E0EC;
+    text-decoration: none;
+}
+
+.uneven_side_by_side {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+
+/* --------------------------------- breadcrumb styling -----------------------------------------  */
+
+
+/* Style the list */
+
+ul.breadcrumb {
+    padding: 5px 10px;
+    list-style: none;
+    background-color: #e9e9e9;
+}
+
+
+/* Display list items side by side */
+
+ul.breadcrumb li {
+    display: inline;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+
+/* Add a slash symbol (/) before/behind each list item */
+
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: ">\00a0";
+}
+
+
+/* Add a color to all links inside the list */
+
+ul.breadcrumb li a {
+    color: #8A8A8B;
+    text-decoration: none;
+}
+
+
+/* Add a color on mouse-over */
+
+ul.breadcrumb li a:hover {
+    color: #1F1F29;
+    text-decoration: underline;
+}
+
+
+/* ------------------- messages section styling ----------------------------- */
+
+.messages_section {
+    margin-right: 20px;
+}
+
+.messages_div {
+    height: 55vh;
+    overflow: auto;
+}
+
+
+/* width */
+
+.messages_div::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+.messages_div::-webkit-scrollbar-track {
+    background: #f8f8f8;
+    border-radius: 30px;
+}
+
+
+/* Handle */
+
+.messages_div::-webkit-scrollbar-thumb {
+    background: #b7b7db;
+    border-radius: 30px;
+}
+
+
+/* Handle on hover */
+
+.messages_div::-webkit-scrollbar-thumb:hover {
+    background: #9797b6;
+}
+
+.user_box {
+    background-color: #fff;
+    /* border-radius: 10px; */
+    margin: 1px 0;
+    padding: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.user_box:hover {
+    background: rgba(255, 255, 255, .5);
+}
+
+.user_box .uneven_columns {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 30px;
+}
+
+.user_box .profile_picture_container img {
+    width: 50px;
+    margin-left: 10px;
+}
+
+.user_box .name_container {
+    font-size: 1.2em;
+    margin-top: 13px;
+}
+
+.user_box .button_container button {
+    border: none;
+    padding: 15px;
+    transition: 0.25s;
+    color: #fff;
+    box-shadow: 1px 1px 5px lightgrey;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #1F1F29;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.user_box .button_container button:hover {
+    background-color: lightgray;
+    box-shadow: none;
+}
+
+
+/* ------------------------------- floating label styling -----------------------------------  */
+
+.floating-label {
+    position: relative;
+    margin-bottom: 1px;
+}
+
+.floating-input,
+.floating-select {
+    font-size: 12px;
+    padding: 4px 4px;
+    display: block;
+    width: 100%;
+    height: 25px;
+    background-color: #f3f3f5;
+    margin-top: 8px;
+    border: none;
+    /* border-bottom: 1px solid #757575; */
+}
+
+.floating-input:focus,
+.floating-select:focus {
+    outline: none;
+    border-bottom: 2px solid #6E6E92;
+}
+
+.to_float {
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 5px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.floating-input:focus~.to_float,
+.floating-input:not(:placeholder-shown)~.to_float {
+    top: -17px;
+    font-size: 10px;
+    color: #6E6E92;
+}
+
+.floating-select:focus~.to_float,
+.floating-select:not([value=""]):valid~.to_float {
+    top: -17px;
+    font-size: 9px;
+    color: #6E6E92;
+}
+
+
+/* active state */
+
+.floating-input:focus~.bar:before,
+.floating-input:focus~.bar:after,
+.floating-select:focus~.bar:before,
+.floating-select:focus~.bar:after {
+    width: 50%;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.floating-textarea {
+    min-height: 30px;
+    max-height: 260px;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+
+/* highlighter */
+
+.highlight {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    top: 15%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
+/* active state */
+
+.floating-input:focus~.highlight,
+.floating-select:focus~.highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+
+/* animation */
+
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #6E6E92;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #6E6E92;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #6E6E92;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+
+/* ----------------------------------- styling for fieldset -------------------------------------- */
+
+
+/* the heading for each section under connect section */
+
+fieldset legend {
+    border-bottom: #b7b7db 2px solid;
+    padding-bottom: 10px;
+    /* color: slategray; */
+    font-size: 1.3em;
+    color: #000;
+    font-weight: bolder;
+}
+
+
+/* ------------------------------ chatbox section styling --------------------------------- */
+
+.chatbox_section {
+    /* background-color: rgba(255, 255, 255, .5); */
+}
+
+#typing-text {
+    color: gray;
+    font-size: 12px;
+}
+
+#online-status {
+    color: #77dd77;
+}
+
+#offline-status {
+    color: #ff6961;
+}
+
+.message_area {
+    background-color: rgba(255, 255, 255, .5);
+    height: 50vh;
+    margin-top: 7px;
+    overflow: auto;
+}

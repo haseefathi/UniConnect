@@ -1,6 +1,9 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% load static %}
 
 <head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.4/scrollMonitor.js" integrity="sha512-tXA4sVTQWtMwrZT/gP8GhRQlIlJzG6Jq3hFLifWs1Hy3XLVhYQaPctKNdBeLjLWOrprVhraKtQ1+S+OUhzPkDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
@@ -34,9 +37,14 @@
     <!-- script for friend request functionality -->
     <script src="{%  static 'js/friend_request_script.js' %}"></script>
 
+    <!-- script for django private chat -->
+    <script src="{%  static 'js/chat_script.js' %}"></script>
+
+
 
     <link rel="stylesheet" href="{%  static 'css/skeleton-style.css' %}">
 </head>
+
 
 
 <body style="background-color: #E0E0EC;">
@@ -102,12 +110,12 @@
                             </a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a id="nav-chat">
                                 <span class="icon"><i class="fas fa-comments"></i></span>
                                 <span class="title">Chat</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li>
                             <a id="nav-universities" onclick="showUniversities()">
@@ -137,7 +145,12 @@
             </div>
 
             <div class="container content">
-                <div id="mainContent"></div>
+                <div id="mainContent">
+
+                    <!-- ----------------- main content goes here ------------------------ -->
+
+
+                </div>
                 <img id="loading-sign" src="{% static 'images/loading-spin.gif' %}" alt="loading image" style="height: 120px;
                 width: 120px;position: absolute;top: 45%;left: 50%;">
             </div>
@@ -160,6 +173,3 @@
         });
     </script>
 </body>
-
-
-{% endblock %}
