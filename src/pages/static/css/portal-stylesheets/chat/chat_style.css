@@ -119,11 +119,12 @@ ul.breadcrumb li a:hover {
 /* ------------------- messages section styling ----------------------------- */
 
 .messages_section {
+    height: 55vh;
     margin-right: 20px;
+    /* background-color: orange; */
 }
 
 .messages_div {
-    height: 55vh;
     overflow: auto;
 }
 
@@ -358,7 +359,8 @@ fieldset legend {
 /* ------------------------------ chatbox section styling --------------------------------- */
 
 .chatbox_section {
-    /* background-color: rgba(255, 255, 255, .5); */
+    height: 55vh;
+    /* background-color: yellow; */
 }
 
 #typing-text {
@@ -374,9 +376,117 @@ fieldset legend {
     color: #ff6961;
 }
 
-.message_area {
+.messages-container {
     background-color: rgba(255, 255, 255, .5);
-    height: 50vh;
+    height: 54vh;
     margin-top: 7px;
     overflow: auto;
+}
+
+.messages {
+    height: 100%;
+}
+
+
+/* width */
+
+.messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+.messages::-webkit-scrollbar-track {
+    background: #f8f8f8;
+    border-radius: 30px;
+}
+
+
+/* Handle */
+
+.messages::-webkit-scrollbar-thumb {
+    background: #b7b7db;
+    border-radius: 30px;
+}
+
+
+/* Handle on hover */
+
+.messages::-webkit-scrollbar-thumb:hover {
+    background: #9797b6;
+}
+
+.bubble {
+    margin: 10px;
+    padding: 15px 30px 5px;
+    border-radius: 10px;
+    width: max-content;
+    max-width: 800px;
+    word-wrap: break-word;
+}
+
+.mine {
+    background-color: #E0E0EC;
+    text-align: right;
+    float: right;
+}
+
+.yours {
+    background-color: #fff;
+    text-align: left;
+    float: left;
+}
+
+.timestamp {
+    color: grey;
+}
+
+.mine .timestamp {
+    text-align: right;
+}
+
+.yours .timestamp {
+    text-align: left;
+}
+
+.msg_text {
+    color: #1F1F29;
+    font-size: 16px;
+}
+
+.message_input_section {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 14fr 1fr;
+    gap: 10px;
+}
+
+.message_input_section textarea {
+    resize: none;
+    transition: 0.2s;
+    border: none;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 5px 30px;
+    outline: none;
+    font-size: 16px;
+}
+
+.send-message {
+    border: none;
+    padding: 20px 20px;
+    width: 100%;
+    transition: 0.25s;
+    color: #fff;
+    box-shadow: 1px 1px 5px lightgrey;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #1F1F29;
+}
+
+.send-message:hover {
+    background-color: lightgray;
+    box-shadow: none;
 }

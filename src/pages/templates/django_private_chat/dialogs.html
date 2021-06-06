@@ -33,10 +33,13 @@
 
         <div class="friends_container">
             <fieldset>
-                <legend><span class="legend_heading">Messages</span></legend>
+                <legend>
+                    <span class="legend_heading">Messages</span>
+                    <button><i class="fas fa-comment-medical"></i></button>
+                </legend>
 
                 <div class="floating-label">
-                    <input class="floating-input" name="search_messages_input" id="search_messages_input" type="text" placeholder=" " oninput="search_friends()">
+                    <input class="floating-input" name="search_messages_input" id="search_messages_input" type="text" placeholder=" " oninput="search_messages()">
                     <span class="highlight"></span>
                     <label class="to_float"><i class="fas fa-search"></i> Search Messages...</label>
                 </div>
@@ -75,9 +78,7 @@
                             <div class="name_container">
                                 <p>{{dialog.owner.first_name|title}} {{dialog.owner.last_name|title}}</p>
                             </div>
-                            <!-- <div class="button_container">
-                                <button onclick="open_chat('{{user.friend.username}}')"><i class="fas fa-comment"></i></button>
-                            </div> -->
+
 
                         </div>
                     </div>
@@ -105,65 +106,45 @@
                 </legend>
             </fieldset>
 
-            <div class="message_area">
-
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-<div class="container">
-
-    <div class="col-md-9">
-        <div class="row">
-            <div class="col-md-3 col-md-offset-9">
-                <span class="pull-right" hidden id="typing-text">
-                        <strong>{{opponent_first_name}} {% trans "is typing..." %}</strong>
-                </span>
-            </div>
-            <p>
-                {{opponent_first_name}} {{opponent_last_name}}
-            </p>
-            <p class="text-success" id="online-status" style="display: none">{% trans "Online" %}</p>
-            <p class="text-danger" id="offline-status" style="display: none">{% trans "Offline" %}</p>
-
-
 
             <div class="messages-container">
                 <div id="messages" class="messages">
                     {% for msg in active_dialog.messages.all %}
-                    <div class="row {% if msg.read %}msg-read{% else %}msg-unread{% endif %}" data-id="{{ msg.id }}">
-                        <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
-                            <span class="username">{{ msg.sender.username }}:</span> {{ msg.text }}
-                            <span class="timestamp">&ndash; <span
-                                            data-livestamp="{{ msg.get_formatted_create_datetime }}">{{ msg.get_formatted_create_datetime }}</span></span>
-                        </p>
+                    <div class="bubble {% if msg.read %}msg-read{% else %}msg-unread{% endif %} {% if msg.sender == request.user %}mine{% else %}yours{% endif %}" data-id="{{ msg.id }}">
+                        <div>
+                            <!-- <p class="username">{{ msg.sender.username }}:</p>  -->
+                            <p class="msg_text">{{ msg.text }}</p>
+                            <p class="timestamp">
+                                <span data-livestamp="{{ msg.get_formatted_create_datetime }}">
+                                    {{ msg.get_formatted_create_datetime }}
+                                </span>
+                            </p>
+                        </div>
+                        <div style="clear:both;"></div>
                     </div>
+                    <div style="clear:both;"></div>
                     {% endfor %}
                 </div>
             </div>
 
 
 
-
-        </div>
-
-        <div class="row">
-            <div class="add-message">
+            <!-- ------- section to type message and send --------------------- -->
+            <div class="message_input_section">
                 <div class="form-group">
-                    <textarea id="chat-message" class="form-control message" placeholder="{% trans 'Write a message' %}"></textarea>
+                    <textarea id="chat-message" class=" message" placeholder="{% trans 'Write a message' %}"></textarea>
                 </div>
 
-                <div class="form-group clearfix">
-                    <input id="btn-send-message" type="submit" class="btn btn-primary pull-right send-message" style="margin-left: 10px;" value="{% trans 'Send' %}" />
+                <div>
+                    <button type="submit" id="btn-send-message" class="send-message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-
 
 <!-- ---------------------- SOCKET PROGRAMMING PART FOR SENDING REAL TIME MESSAGES ----------------------- -->
 
@@ -221,19 +202,26 @@
 
     function addNewMessage(packet) {
         var msg_class = "";
+        var owner_class = "";
         if (packet['sender_name'] == $("#owner_username").val()) {
-            msg_class = "pull-left";
-        } else {
             msg_class = "pull-right";
+            owner_class = "mine";
+        } else {
+            msg_class = "pull-left";
+            owner_class = "yours";
         }
         var msgElem =
-            $('<div class="row msg-unread" data-id="' + packet.message_id + '">' +
-                '<p class="' + msg_class + '">' +
-                '<span class="username">' + packet['sender_name'] + ': </span>' +
+            $('<div class="bubble msg-unread ' + owner_class + '" data-id="' + packet.message_id + '">' +
+                '<div class="' + msg_class + '">' +
+                // '<p class="username">' + packet['sender_name'] + ': </p>' +
+                '<p class="msg_text">' +
                 packet['message'] +
-                ' <span class="timestamp">&ndash; <span data-livestamp="' + packet['created'] + '"> ' + packet['created'] + '</span></span> ' +
-                '</p> ' +
-                '</div>');
+                '</p> <p class="timestamp"><span data-livestamp="' + packet['created'] + '"> ' + packet['created'] + '</span></p> ' +
+                '</div> ' +
+                '<div style="clear:both;"></div>' +
+                '</div>' +
+                '<div style="clear:both;"></div>'
+            );
         $('#messages').append(msgElem);
         scrollToLastMessage()
     }
