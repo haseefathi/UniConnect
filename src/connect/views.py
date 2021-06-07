@@ -178,7 +178,7 @@ def calculate_age(born):
 
 
 
-def dynamic_user_profile_lookup_view(request, my_username):
+def dynamic_user_profile_lookup_view_home(request, my_username):
     # print('username in dynamic view', my_username)
     lookup_user = User.objects.get(username = my_username)
 
@@ -193,7 +193,48 @@ def dynamic_user_profile_lookup_view(request, my_username):
 
     # print(lookup_user.last_name)
     
-    return render(request, 'portal/user_profile_details.html', context)
+    return render(request, 'portal/user_profile_details_home.html', context)
+
+
+def dynamic_user_profile_lookup_view_friends(request, my_username):
+    # print('username in dynamic view', my_username)
+    lookup_user = User.objects.get(username = my_username)
+
+    age = calculate_age(lookup_user.publicprofile.date_of_birth)
+
+    context = {
+        'lookup_user': lookup_user, 
+        'age': age, 
+        'is_friended': is_friended(request.user, lookup_user), 
+        'is_requested': is_requested(request.user, lookup_user)
+    }
+
+    # print(lookup_user.last_name)
+    
+    return render(request, 'portal/user_profile_details_friends.html', context)
+
+
+
+def dynamic_user_profile_lookup_view_request(request, my_username):
+    # print('username in dynamic view', my_username)
+    lookup_user = User.objects.get(username = my_username)
+
+    age = calculate_age(lookup_user.publicprofile.date_of_birth)
+
+    friend_request = Friend_Request.objects.get(to_user = request.user, from_user = lookup_user)
+
+
+    context = {
+        'lookup_user': lookup_user, 
+        'age': age, 
+        'is_friended': is_friended(request.user, lookup_user), 
+        'is_requested': is_requested(lookup_user, request.user), 
+        'friend_request': friend_request
+    }
+
+    # print(lookup_user.last_name)
+    
+    return render(request, 'portal/user_profile_details_request.html', context)
 
 
 def is_friended(from_user, to_user):
@@ -233,6 +274,8 @@ def send_friend_request(request):
 def accept_friend_request(request):
     print('in accept view')
     requestID = request.POST.get('request_id')
+
+    print(requestID, type(requestID))
 
     friend_request = Friend_Request.objects.get(id = requestID)
 

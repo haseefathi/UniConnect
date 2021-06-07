@@ -212,15 +212,15 @@ ul.breadcrumb li a:hover {
 }
 
 .friend_request_section .user_details .name_container {
-    width: 20%;
+    width: 15%;
 }
 
 .friend_request_section .user_details .university_container {
-    width: 25%;
+    width: 24%;
 }
 
 .friend_request_section .user_details .from_container {
-    width: 25%;
+    width: 24%;
 }
 
 .friend_request_section .user_details .button_container {
@@ -235,6 +235,11 @@ ul.breadcrumb li a:hover {
     box-shadow: 1px 1px 5px lightgrey;
     border-radius: 5px;
     text-align: center;
+}
+
+.friend_request_section .user_details .profile_button button {
+    background-color: white;
+    color: #1F1F29;
 }
 
 .friend_request_section .user_details .accept_button button {
@@ -319,10 +324,10 @@ fieldset legend {
     padding: 10px;
 }
 
-.friend_box .three_columns {
+.friend_box .four_columns {
     display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
-    gap: 30px;
+    grid-template-columns: 1fr 5fr 1fr 1fr;
+    gap: 10px;
 }
 
 .friend_box .profile_picture_container img {
@@ -346,6 +351,10 @@ fieldset legend {
     background-color: #1F1F29;
     margin-top: 2px;
     margin-right: 10px;
+}
+
+.friend_box .button_container.profile_button button {
+    background-color: #6E6E92;
 }
 
 .friend_box .button_container button:hover {

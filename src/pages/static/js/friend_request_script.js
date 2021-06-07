@@ -1,7 +1,10 @@
-function delete_friend_request(request_id) {
+function delete_friend_request(request_id, source_page) {
 
     let delete_url = '/user/delete_friend_request/';
     let csrf_value = getCookie('csrftoken');
+
+    request_id = parseInt(request_id);
+    console.log(request_id);
 
     //deleting the request from DB
     $.post(delete_url, {
@@ -9,16 +12,42 @@ function delete_friend_request(request_id) {
         csrfmiddlewaretoken: csrf_value
     });
 
-    //removing the request from front end
-    remove_element(request_id);
+
+    if (source_page == 'f') {
+        console.log('deleting request from friend request list');
+        // removing element from front end
+        remove_element(request_id);
+
+    } else if (source_page == 'p') {
+        console.log('deleting request from lookup profile');
+
+        let request_notification = document.getElementById('request_section');
+        request_notification.remove();
+        let new_notification = document.createElement("div");
+        new_notification.className = 'request_section';
+        new_notification.innerHTML = `
+        <p id="request_notification">Request deleted! &nbsp;
+            <a onclick = "showFriends()" style="cursor:pointer;">Go back</a>
+        </p>
+        `;
+
+        let main_container = document.getElementsByClassName('right')[0];
+        main_container.appendChild(new_notification);
+
+
+    }
 
 }
 
 
-function accept_friend_request(request_id, username) {
+function accept_friend_request(request_id, username, source_page) {
     let accept_url = '/user/accept_friend_request/';
     let csrf_value = getCookie('csrftoken');
     console.log('in fn 1 ' + username);
+
+    // alert(request_id);
+    request_id = parseInt(request_id);
+    console.log(request_id);
 
     //accepting the request
     $.post(accept_url, {
@@ -26,11 +55,32 @@ function accept_friend_request(request_id, username) {
         csrfmiddlewaretoken: csrf_value
     });
 
-    add_friend_to_list(request_id, username);
-    remove_element(request_id);
+    if (source_page == 'f') {
+        console.log('accepting request from friend request list');
+        add_friend_to_list(request_id, username);
+        remove_element(request_id);
 
+    } else if (source_page == 'p') {
+        console.log('accepting request from lookup profile');
+
+        let request_notification = document.getElementById('request_section');
+        request_notification.remove();
+        let new_notification = document.createElement("div");
+        new_notification.className = 'request_section';
+        new_notification.innerHTML = `
+        <p id="request_notification">Request accepted! &nbsp;
+            <a onclick = "showFriends()" style="cursor:pointer;">Go back</a>
+        </p>
+        `;
+
+        let main_container = document.getElementsByClassName('right')[0];
+        main_container.appendChild(new_notification);
+
+
+    }
 
 }
+
 
 
 function send_friend_request(to_username) {
@@ -94,12 +144,15 @@ function add_friend_to_list(request_id, username) {
     var new_friend_box = document.createElement("div");
     new_friend_box.className = 'friend_box';
     new_friend_box.innerHTML = `
-        <div class="three_columns">
+        <div class="four_columns">
             <div class="profile_picture_container">
                 <img src="${img_src}" alt="profile_pic" class="profile_picture"> 
             </div>
             <div class="name_container">
                 <p>${friend_name}</p>
+            </div>
+            <div class="button_container profile_button">
+                <button onclick="lookup_profile_friend('${username}')"><i class="fas fa-address-card"></i></button>
             </div>
             <div class="button_container">
                 <button onclick="open_chat('${username}')"><i class="fas fa-comment"></i></button>

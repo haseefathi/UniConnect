@@ -51,15 +51,21 @@
 
                     <div class="friend_box">
 
-                        <div class="three_columns">
+                        <div class="four_columns">
                             <div class="profile_picture_container">
                                 {% if user.friend.graduateadmissionsprofile.gender == 'M' %}
                                 <img src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic" class="profile_picture"> {% else %}
                                 <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic" class="profile_picture"> {% endif %}
                             </div>
+
                             <div class="name_container">
                                 <p>{{user.friend.first_name|title}} {{user.friend.last_name|title}}</p>
                             </div>
+
+                            <div class="button_container profile_button">
+                                <button onclick="lookup_profile_friend('{{user.friend.username}}')"><i class="fas fa-address-card"></i></button>
+                            </div>
+
                             <div class="button_container">
                                 <button onclick="open_chat('{{user.friend.username}}')"><i class="fas fa-comment"></i></button>
                             </div>
@@ -116,8 +122,11 @@
                                         alt="">
                                 </li>
 
-                                <li class="button_container accept_button"><button onclick="accept_friend_request({{request.id}} , '{{request.from_user.username}}')"><i class="fas fa-check-circle"></i><br>Accept</button></li>
-                                <li class="button_container delete_button"><button onclick="delete_friend_request({{request.id}})"><i class="fas fa-times-circle"></i><br>Delete</button></li>
+
+                                <li class="button_container profile_button"><button value="{{request.from_user.username}}" onclick="lookup_profile_request(this.value)"><i class="fas fa-eye"></i><br>Profile</button></li>
+
+                                <li class="button_container accept_button"><button onclick="accept_friend_request({{request.id}} , '{{request.from_user.username}}', 'f')"><i class="fas fa-check-circle"></i><br>Accept</button></li>
+                                <li class="button_container delete_button"><button onclick="delete_friend_request({{request.id}}, 'f')"><i class="fas fa-times-circle"></i><br>Delete</button></li>
 
                             </ul>
 

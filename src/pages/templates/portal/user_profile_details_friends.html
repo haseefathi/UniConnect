@@ -1,0 +1,103 @@
+{% load widget_tweaks %} {% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="{%  static 'css/portal-stylesheets/user_lookup_style.css' %}">
+</head>
+
+<!-- breadcrumb section  -->
+<ul class="breadcrumb">
+    <li>
+        <a onclick="showFriends()"> > Friends </a>
+    </li>
+    <li>{{lookup_user.first_name|title}}'s Profile</li>
+</ul>
+
+
+
+
+
+<div class="section">
+
+    <div class="uneven_side_by_side">
+        <div class="left">
+            <section class="profile_pic_section">
+                {% if lookup_user.graduateadmissionsprofile.gender == 'M' %}
+                <img class="profile-pic" src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic"> {% else %}
+                <img class="profile-pic" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic"> {% endif %}
+            </section>
+            <section class="section profile_writeup_section">
+                <p class="section-subheading">About {{lookup_user.first_name|title}}:</p>
+                <p>{{lookup_user.publicprofile.profile}}</p>
+            </section>
+
+        </div>
+
+        <div class="right">
+            <p class="main-heading">{{lookup_user.first_name|title}} {{lookup_user.last_name|title}}</p>
+
+            <table class="table_details">
+                <tr>
+                    <th>Date of Birth</th>
+                    <td>{{lookup_user.publicprofile.date_of_birth }} ({{age}} years)</td>
+                </tr>
+                <tr>
+                    <th>Accepted University</th>
+                    <td>{{lookup_user.publicprofile.accepted_university }}</td>
+                </tr>
+                <tr>
+                    <th>Major</th>
+                    <td>{{lookup_user.publicprofile.major }}</td>
+                </tr>
+                <tr>
+                    <th>Degree</th>
+                    <td>{{lookup_user.publicprofile.degree|upper }}</td>
+                </tr>
+                <tr>
+                    <th>Starting</th>
+                    <td>
+                        {% if lookup_user.publicprofile.starting_year == 'F' %} Fall{% else %} Spring{% endif %}, {{lookup_user.publicprofile.starting_year }}</td>
+                </tr>
+            </table>
+
+            <div class="side-by-side">
+                <div class="section origin">
+                    <p class="section-subheading location_heading">Current Location</p>
+                    <table class="location_details">
+                        <tr>
+                            <th>City</th>
+                            <td>{{lookup_user.publicprofile.origin_city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>{{lookup_user.publicprofile.origin_country.name }} <img src="{{lookup_user.publicprofile.origin_country.flag}}" alt=""></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="section destination">
+                    <p class="section-subheading location_heading">Destination</p>
+                    <table class="location_details">
+                        <tr>
+                            <th>City</th>
+                            <td>{{lookup_user.publicprofile.destination_city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>{{lookup_user.publicprofile.destination_country.name }} <img src="{{lookup_user.publicprofile.destination_country.flag}}" alt=""></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {% if not is_friended %} {% if not is_requested %}
+            <button class="button connect_button" id="send_request_button" onclick="send_friend_request('{{lookup_user.username}}')"><i class="fas fa-paper-plane"></i> Send request to {{lookup_user.first_name|title}}</button> {% else %}
+            <button class="button connect_button" id="send_request_button_disabled" disabled><i class="fas fa-check-circle"></i> Request has been sent!</button> {% endif %} {% else %}
+            <button class="button connect_button" onclick="open_chat('{{lookup_user.username}}')"><i class="fas fa-comment"></i> Message {{lookup_user.first_name|title}}</button> {% endif %}
+
+        </div>
+    </div>
+</div>
