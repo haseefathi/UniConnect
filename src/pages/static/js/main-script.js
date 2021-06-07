@@ -1,5 +1,5 @@
 window.onload = function() {
-    showFriends();
+    showHome();
 };
 
 function scrollToTop() {

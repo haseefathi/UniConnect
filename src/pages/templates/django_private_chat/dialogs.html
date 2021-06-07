@@ -25,6 +25,10 @@
 
 <p class="main-heading">Chat</p>
 
+
+
+
+
 <div class="uneven_side_by_side">
 
     <div class="messages_section">
@@ -34,8 +38,8 @@
         <div class="friends_container">
             <fieldset>
                 <legend>
-                    <span class="legend_heading">Messages</span>
-                    <button><i class="fas fa-comment-medical"></i></button>
+                    <span class="legend_heading">Your Active Messages</span> {% if inactive_exists %}
+                    <button onclick="addMessagesModal()" id="new_message_button"><i class="fas fa-comment-medical"></i></button> {% endif %}
                 </legend>
 
                 <div class="floating-label">
@@ -58,10 +62,6 @@
                             <div class="name_container">
                                 <p>{{dialog.opponent.first_name|title}} {{dialog.opponent.last_name|title}}</p>
                             </div>
-                            <!-- <div class="button_container">
-                                <button onclick="open_chat('{{user.friend.username}}')"><i class="fas fa-comment"></i></button>
-                            </div> -->
-
                         </div>
                     </div>
 
@@ -145,6 +145,51 @@
 
     </div>
 </div>
+
+
+
+<!-- the modal that opens when trying to make profile public/private -->
+<div id="add_messages_modal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Open New Message</h2>
+        </div>
+        <div class="modal-body">
+            <div class="floating-label">
+                <input class="floating-input" name="search_friends_input" id="search_friends_input" type="text" placeholder=" " oninput="search_friends()">
+                <span class="highlight"></span>
+                <label class="to_float"><i class="fas fa-search"></i> Search Friends...</label>
+            </div>
+
+            <div class="messages_div">
+                {% for user in inactive_chats %}
+                <div class="user_box new_message_user_box" onclick="open_chat('{{user.username}}')">
+                    <div class="uneven_columns">
+                        <div class="profile_picture_container">
+                            {% if user.graduateadmissionsprofile.gender == 'M' %}
+                            <img src="https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png" alt="profile_pic" class="profile_picture"> {% else %}
+                            <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/female-avatar-12-774634.png" alt="profile_pic" class="profile_picture"> {% endif %}
+                        </div>
+                        <div class="name_container">
+                            <p>{{user.first_name|title}} {{user.last_name|title}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="close_button" class="modal_button"> Close </button>
+        </div>
+    </div>
+
+</div>
+
+
+
+
 
 <!-- ---------------------- SOCKET PROGRAMMING PART FOR SENDING REAL TIME MESSAGES ----------------------- -->
 

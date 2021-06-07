@@ -126,6 +126,26 @@ ul.breadcrumb li a:hover {
 
 .messages_div {
     overflow: auto;
+    height: 59vh;
+}
+
+#new_message_button {
+    float: right;
+    border: none;
+    transition: 0.25s;
+    padding: 5px 5px 3px;
+    color: #fff;
+    box-shadow: 1px 1px 5px lightgrey;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #1F1F29;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+#new_message_button:hover {
+    background-color: lightgrey;
+    box-shadow: none;
 }
 
 
@@ -489,4 +509,123 @@ fieldset legend {
 .send-message:hover {
     background-color: lightgray;
     box-shadow: none;
+}
+
+
+/* ---------------------------------- styling for the modal ---------------------- */
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: auto;
+    padding: 0;
+    /* border: 1px solid #888; */
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    font-size: 1em;
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.modal-header {
+    padding: 15px 30px;
+    background-color: #1F1F29;
+    color: #fff;
+}
+
+.modal-body {
+    padding: 30px;
+    font-size: 1.2em;
+}
+
+.modal-footer {
+    padding: 15px 30px;
+    color: #fff;
+}
+
+.modal_button {
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 3px;
+    border: none;
+    font-size: 1em;
+}
+
+.modal .user_box {
+    background-color: #f3f3f5;
+    transition: 0.2s;
+}
+
+.modal .user_box:hover {
+    background-color: #e8e8e9;
+}
+
+.modal .messages_div {
+    height: 40vh;
+}
+
+#close_button {
+    float: right;
+    background-color: #F7372D;
+    transition: 0.2s;
+}
+
+#close_button:hover {
+    background-color: #f59f9b;
 }
