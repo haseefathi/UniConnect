@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_countries',
     # chat app
     'django_private_chat',
+    'django_extensions',
 
     
     # my apps

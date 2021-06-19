@@ -14,12 +14,11 @@ from sklearn.preprocessing import Normalizer
 from project.project_data_paths import paths
 
 # libraries for CNN
-import keras
-from keras.datasets import mnist
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv1D, MaxPooling1D
-from keras import backend as K
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, Flatten
+from tensorflow.keras.layers import Conv1D, MaxPooling1D
+from tensorflow.keras import backend as K
 from math import sqrt
 
 
