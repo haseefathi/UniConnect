@@ -406,16 +406,8 @@ def get_knn_recommendation(student_info):
 def get_recommendations(student_info):
 
     top_recommendation_cnn = get_cnn_recommendation(student_info)
-    # top_recommendation_cnn = {
-    #     'recommendation': 'University of Texas Dallas',
-    #     'image_link': 'https://media-exp1.licdn.com/dms/image/C4E1BAQESsYKpD2giAg/company-background_10000/0/1545159143732?e=2159024400&v=beta&t=5WALs4hWnJVwj4BcI87hm9V_A1IC00GJMWXjggi-Sd4'
-    # }
 
     best_knn_recommendation, remaining_predictions = get_knn_recommendation(student_info)
-    # knn_recommendation = {
-    #     'recommendation': 'University of Texas Dallas',
-    #     'image_link': 'https://media-exp1.licdn.com/dms/image/C4E1BAQESsYKpD2giAg/company-background_10000/0/1545159143732?e=2159024400&v=beta&t=5WALs4hWnJVwj4BcI87hm9V_A1IC00GJMWXjggi-Sd4'
-    # }
 
     all_recommendations = {
         'cnn_recommendation': top_recommendation_cnn,

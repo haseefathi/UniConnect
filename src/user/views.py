@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, render_to_response
 from .forms import SignUpForm, UpdateGradAdmProfileForm
 
 from django.contrib.auth.models import User
-from user.models import GraduateAdmissionsProfile
+from user.models import GraduateAdmissionsProfile, UniversityRecommendation
 
 from django.contrib.auth import authenticate, login
 
@@ -14,6 +14,9 @@ from user.predict_admissions import get_predictions
 from user.recommend_universities import get_recommendations
 
 from connect.models import PublicProfile
+
+import time
+from django.http import HttpResponse
 
 def user_signup_view(request):
     form = SignUpForm(request.POST or None)
@@ -96,6 +99,9 @@ def update_grad_adm_profile_view(request):
             grad_profile.intended_field = intended_field
             grad_profile.save()
 
+            # deleting previously saved recommendations
+            delete_recommendations(user)
+
             return redirect('user-home')
             # print(user)
         
@@ -165,22 +171,93 @@ def admissions_predictor_view(request):
     return render(request,'portal/admissions-predictor.html', context)
 
 
+def delete_recommendations(user):
+    user_recs = UniversityRecommendation.objects.filter(user = user)
+    if len(user_recs):
+        user_recs.delete()
+    return
+
+
+def save_recommendations(rec_dict, user):
+    nn_recommendation = rec_dict.get('cnn_recommendation')
+    best_knn_recommendation = rec_dict.get('best_knn_recommendation')
+    other_recs_dict = rec_dict.get('remaining_recommendations')
+
+    print('saving best recs')
+    nn_rec_object = UniversityRecommendation(user = user, recommendation = nn_recommendation['recommendation'], image_url = nn_recommendation['image_link'], recommendation_type = 1 )
+    nn_rec_object.save()
+
+    best_knn_object = UniversityRecommendation(user = user, recommendation = best_knn_recommendation['recommendation'], image_url = best_knn_recommendation['image_link'], recommendation_type = 1 )
+    best_knn_object.save()
+
+    print('saving other recommendations')
+    for rec in other_recs_dict:
+        rec_obj = UniversityRecommendation(user = user, recommendation = rec['recommendation'], image_url = rec['image_link'], recommendation_type = 2 )
+        rec_obj.save()
+
+
+def recommendations_already_generated(user):
+    recommendations = UniversityRecommendation.objects.filter(user = user)
+    return len(recommendations) != 0
+
+
+def get_generated_recommendations(user):
+
+    all_recommendations = dict()
+
+    top_recs = UniversityRecommendation.objects.filter(user = user, recommendation_type = 1)
+    other_recs = UniversityRecommendation.objects.filter(user = user, recommendation_type = 2)
+
+    cnn_recommendation = {
+        'recommendation': top_recs[0].recommendation,
+        'image_link': top_recs[0].image_url
+    }
+
+    best_knn_recommendation = {
+        'recommendation': top_recs[1].recommendation,
+        'image_link': top_recs[1].image_url
+    }
+
+    other_recs_list = list()
+    for rec in other_recs:
+        dict_obj = dict()
+        dict_obj['recommendation'] = rec.recommendation
+        dict_obj['image_link'] = rec.image_url
+        other_recs_list.append(dict_obj)
+
+
+    all_recommendations['cnn_recommendation'] = cnn_recommendation
+    all_recommendations['best_knn_recommendation'] = best_knn_recommendation
+    all_recommendations['remaining_recommendations'] = other_recs_list
+
+    return all_recommendations
+
+
+
 def university_recommender_view(request):
 
     current_user = request.user
     if current_user.graduateadmissionsprofile.is_profile_updated:
         print('student profile updated')
-        student_info = {
-                'profile_updated': True,
-                'gre_verbal_score': current_user.graduateadmissionsprofile.gre_verbal_score,
-                'gre_quant_score': current_user.graduateadmissionsprofile.gre_quant_score,
-                'gre_awa_score': current_user.graduateadmissionsprofile.gre_awa_score,
-                'intended_semester': current_user.graduateadmissionsprofile.intended_semester,
-                'toefl_score': current_user.graduateadmissionsprofile.toefl_score,
-                'undergrad_gpa': current_user.graduateadmissionsprofile.undergrad_gpa,
-                'intended_field': current_user.graduateadmissionsprofile.intended_field
-            }
-        context = get_recommendations(student_info)
+        if not recommendations_already_generated(request.user):
+            print('recommendations being generated for the first time')
+            student_info = {
+                    'profile_updated': True,
+                    'gre_verbal_score': current_user.graduateadmissionsprofile.gre_verbal_score,
+                    'gre_quant_score': current_user.graduateadmissionsprofile.gre_quant_score,
+                    'gre_awa_score': current_user.graduateadmissionsprofile.gre_awa_score,
+                    'intended_semester': current_user.graduateadmissionsprofile.intended_semester,
+                    'toefl_score': current_user.graduateadmissionsprofile.toefl_score,
+                    'undergrad_gpa': current_user.graduateadmissionsprofile.undergrad_gpa,
+                    'intended_field': current_user.graduateadmissionsprofile.intended_field
+                }
+            context = get_recommendations(student_info)
+            save_recommendations(context, request.user)
+        else:
+            print('retrieving already generated recommendations')
+            time.sleep(5)
+            context = get_generated_recommendations(request.user)
+
     
     else:
         print('student profile not updated')

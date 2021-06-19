@@ -47,5 +47,8 @@ class GraduateAdmissionsProfile(models.Model):
 
 
 
-    
-
+class UniversityRecommendation(models.Model):
+    user = models.ForeignKey(User, related_name='user_recommendation', on_delete=models.CASCADE)
+    recommendation = models.CharField(max_length = 200, blank = True)
+    image_url = models.URLField(max_length = 255, blank = True)
+    recommendation_type = models.IntegerField(blank = True, null = True)
