@@ -25,7 +25,7 @@ def df_to_list(df):
 # returns urls of campus images using google custom search api
 def get_university_images(college_name):
     query = college_name + 'campus'
-    api_key = 'AIzaSyBh2aoaZvbcsLK9EO8tFCs6LSijNo_lyzQ'
+    api_key = '' # enter your google custom search API key here
     resource = build('customsearch','v1', developerKey = api_key).cse()
     result = resource.list(q = query, cx = 'ecf1c639b0185cb84', searchType = 'image').execute()
 
