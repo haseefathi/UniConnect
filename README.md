@@ -1,5 +1,5 @@
 # UniConnect
-### A Social Networking Platform for Prospective Graduate Students. See it <a href = "http://uniconnect2021.herokuapp.com/user/login/">here!</a><br>
+### A Social Networking Platform for Prospective Graduate Students. See it <a href = "http://uniconnect2021.herokuapp.com/">here!</a><br>
 
 ## Description
 This is a platform which allows upcoming students to find others all around the world and communicate with them through real-time messaging. Users will be allowed to register and create an account on the platform and create profiles and make connections with others. Additionally, there will also be other services on the web application such as a university admissions predictor and a university recommender system which can be used by students to help in decision making. Students will also be able to view statistics of different universities available on the database and see how they compare to others who were admitted to the university. <br>
